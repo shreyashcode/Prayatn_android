@@ -1,0 +1,8 @@
+<TextView android:id="@+id/option"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="20sp"
+    android:textColor="#242525"
+    android:padding="8dp"
+    android:text="Options"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

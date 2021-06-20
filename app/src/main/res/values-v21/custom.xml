@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="customcolor" parent="android:Theme.Material">
+        <item name="android:backgroundTint">#BDBFC1</item>
+    </style>
+</resources>

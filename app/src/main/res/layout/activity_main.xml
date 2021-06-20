@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Layouts.MainActivity"
+    android:background="@color/ui_light2">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="49dp">
+        <fragment
+            android:id="@+id/hosting"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_host_graph" />
+
+    </FrameLayout>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:fabCradleRoundedCornerRadius="10dp"
+        app:fabCradleMargin="10dp"
+        app:fabAlignmentMode="center"
+        app:fabCradleVerticalOffset="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetEnd="0dp"
+        app:backgroundTint="#FFFFFF"
+        android:layout_gravity="bottom">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_nav_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="9dp"
+            app:labelVisibilityMode="unlabeled"
+            app:itemIconTint="@drawable/bottom_navigation_color_selector"
+            android:background="@drawable/states"
+            app:menu="@menu/bottom_app_menu" />
+
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_button"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:fabCustomSize="80dp"
+        android:src="@drawable/ic_baseline_add_24"
+        android:backgroundTint="#000000"
+        android:background="@color/black_end"
+        android:scaleType="centerInside"
+        app:layout_anchor="@id/bottomBar" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

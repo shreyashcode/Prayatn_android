@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/homeTodo"
+        android:name="com.example.theproductivityapp.ui.Layouts.HomeTodoFragment"
+        android:label="fragment_home_todo"
+        tools:layout="@layout/fragment_home_todo" >
+        <action
+            android:id="@+id/action_homeTodo_to_countFragment"
+            app:destination="@id/countFragment" />
+        <action
+            android:id="@+id/action_homeTodo_to_tagFilterFragment"
+            app:destination="@id/tagFilterFragment" />
+        <action
+            android:id="@+id/action_homeTodo_to_addTodoFragment"
+            app:destination="@id/addTodoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/graphFragment"
+        android:name="com.example.theproductivityapp.ui.Layouts.GraphFragment"
+        android:label="GraphFragment" />
+    <fragment
+        android:id="@+id/countFragment"
+        android:name="com.example.theproductivityapp.ui.Layouts.CountFragment"
+        android:label="fragment_count"
+        tools:layout="@layout/fragment_count" />
+    <fragment
+        android:id="@+id/quadrantFragment"
+        android:name="com.example.theproductivityapp.ui.Layouts.QuadrantFragment"
+        android:label="fragment_quadrant"
+        tools:layout="@layout/fragment_quadrant" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.theproductivityapp.ui.Layouts.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_homeTodo"
+            app:destination="@id/homeTodo"
+            app:enterAnim="@anim/login_animation"
+            app:exitAnim="@anim/login_exit"
+            app:popEnterAnim="@anim/login_exit"
+            app:popExitAnim="@anim/login_exit"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/tagFilterFragment"
+        android:name="com.example.theproductivityapp.ui.Layouts.TagFilterFragment"
+        android:label="fragment_tag_filter"
+        tools:layout="@layout/fragment_tag_filter" >
+        <action
+            android:id="@+id/action_tagFilterFragment_to_homeTodo"
+            app:destination="@id/homeTodo" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTodoFragment"
+        android:name="com.example.theproductivityapp.ui.Layouts.AddTodoFragment"
+        android:label="fragment_add_todo"
+        tools:layout="@layout/fragment_add_todo" >
+        <argument
+            android:name="TodoID"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
+</navigation>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomShapeAppearance">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">0dp</item>
+
+        <!-- Or if wants different radii depending on the corner. -->
+        <item name="neumorph_cornerSizeTopLeft">6dp</item>
+        <item name="neumorph_cornerSizeTopRight">6dp</item>
+        <item name="neumorph_cornerSizeBottomLeft">6dp</item>
+        <item name="neumorph_cornerSizeBottomRight">6dp</item>
+    </style>
+    <style name="tagStyle">
+        <item name="neumorph_cornerSizeTopLeft">16dp</item>
+        <item name="neumorph_cornerSizeTopRight">16dp</item>
+        <item name="neumorph_cornerSizeBottomLeft">16dp</item>
+        <item name="neumorph_cornerSizeBottomRight">16dp</item>
+    </style>
+</resources>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#67696A</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="ui_light_blue">#0c8af8</color>
+    <color name="ui_dark_blue">#4154f7</color>
+    <color name="grey_">#c5c5c7</color>
+    <color name="ui_dark">#1a1a1a</color>
+    <color name="shadow_ui_light">#242426</color>
+    <color name="shadow_ui_dark">#15151a</color>
+<!--    Dark 2-->
+    <color name="ui_dark2">#2C2C2C</color>
+    <color name="shadow_ui_light2">#636365</color>
+    <color name="shadow_ui_dark2">#1E1E23</color>
+
+<!--    Light 1-->
+    <color name="ui_light">#e3e6ec</color>
+    <color name="shadow_light">#fdfefe</color>
+    <color name="shadow_dark">#d1d9e6</color>
+
+<!--    Light 2-->
+    <color name="ui_light2">#D5DCE5</color>
+    <color name="shadow_light2">#fdfefe</color>
+    <color name="shadow_dark2">#ADBACB</color>
+
+<!--    Dark v1-->
+    <color name="ui_light3">#949698</color>
+    <color name="shadow_light3">#C2C3C4</color>
+    <color name="shadow_dark3">#4E5256</color>
+
+<!--    Final Primary_dark-->
+    <color name="primary_dark">#373B40</color>
+    <color name="primary_light">@color/ui_light2</color>
+
+<!--    Color for gradient-->
+    <color name="black_start">#000000</color>
+    <color name="black_end">#434343</color>
+
+</resources>

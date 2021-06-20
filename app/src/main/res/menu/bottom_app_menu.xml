@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/homeTodo"
+        android:title="Home"
+        android:icon="@drawable/ic_account"/>
+
+    <item  android:id="@+id/graphFragment"
+        android:title="Graph"
+        android:icon="@drawable/ic_graph" />
+
+    <item android:id="@+id/empty"
+        android:title=""/>
+
+    <item android:id="@+id/countFragment"
+        android:title="Count Hours"
+        android:icon="@drawable/ic_count"/>
+
+    <item android:id="@+id/quadrantFragment"
+        android:title="Quadrant"
+        android:icon="@drawable/ic_graph" />
+
+</menu>

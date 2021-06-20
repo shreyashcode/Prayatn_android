@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Layouts.AddTodoFragment"
+    android:background="@color/ui_light2">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <com.camerash.toggleedittextview.ToggleEditTextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Add title to this ToDo!"
+            android:inputType="textMultiLine|textAutoComplete"
+            android:paddingTop="3dp"
+            android:textSize="26sp"
+            app:layout_constraintEnd_toStartOf="@+id/toggleButton"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tetv_editTextBottomLineColor="@android:color/transparent"
+            app:tetv_editing="false" />
+
+
+        <soup.neumorphism.NeumorphCardView
+            android:id="@+id/tag_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:outlineAmbientShadowColor="@color/ui_light_blue"
+            app:cardBackgroundColor="#979DA3"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="20dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:neumorph_backgroundColor="@color/ui_light2"
+            app:neumorph_shadowColorDark="@color/shadow_dark2"
+            app:neumorph_shadowColorLight="@color/shadow_light2"
+            app:neumorph_shapeType="flat">
+
+            <com.camerash.toggleedittextview.ToggleEditTextView
+                android:id="@+id/tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="9dp"
+                android:hint="Enter tag for identify stuff!"
+                android:inputType="textMultiLine|textAutoComplete"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                app:tetv_editTextBottomLineColor="#050505"
+                app:tetv_editing="false"
+                app:tetv_textViewColor="#040404" />
+
+        </soup.neumorphism.NeumorphCardView>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/custom_drop_down"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Priority"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/tag_back">
+
+            <AutoCompleteTextView
+                android:id="@+id/drop_down"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:text="Priority" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/custom_drop_down_imp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="10dp"
+            android:hint="Importance"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toEndOf="@+id/custom_drop_down"
+            app:layout_constraintTop_toBottomOf="@+id/tag_back">
+
+            <AutoCompleteTextView
+                android:id="@+id/drop_down_imp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:text="Important" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <soup.neumorphism.NeumorphCardView
+            android:id="@+id/neumorphCardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/custom_drop_down"
+            app:neumorph_backgroundColor="@color/ui_light2"
+            app:neumorph_shadowColorDark="@color/shadow_dark2"
+            app:neumorph_shadowColorLight="@color/shadow_light2"
+            app:neumorph_shapeType="flat">
+
+            <com.camerash.toggleedittextview.ToggleEditTextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="9dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                android:hint="Add details about the task!"
+                android:inputType="textMultiLine|textAutoComplete"
+                android:padding="4dp"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toBottomOf="@+id/tag"
+                app:tetv_textViewColor="#040404" />
+
+        </soup.neumorphism.NeumorphCardView>
+
+        <com.camerash.toggleedittextview.ToggleEditButton
+            android:id="@+id/toggleButton"
+            android:layout_width="36dp"
+            android:layout_height="35dp"
+            app:layout_constraintBottom_toBottomOf="@+id/title"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
