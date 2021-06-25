@@ -114,14 +114,10 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
 
         binding.dropDown.setOnItemClickListener { parent, view, position, id ->
             priority = priorities[position]
-            Toast.makeText(requireContext(), "Selected ${priorities[position]}", Toast.LENGTH_SHORT)
-                .show()
         }
 
         binding.dropDownImp.setOnItemClickListener { _, view, position, id ->
             imp = importance[position]
-            Toast.makeText(requireContext(), "Selected ${imp}", Toast.LENGTH_SHORT)
-                .show()
         }
     }
 

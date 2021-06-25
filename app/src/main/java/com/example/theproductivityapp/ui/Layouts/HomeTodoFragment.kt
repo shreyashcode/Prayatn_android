@@ -42,7 +42,6 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
         super.onResume()
         binding.rView.smoothScrollToPosition(0)
         binding.tagRview.smoothScrollToPosition(0)
-        Toast.makeText(requireContext(), "CALLED", Toast.LENGTH_SHORT).show()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -197,16 +196,8 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
                 }
             }
             Common.todos = filter
-            Toast.makeText(requireContext(), "TAG: ${list[int].tag}", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_homeTodo_to_tagFilterFragment)
         } else {
-            Toast.makeText(requireContext(), "TOD: ${list[int].title}", Toast.LENGTH_SHORT).show()
-            Timber.d("XYZC: ${list[int]}")
-//            val action = list[int].id?.let {
-//                HomeTodoFragmentDirections.actionHomeTodoToAddTodoFragment(
-//                    it
-//                )
-//            }
             Common.reqId = list[int].id!!
             findNavController().navigate(R.id.action_homeTodo_to_addTodoFragment)
         }

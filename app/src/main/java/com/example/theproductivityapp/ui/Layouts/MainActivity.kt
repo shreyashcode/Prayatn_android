@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 else -> {
+                    Toast.makeText(this, "Coming soon!", Toast.LENGTH_SHORT).show()
                     binding.bottomNavView.visibility = View.VISIBLE
                     binding.bottomBar.visibility = View.VISIBLE
                     binding.fabButton.visibility = View.INVISIBLE

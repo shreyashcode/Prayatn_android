@@ -18,20 +18,14 @@ import timber.log.Timber
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
     lateinit var binding: FragmentLoginBinding
-    private val viewModel: MainViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLoginBinding.bind(view)
 
-        binding.existing.setOnClickListener {
+        Handler().postDelayed({
             findNavController().navigate(R.id.action_loginFragment_to_homeTodo)
-        }
+        }, 2000)
 
-        binding.button.setOnClickListener{
-//            viewModel.insert(Todo("NULL", "NULL", "", System.currentTimeMillis(), true, "TAG_1", 0, ""))
-//            viewModel.insert(Todo("NULL1", "NULL1", "", System.currentTimeMillis(), true, "TAG_2", 1, ""))
-            findNavController().navigate(R.id.action_loginFragment_to_homeTodo)
-        }
     }
 }

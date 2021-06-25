@@ -34,6 +34,7 @@
                 android:padding="7dp"
                 android:text="Tag Appears Here"
                 android:textColor="@color/black_start"
+                android:textStyle="bold"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
