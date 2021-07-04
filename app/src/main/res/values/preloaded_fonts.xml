@@ -2,6 +2,7 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/</item>
+        <item>@font/archivo_black</item>
         <item>@font/open_sans</item>
         <item>@font/secular_one</item>
     </array>

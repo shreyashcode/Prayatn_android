@@ -67,6 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:hint="Priority"
+            android:visibility="invisible"
             app:layout_constraintEnd_toStartOf="@+id/guideline6"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/tag_back">
@@ -80,17 +81,58 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            android:layout_marginEnd="3dp"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/toggleButton"
+            app:layout_constraintStart_toEndOf="@+id/title"
+            app:layout_constraintTop_toBottomOf="@+id/toggleButton" />
+
+        <TextView
+            android:id="@+id/priority_text"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="Priority"
+            android:textAlignment="viewStart"
+            android:textSize="25sp"
+            android:padding="3dp"
+            android:textColor="#1D64B8"
+            android:textStyle="italic|bold"
+            app:layout_constraintBottom_toBottomOf="@+id/custom_drop_down"
+            app:layout_constraintEnd_toEndOf="@+id/custom_drop_down"
+            app:layout_constraintStart_toStartOf="@+id/custom_drop_down"
+            app:layout_constraintTop_toTopOf="@+id/custom_drop_down" />
+
+        <TextView
+            android:id="@+id/importance_text"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="3dp"
+            android:text="Importance"
+            android:textAlignment="viewStart"
+            android:textColor="#1D64B8"
+            android:textSize="25sp"
+            android:textStyle="italic|bold"
+            app:layout_constraintBottom_toBottomOf="@+id/custom_drop_down_imp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/custom_drop_down" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/custom_drop_down_imp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="10dp"
             android:hint="Importance"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintStart_toEndOf="@+id/custom_drop_down"
-            app:layout_constraintTop_toBottomOf="@+id/tag_back">
+            android:visibility="invisible"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/custom_drop_down">
 
             <AutoCompleteTextView
                 android:id="@+id/drop_down_imp"
@@ -105,12 +147,12 @@
             android:id="@+id/neumorphCardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             app:cardCornerRadius="14dp"
             app:cardElevation="20dp"
+            android:layout_marginTop="30dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/custom_drop_down"
+            app:layout_constraintTop_toBottomOf="@+id/custom_drop_down_imp"
             app:neumorph_backgroundColor="@color/ui_light2"
             app:neumorph_shadowColorDark="@color/shadow_dark2"
             app:neumorph_shadowColorLight="@color/shadow_light2"

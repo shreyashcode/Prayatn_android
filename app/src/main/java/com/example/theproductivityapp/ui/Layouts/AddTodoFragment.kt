@@ -1,6 +1,9 @@
 package com.example.theproductivityapp.ui.Layouts
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -12,12 +15,17 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.theproductivityapp.R
 import com.example.theproductivityapp.databinding.FragmentAddTodoBinding
+import com.example.theproductivityapp.db.GraphTodo
 import com.example.theproductivityapp.db.Todo
+import com.example.theproductivityapp.db.Utils
 import com.example.theproductivityapp.ui.UIHelper.Common
 import com.example.theproductivityapp.ui.ViewModels.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.util.*
 
 @AndroidEntryPoint
 class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
@@ -32,6 +40,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
     private val arg: AddTodoFragmentArgs by navArgs()
     private var id_: Int = 0
     private lateinit var gTodo: Todo
+    private lateinit var graphTodo: GraphTodo
 
 
     override fun onResume() {
@@ -49,31 +58,36 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val onBack = object: OnBackPressedCallback(true){
-            override fun handleOnBackPressed() {
-                Toast.makeText(requireContext(), "ONBACK!", Toast.LENGTH_SHORT).show()
 
-                if(validate(view)){
-//                    binding.toggleButton.visibility = View.INVISIBLE
-                    var notify: String? = null
-                    if(id_ > 0){
-                        notify = "Todo updated!"
-                        updateTodo()
-                    } else {
-                        notify = "Todo Saved!"
-                        insertTodo()
-                    }
-                    Snackbar.make(view, notify, Snackbar.LENGTH_SHORT).show()
-                    findNavController().popBackStack()
-                }
+        binding = FragmentAddTodoBinding.bind(view)
+        importance = resources.getStringArray(R.array.Importance)
+        priorities = resources.getStringArray(R.array.Priority)
+        priority = priorities[0]
+        imp = importance[0]
+        binding.dropDownImp.isClickable = false
+        disableEditingMode()
 
-                findNavController().popBackStack()
+        viewModel.graphTodos.observe(viewLifecycleOwner, {
+            var month: Int = 0
+            var date: Int = 0
+            if(Build.VERSION.SDK_INT >= 26){
+                var timeInstance: LocalDateTime? = null
+                timeInstance = LocalDateTime.now(ZoneId.of("Asia/Kolkata"))
+                month = timeInstance.monthValue
+                date = timeInstance.dayOfMonth
+            } else {
+                var timeInstance = Date(System.currentTimeMillis())
+                month = timeInstance.month
+                date = timeInstance.date
             }
-        }
 
-
-
-//        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBack)
+            for(graphTodo_ in it){
+                if(graphTodo_.month == month && graphTodo_.date == date){
+                    graphTodo = graphTodo_
+                    break
+                }
+            }
+        })
 
         id_ = Common.reqId
 
@@ -81,11 +95,6 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
             prepareUI(id_)
         }
 
-        binding = FragmentAddTodoBinding.bind(view)
-        importance = resources.getStringArray(R.array.Importance)
-        priorities = resources.getStringArray(R.array.Priority)
-        priority = priorities[0]
-        imp = importance[0]
 
         Timber.d("NUMBER IS FAST: $id_")
 
@@ -93,6 +102,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
 
         binding.toggleButton.setOnClickListener {
             if(binding.title.getEditing()){
+                disableEditingMode()
                 if(validate(view)){
                     binding.toggleButton.visibility = View.INVISIBLE
                     var notify: String? = null
@@ -106,6 +116,8 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
                     Snackbar.make(view, notify!!, Snackbar.LENGTH_SHORT).show()
                     findNavController().popBackStack()
                 }
+            } else {
+                editingMode()
             }
         }
 
@@ -130,6 +142,8 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
             binding.description.editText.setText(it.description)
             binding.title.textView.text = it.title
             binding.title.editText.setText(it.title)
+            binding.priorityText.text = it.priority
+            binding.importanceText.text = it.importance
             binding.tag.textView.text = it.tag
             binding.tag.editText.setText(it.tag)
             binding.dropDown.setText(it.priority, false)
@@ -152,7 +166,10 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
         todo.displayOrder = Common.todos_size
         Common.todos_size++
         Timber.d("DAO_ENTITY_ ${todo}")
+        writeSharedPref(todo.priority, todo.importance)
         viewModel.insert(todo)
+        graphTodo.added_count++
+        viewModel.updateGraph(graphTodo)
     }
 
     private fun buildTodo() = Todo(
@@ -174,6 +191,35 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
         viewModel.update(todo)
     }
 
+    private fun editingMode(){
+        binding.save.text = "Save"
+        binding.customDropDown.visibility = View.VISIBLE
+        binding.customDropDownImp.visibility = View.VISIBLE
+        binding.importanceText.visibility = View.INVISIBLE
+        binding.priorityText.visibility = View.INVISIBLE
+    }
 
+    private fun disableEditingMode(){
+        binding.save.text = "Edit"
+        binding.customDropDownImp.visibility = View.INVISIBLE
+        binding.customDropDown.visibility = View.INVISIBLE
+        binding.importanceText.visibility = View.VISIBLE
+        binding.priorityText.visibility = View.VISIBLE
+    }
+
+    private fun writeSharedPref(priority: String, imp: String){
+        var key: String = imp+priority;
+        val sharedPref: SharedPreferences = requireContext().getSharedPreferences(Utils.QuadrantSharedPrefs, Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        val getValue: Float = readSharedPref(key)
+        Timber.d("APJ Abdul Kalam Sir | $key | ${getValue+1}")
+        editor.putFloat(key, getValue.plus(1f))
+        editor.apply()
+    }
+
+    private fun readSharedPref(key: String): Float{
+        val sharedPref: SharedPreferences = requireContext().getSharedPreferences(Utils.QuadrantSharedPrefs, Context.MODE_PRIVATE)
+        return sharedPref.getFloat(key, 0f)
+    }
 
 }

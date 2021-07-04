@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.theproductivityapp.Repository.MainRepository
+import com.example.theproductivityapp.db.GraphTodo
 import com.example.theproductivityapp.db.Todo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -17,6 +18,13 @@ class MainViewModel @Inject constructor(
 ) : ViewModel(){
 
     var todos: LiveData<List<Todo>> = mainRepository.getAllTodos()
+    var graphTodos: LiveData<List<GraphTodo>> = mainRepository.getAllGraphTodos()
+
+    fun deleteAllGraphEntries() {
+        viewModelScope.launch {
+            mainRepository.deleteAll()
+        }
+    }
 
     fun getById(reqId: Int) = mainRepository.getById(reqId)
 
@@ -28,12 +36,16 @@ class MainViewModel @Inject constructor(
         return k
     }
 
-    fun getHighestOrder(): Int {
-        var order: Int = 0
-        viewModelScope.launch {
-            order = mainRepository.getHighestOrder()
-        }
-        return order
+    fun insertGraph(graphTodo: GraphTodo) = viewModelScope.launch {
+        mainRepository.insertGraph(graphTodo)
+    }
+
+    fun deleteGraph(graphTodo: GraphTodo) = viewModelScope.launch {
+        mainRepository.deleteGraph(graphTodo)
+    }
+
+    fun updateGraph(graphTodo: GraphTodo) = viewModelScope.launch {
+        mainRepository.updateGraph(graphTodo)
     }
 
     fun update(todo: Todo) = viewModelScope.launch {

@@ -1,13 +1,19 @@
 package com.example.theproductivityapp.ui.Layouts
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +23,7 @@ import com.example.theproductivityapp.Adapter.TagAdapter
 import com.example.theproductivityapp.Adapter.TodoAdapter
 import com.example.theproductivityapp.R
 import com.example.theproductivityapp.databinding.FragmentHomeTodoBinding
+import com.example.theproductivityapp.db.GraphTodo
 import com.example.theproductivityapp.db.Todo
 import com.example.theproductivityapp.db.Utils
 import com.example.theproductivityapp.ui.UIHelper.ItemClickListener
@@ -24,6 +31,8 @@ import com.example.theproductivityapp.ui.ViewModels.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.util.*
 
 @AndroidEntryPoint
@@ -37,6 +46,9 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
     private lateinit var itemClickListener: ItemClickListener
     private lateinit var itemTouchHelper: ItemTouchHelper
     private lateinit var view_: View
+    lateinit var paint: Paint
+    lateinit var background: Drawable
+    lateinit var graphTodo: GraphTodo
 
     override fun onResume() {
         super.onResume()
@@ -53,19 +65,33 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
         itemClickListener = this
         setUpTagRecyclerView()
 
+        viewModel.graphTodos.observe(viewLifecycleOwner, {
+            var month: Int = 0
+            var date: Int = 0
+            if(Build.VERSION.SDK_INT >= 26){
+                var timeInstance: LocalDateTime? = null
+                timeInstance = LocalDateTime.now(ZoneId.of("Asia/Kolkata"))
+                month = timeInstance.monthValue
+                date = timeInstance.dayOfMonth
+            } else {
+                var timeInstance = Date(System.currentTimeMillis())
+                month = timeInstance.month
+                date = timeInstance.date
+            }
+
+            for(graphTodo_ in it){
+                if(graphTodo_.month == month && graphTodo_.date == date){
+                    graphTodo = graphTodo_
+                    break
+                }
+            }
+        })
+
         viewModel.todos.observe(viewLifecycleOwner, Observer{
-//            Timber.d("INCLUDE: 1")
             var order: Int = 0
             for(i in it){
                 order = Math.max(order, i.displayOrder)
-                Timber.d("ONSWIPE : ${i}")
             }
-            Timber.d("ONSWIPE: OUTSIDE")
-            Timber.d("ONSWIPE: OUTSIDE")
-            Timber.d("ONSWIPE: OUTSIDE")
-//            if(it.isNotEmpty() && it[0].priority < 0){
-//                Collections.reverse(it)
-//            }
             val listToTag = mutableListOf<Todo>()
             val set = mutableSetOf<String>()
 //            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
@@ -126,24 +152,94 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
             return true
         }
 
+        override fun onChildDraw(
+            c: Canvas,
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            dX: Float,
+            dY: Float,
+            actionState: Int,
+            isCurrentlyActive: Boolean
+        ) {
+
+            val itemView = viewHolder.itemView
+            paint = Paint()
+            background = ColorDrawable()
+            val leftBG: Int = Color.BLACK
+            val leftLabel: String = "Delete!"
+            val leftIcon: Drawable? = AppCompatResources.
+            getDrawable(requireContext(), R.drawable.ic_account)
+
+            val rightBG: Int = Color.BLUE
+            val rightLabel: String = "Done!"
+            val rightIcon: Drawable? = AppCompatResources.
+            getDrawable(requireContext(), R.drawable.ic_count)
+            paint.color = Color.WHITE
+            paint.textSize = 48f
+            paint.textAlign = Paint.Align.CENTER
+            background = ColorDrawable();
+
+            if (dX != 0.0f) {
+
+                if (dX > 0) {
+                    //right swipe
+                    val intrinsicHeight = (rightIcon?.intrinsicWidth ?: 0)
+                    val xMarkTop = itemView.top + ((itemView.bottom - itemView.top) - intrinsicHeight) / 2
+                    val xMarkBottom = xMarkTop + intrinsicHeight
+
+                    colorCanvas(c, rightBG, itemView.left + dX.toInt(), itemView.top, itemView.left, itemView.bottom)
+                    drawTextOnCanvas(c, rightLabel, (itemView.left + 200).toFloat(), (xMarkTop + 10).toFloat())
+                    drawIconOnCanVas(
+                        c, rightIcon, itemView.left + (rightIcon?.intrinsicWidth ?: 0) + 50,
+                        xMarkTop + 20,
+                        itemView.left + 2 * (rightIcon?.intrinsicWidth ?: 0) + 50,
+                        xMarkBottom + 20
+                    )
+
+                } else {
+                    //left swipe
+                    val intrinsicHeight = (leftIcon?.intrinsicWidth ?: 0)
+                    val xMarkTop = itemView.top + ((itemView.bottom - itemView.top) - intrinsicHeight) / 2
+                    val xMarkBottom = xMarkTop + intrinsicHeight
+
+                    colorCanvas(
+                        c,
+                        leftBG,
+                        itemView.right + dX.toInt(),
+                        itemView.top,
+                        itemView.right,
+                        itemView.bottom
+                    )
+                    drawTextOnCanvas(c, leftLabel, (itemView.right - 200).toFloat(), (xMarkTop + 10).toFloat())
+                    drawIconOnCanVas(
+                        c, leftIcon, itemView.right - 2 * (leftIcon?.intrinsicWidth ?: 0) - 70,
+                        xMarkTop + 20,
+                        itemView.right - (leftIcon?.intrinsicWidth ?: 0) - 70,
+                        xMarkBottom + 20
+                    )
+                }
+            }
+
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+        }
+
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
             val toDelete = list[viewHolder.adapterPosition]
-            var removed = 0
-            Timber.d("ONSWIPE1: ${list[viewHolder.adapterPosition]} | ${viewHolder.adapterPosition}")
-//            binding.rView.adapter?.notifyItemRemoved(viewHolder.adapterPosition)
+
+            if(direction == ItemTouchHelper.RIGHT){
+                //Add to 2nd DATABASE
+                graphTodo.done_count++
+                viewModel.updateGraph(graphTodo)
+            }
+
             viewModel.delete(toDelete)
             Snackbar.make(requireView(), "Marked as done!", Snackbar.LENGTH_SHORT).setAction("Undo!", View.OnClickListener {
-//                todoAdapter.submitList(list)
-                Timber.d("ONSWIPE: OnClick")
                 viewModel.insert(toDelete)
-//                binding.rView.adapter?.notifyItemInserted(viewHolder.adapterPosition)
-                removed++
+                if(direction == ItemTouchHelper.RIGHT){
+                    graphTodo.done_count--
+                }
+                viewModel.updateGraph(graphTodo)
             }).show()
-            if(removed == 0){
-                Timber.d("ONSWIPE: REMOVED")
-            } else {
-                Timber.d("ONSWIPE: INSERTED")
-            }
         }
 
         override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
@@ -201,5 +297,22 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
             Common.reqId = list[int].id!!
             findNavController().navigate(R.id.action_homeTodo_to_addTodoFragment)
         }
+    }
+
+    fun colorCanvas(canvas: Canvas, canvasColor: Int, left: Int, top: Int, right: Int, bottom: Int): Unit {
+        (background as ColorDrawable).color = canvasColor
+        background.setBounds(left, top, right, bottom)
+        background.draw(canvas)
+    }
+
+    fun drawTextOnCanvas(canvas: Canvas, label: String, x: Float, y: Float) {
+        canvas.drawText(label, x, y, paint)
+    }
+
+    fun drawIconOnCanVas(
+        canvas: Canvas, icon: Drawable?, left: Int, top: Int, right: Int, bottom: Int
+    ): Unit {
+        icon?.setBounds(left, top, right, bottom)
+        icon?.draw(canvas)
     }
 }
