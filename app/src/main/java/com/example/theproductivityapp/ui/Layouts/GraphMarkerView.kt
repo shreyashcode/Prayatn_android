@@ -2,6 +2,7 @@ package com.example.theproductivityapp.ui.Layouts
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.widget.TextView
 import com.example.theproductivityapp.databinding.GraphMarkerBinding
 import com.example.theproductivityapp.db.GraphTodo
 import com.example.theproductivityapp.db.Utils
@@ -13,7 +14,9 @@ import com.github.mikephil.charting.utils.MPPointF
 class GraphMarkerView (
     val graphTodos: List<GraphTodo>,
     context: Context,
-    LayoutId: Int
+    LayoutId: Int,
+    var stats: TextView,
+    var date_: TextView
 ) : MarkerView(context, LayoutId){
 
     private lateinit var binding: GraphMarkerBinding
@@ -38,9 +41,13 @@ class GraphMarkerView (
         val months = arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec")
 
         val graphTodo = graphTodos[index]
-        binding.added.text = "Added ${graphTodo.added_count}"
-        binding.done.text = "Done ${graphTodo.done_count}"
-        binding.date.text = "${graphTodo.date} ${months[graphTodo.month-1]}"
+        val input_ = "Added ${graphTodo.added_count}, Done ${graphTodo.done_count}"
+        stats.text = input_
+        date_.text = "${graphTodo.date} ${months[graphTodo.month - 1]}"
+
+//        binding.added.text = "Added ${graphTodo.added_count}"
+//        binding.done.text = "Done ${graphTodo.done_count}"
+//        binding.date.text = "${graphTodo.date} ${months[graphTodo.month-1]}"
     }
 
 }

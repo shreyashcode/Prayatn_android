@@ -3,21 +3,21 @@
 
     <item android:id="@+id/homeTodo"
         android:title="Home"
-        android:icon="@drawable/home"/>
+        android:icon="@drawable/ic_home_todo"/>
 
     <item  android:id="@+id/graphFragment"
         android:title="Graph"
-        android:icon="@drawable/ic_graph" />
+        android:icon="@drawable/ic_graph_" />
 
     <item android:id="@+id/empty"
         android:title=""/>
 
     <item android:id="@+id/countFragment"
         android:title="Count Hours"
-        android:icon="@drawable/ic_count"/>
+        android:icon="@drawable/ic_count_timer"/>
 
     <item android:id="@+id/quadrantFragment"
         android:title="Quadrant"
-        android:icon="@drawable/ic_graph" />
+        android:icon="@drawable/ic_pie" />
 
 </menu>

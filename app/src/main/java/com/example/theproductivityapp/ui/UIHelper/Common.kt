@@ -15,5 +15,6 @@ class Common {
         val notUrgent = "Low"
         var todos_size: Int = 0
         var reqId: Int = 0
+        var tag: String = "tag"
     }
 }

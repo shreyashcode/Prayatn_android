@@ -19,12 +19,15 @@ class MainViewModel @Inject constructor(
 
     var todos: LiveData<List<Todo>> = mainRepository.getAllTodos()
     var graphTodos: LiveData<List<GraphTodo>> = mainRepository.getAllGraphTodos()
+//    var todoByTag: LiveData<List<Todo>> = mainRepository.get
 
     fun deleteAllGraphEntries() {
         viewModelScope.launch {
             mainRepository.deleteAll()
         }
     }
+
+    fun getTodoByTAG(tag: String) = mainRepository.getTodoByTag(tag)
 
     fun getById(reqId: Int) = mainRepository.getById(reqId)
 

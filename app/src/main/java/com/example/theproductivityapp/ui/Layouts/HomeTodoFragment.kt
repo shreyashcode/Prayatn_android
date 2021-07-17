@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.theproductivityapp.ui.UIHelper.Common
 import com.example.theproductivityapp.Adapter.TagAdapter
 import com.example.theproductivityapp.Adapter.TodoAdapter
@@ -43,6 +44,7 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
     private lateinit var todoAdapter: TodoAdapter
     private lateinit var tagAdapter: TagAdapter
     private lateinit var list: List<Todo>
+    private lateinit var listToTag: List<Todo>
     private lateinit var itemClickListener: ItemClickListener
     private lateinit var itemTouchHelper: ItemTouchHelper
     private lateinit var view_: View
@@ -92,16 +94,16 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
             for(i in it){
                 order = Math.max(order, i.displayOrder)
             }
-            val listToTag = mutableListOf<Todo>()
+            val listToTag_ = mutableListOf<Todo>()
             val set = mutableSetOf<String>()
 //            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
             for(i in it){
                 if(set.contains(i.tag) == false){
-                    listToTag.add(i)
+                    listToTag_.add(i)
                     set.add(i.tag)
                 }
             }
-
+            listToTag = listToTag_
             list = it
 
             Common.todos_size = order+1
@@ -122,6 +124,7 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
             viewHolder: RecyclerView.ViewHolder,
             target: RecyclerView.ViewHolder
         ): Boolean {
+
             var start = viewHolder.adapterPosition
             var end = target.adapterPosition
             Timber.d("Shreyash: ${start} ${end}")
@@ -165,15 +168,15 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
             val itemView = viewHolder.itemView
             paint = Paint()
             background = ColorDrawable()
-            val leftBG: Int = Color.BLACK
+            val leftBG: Int = Color.parseColor("#f53b02")
             val leftLabel: String = "Delete!"
             val leftIcon: Drawable? = AppCompatResources.
-            getDrawable(requireContext(), R.drawable.ic_account)
+            getDrawable(requireContext(), R.drawable.ic_trash)
 
-            val rightBG: Int = Color.BLUE
+            val rightBG: Int = Color.parseColor("#25cc04")
             val rightLabel: String = "Done!"
             val rightIcon: Drawable? = AppCompatResources.
-            getDrawable(requireContext(), R.drawable.ic_count)
+            getDrawable(requireContext(), R.drawable.tick)
             paint.color = Color.WHITE
             paint.textSize = 48f
             paint.textAlign = Paint.Align.CENTER
@@ -266,7 +269,8 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
         Timber.d("INCLUDE: Todo setup")
         todoAdapter = TodoAdapter(itemClickListener, requireContext())
         adapter = todoAdapter
-        layoutManager = LinearLayoutManager(requireContext())
+        val staggeredGridLayoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
+        layoutManager = staggeredGridLayoutManager
         itemTouchHelper.attachToRecyclerView(this)
     }
 
@@ -284,14 +288,13 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
 
     override fun onItemClick(int: Int, sender: String) {
         val tag = list[int].tag
+        for(i in list){
+            Timber.d("GSOC::::: ${i}")
+        }
+        Timber.d("GSOC: COMMON: ${list[int]}")
         if(sender == Utils.TAG){
-            val filter = mutableListOf<Todo>()
-            for(todo in list){
-                if(todo.tag == tag){
-                    filter.add(todo)
-                }
-            }
-            Common.todos = filter
+            Common.tag = listToTag[int].tag
+            Timber.d("GSOC: $tag")
             findNavController().navigate(R.id.action_homeTodo_to_tagFilterFragment)
         } else {
             Common.reqId = list[int].id!!

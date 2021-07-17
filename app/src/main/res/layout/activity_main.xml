@@ -53,8 +53,10 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         app:fabCustomSize="80dp"
+        app:borderWidth="0dp"
+        android:translationZ="80dp"
         android:src="@drawable/ic_baseline_add_24"
-        android:backgroundTint="#000000"
+        android:backgroundTint="#292C30"
         android:background="@color/black_end"
         android:scaleType="centerInside"
         app:layout_anchor="@id/bottomBar" />

@@ -17,5 +17,5 @@ data class Todo (
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null
 
-    override fun toString() = "ID: $id | TITLE: $title | ORDER: $displayOrder TAG: $tag | DESC: $description"
+    override fun toString() = "ID: $id | TITLE: $title | TAG: $tag"
 }

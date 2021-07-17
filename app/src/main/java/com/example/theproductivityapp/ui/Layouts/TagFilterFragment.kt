@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.theproductivityapp.ui.UIHelper.Common
@@ -12,40 +13,35 @@ import com.example.theproductivityapp.R
 import com.example.theproductivityapp.databinding.FragmentTagFilterBinding
 import com.example.theproductivityapp.db.Todo
 import com.example.theproductivityapp.ui.UIHelper.ItemClickListener
+import com.example.theproductivityapp.ui.ViewModels.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class TagFilterFragment : Fragment(R.layout.fragment_tag_filter), ItemClickListener {
 
     private lateinit var binding: FragmentTagFilterBinding
     private lateinit var todoAdapter: TodoAdapter
     private lateinit var itemClickListener: ItemClickListener
     private lateinit var todos: List<Todo>
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Timber.d("KKKKKKKKKKKK: Fragment ONCREATE!")
-    }
-
-    init{
-        Timber.d("KKKKKKKKKKKK: Fragment!")
-    }
+    private val viewModel:MainViewModel by viewModels()
+    private lateinit var presentTodo: String
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentTagFilterBinding.bind(view)
-
-        todos = Common.todos
-        Timber.d("KKKKKKKKKKKK: Fragment2!")
-        for(i in todos){
-            Timber.d("KKKKKKKKKKKK11: ${i}")
-        }
-        Timber.d("KKKKKKKKKKKK: ${todos.size}")
         itemClickListener = this
         setUpRecyclerView()
+        presentTodo = Common.tag
+
+        viewModel.getTodoByTAG(presentTodo).observe(viewLifecycleOwner, {
+            todos = it
+            todoAdapter.submitList(it)
+        })
+
         binding.remove.setOnClickListener {
 //            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
             findNavController().popBackStack()
-//            findNavController().navigate(R.id.action_tagFilterFragment_to_homeTodo)
         }
     }
 
@@ -54,10 +50,11 @@ class TagFilterFragment : Fragment(R.layout.fragment_tag_filter), ItemClickListe
         todoAdapter = TodoAdapter(itemClickListener, requireContext())
         adapter = todoAdapter
         layoutManager = LinearLayoutManager(requireContext())
-        todoAdapter.submitList(todos)
     }
 
     override fun onItemClick(int: Int, sender: String) {
         Toast.makeText(requireContext(), "Congrats! ${todos[int].title}", Toast.LENGTH_SHORT).show()
+        Common.reqId = todos[int].id!!
+        findNavController().navigate(R.id.action_tagFilterFragment_to_addTodoFragment)
     }
 }

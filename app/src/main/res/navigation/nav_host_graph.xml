@@ -57,6 +57,9 @@
         <action
             android:id="@+id/action_tagFilterFragment_to_homeTodo"
             app:destination="@id/homeTodo" />
+        <action
+            android:id="@+id/action_tagFilterFragment_to_addTodoFragment"
+            app:destination="@id/addTodoFragment" />
     </fragment>
     <fragment
         android:id="@+id/addTodoFragment"

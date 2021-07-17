@@ -64,7 +64,7 @@ class GraphFragment : Fragment(R.layout.fragment_graph) {
                 binding.graph.data.setValueTextSize(10f)
                 binding.graph.description.isEnabled = false
                 binding.graph.isDoubleTapToZoomEnabled = false
-                binding.graph.marker = GraphMarkerView(it, requireContext(), R.layout.graph_marker)
+                binding.graph.marker = GraphMarkerView(it, requireContext(), R.layout.graph_marker, binding.stats, binding.date)
                 binding.graph.invalidate()
             }
         })
