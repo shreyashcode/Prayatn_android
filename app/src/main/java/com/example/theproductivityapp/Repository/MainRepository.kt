@@ -14,6 +14,8 @@ class MainRepository @Inject constructor(
 
     fun getTodoByTag(tag: String) = todoDao.getTodoByTag(tag)
 
+    fun getTodoByTimeStamp(timeStamp: Long) = todoDao.getTodoByTimeStamp(timeStamp)
+
     suspend fun deleteAll() = todoDao.deleteAllGraphEntries()
 
     suspend fun insertGraph(graphTodo: GraphTodo) = todoDao.insertGraph(graphTodo)

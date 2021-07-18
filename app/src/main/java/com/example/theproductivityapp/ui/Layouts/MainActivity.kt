@@ -1,33 +1,28 @@
 package com.example.theproductivityapp.ui.Layouts
 
+import android.app.NotificationManager
+import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.NavHostFragment.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.theproductivityapp.R
 import com.example.theproductivityapp.databinding.ActivityMainBinding
 import com.example.theproductivityapp.db.GraphTodo
-import com.example.theproductivityapp.db.Todo
 import com.example.theproductivityapp.db.TodoDao
-import com.example.theproductivityapp.ui.UIHelper.Common
+import com.example.theproductivityapp.Utils.Common
 import com.example.theproductivityapp.ui.ViewModels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
-import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.LocalTime
 import java.time.ZoneId
 import java.util.*
 import javax.inject.Inject
@@ -53,6 +48,11 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.hosting) as NavHostFragment
         val navController = navHostFragment.navController
         binding.bottomNavView.setupWithNavController(navController)
+//        if(intent.getStringExtra("SOURCE") != null){
+//            Common.loginReq = false
+//            Common.reqId = intent.getIntExtra("ID", 1)
+//            navController.navigate(R.id.action_loginFragment_to_addTodoFragment)
+//        }
 
         navController.addOnDestinationChangedListener { controller, destination, arg ->
             binding.background.setBackgroundColor(ContextCompat.getColor(this, R.color.ui_light2))
@@ -88,6 +88,7 @@ class MainActivity : AppCompatActivity() {
         binding.fabButton.setOnClickListener {
             val action = HomeTodoFragmentDirections.actionHomeTodoToAddTodoFragment()
             navController.navigate(R.id.action_homeTodo_to_addTodoFragment)
+            Common.reqTimeStamp = 0L
             Common.reqId = -1
         }
     }

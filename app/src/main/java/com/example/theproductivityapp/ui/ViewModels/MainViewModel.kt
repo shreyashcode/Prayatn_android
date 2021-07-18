@@ -28,6 +28,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun getTodoByTAG(tag: String) = mainRepository.getTodoByTag(tag)
+    fun getTodoByTimeStamp(timeStamp: Long) = mainRepository.getTodoByTimeStamp(timeStamp)
 
     fun getById(reqId: Int) = mainRepository.getById(reqId)
 

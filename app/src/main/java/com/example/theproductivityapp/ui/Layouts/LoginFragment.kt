@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.theproductivityapp.R
+import com.example.theproductivityapp.Utils.Common
 import com.example.theproductivityapp.databinding.FragmentLoginBinding
 import com.example.theproductivityapp.db.GraphTodo
 import com.example.theproductivityapp.db.Todo
@@ -55,6 +56,9 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
         Toast.makeText(requireContext(),"FOUND! ${readSharedPref(date, month)}", Toast.LENGTH_SHORT).show()
         if(readSharedPref(date, month) == false){
+            if(date == 1){
+                viewModel.deleteAllGraphEntries()
+            }
             viewModel.insertGraph(GraphTodo(System.currentTimeMillis(), 0, 0, date, month))
             writeSharedPref(date, month)
         }

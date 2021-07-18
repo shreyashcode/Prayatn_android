@@ -10,14 +10,12 @@ import androidx.fragment.app.viewModels
 import com.example.theproductivityapp.R
 import com.example.theproductivityapp.databinding.FragmentQuadrantBinding
 import com.example.theproductivityapp.db.Utils
-import com.example.theproductivityapp.ui.UIHelper.Common
 import com.example.theproductivityapp.ui.ViewModels.MainViewModel
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
-import com.github.mikephil.charting.utils.ColorTemplate
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 

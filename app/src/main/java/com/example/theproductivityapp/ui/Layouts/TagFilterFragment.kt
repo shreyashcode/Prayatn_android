@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.theproductivityapp.ui.UIHelper.Common
+import com.example.theproductivityapp.Utils.Common
 import com.example.theproductivityapp.Adapter.TodoAdapter
 import com.example.theproductivityapp.R
 import com.example.theproductivityapp.databinding.FragmentTagFilterBinding
@@ -55,6 +55,7 @@ class TagFilterFragment : Fragment(R.layout.fragment_tag_filter), ItemClickListe
     override fun onItemClick(int: Int, sender: String) {
         Toast.makeText(requireContext(), "Congrats! ${todos[int].title}", Toast.LENGTH_SHORT).show()
         Common.reqId = todos[int].id!!
+        Common.reqTimeStamp = todos[int].timestamp
         findNavController().navigate(R.id.action_tagFilterFragment_to_addTodoFragment)
     }
 }

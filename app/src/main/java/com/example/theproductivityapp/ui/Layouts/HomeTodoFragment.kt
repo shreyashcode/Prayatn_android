@@ -1,7 +1,5 @@
 package com.example.theproductivityapp.ui.Layouts
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -19,7 +17,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.theproductivityapp.ui.UIHelper.Common
+import com.example.theproductivityapp.Utils.Common
 import com.example.theproductivityapp.Adapter.TagAdapter
 import com.example.theproductivityapp.Adapter.TodoAdapter
 import com.example.theproductivityapp.R
@@ -66,6 +64,12 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
         binding = FragmentHomeTodoBinding.bind(view)
         itemClickListener = this
         setUpTagRecyclerView()
+        if(requireActivity().intent.getStringExtra("SOURCE") != null){
+//            Common.loginReq = false
+            Common.reqTimeStamp = requireActivity().intent.getLongExtra("timeStamp", 0L)
+            Timber.d("aashi HOME ${Common.reqId}")
+            findNavController().navigate(R.id.action_homeTodo_to_addTodoFragment)
+        }
 
         viewModel.graphTodos.observe(viewLifecycleOwner, {
             var month: Int = 0
@@ -298,6 +302,7 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
             findNavController().navigate(R.id.action_homeTodo_to_tagFilterFragment)
         } else {
             Common.reqId = list[int].id!!
+            Common.reqTimeStamp = list[int].timestamp!!
             findNavController().navigate(R.id.action_homeTodo_to_addTodoFragment)
         }
     }

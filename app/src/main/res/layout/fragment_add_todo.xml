@@ -14,6 +14,31 @@
         android:orientation="vertical"
         android:padding="20dp">
 
+        <TextView
+            android:id="@+id/showAlarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SHOW ALARM!"
+            android:textColor="@color/primary_dark"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/neumorphCardView"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toEndOf="@+id/custom_drop_down"
+            app:layout_constraintTop_toBottomOf="@+id/save"
+            app:layout_constraintVertical_bias="0.238" />
+
+        <Button
+            android:id="@+id/addAlarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="@color/primary_dark"
+            android:text="Add reminder.."
+            app:layout_constraintEnd_toEndOf="@+id/showAlarm"
+            app:layout_constraintStart_toStartOf="@+id/showAlarm"
+            app:layout_constraintTop_toBottomOf="@+id/showAlarm" />
+
         <com.camerash.toggleedittextview.ToggleEditTextView
             android:id="@+id/title"
             android:layout_width="0dp"
@@ -49,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="9dp"
-                android:hint="Enter tag for identify stuff!"
+                android:hint="TAG!"
                 android:inputType="textMultiLine|textAutoComplete"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline3"

@@ -1,4 +1,4 @@
-package com.example.theproductivityapp.ui.UIHelper
+package com.example.theproductivityapp.Utils
 
 import com.example.theproductivityapp.db.GraphTodo
 import com.example.theproductivityapp.db.Todo
@@ -16,5 +16,8 @@ class Common {
         var todos_size: Int = 0
         var reqId: Int = 0
         var tag: String = "tag"
+        const val remindAction = "REMINDER_ACTION"
+        var loginReq = true
+        var reqTimeStamp: Long = 0L
     }
 }

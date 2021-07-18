@@ -15,6 +15,8 @@ interface TodoDao {
     @Update
     suspend fun updateTodo(todo: Todo)
 
+    @Query("SELECT * FROM TODOS WHERE timestamp = :timeStamp")
+    fun getTodoByTimeStamp(timeStamp: Long): LiveData<List<Todo>>
 
     @Query("SELECT * FROM TODOS WHERE tag = :tag")
     fun getTodoByTag(tag: String): LiveData<List<Todo>>
