@@ -38,7 +38,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         Handler().postDelayed({
             findNavController().navigate(R.id.action_loginFragment_to_homeTodo)
             Timber.d("Computer End")
-        }, 1000)
+        }, 2000)
     }
 
     private fun setUpDatabase() {

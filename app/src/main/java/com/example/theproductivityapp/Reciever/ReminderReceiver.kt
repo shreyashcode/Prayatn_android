@@ -26,9 +26,10 @@ class ReminderReceiver: BroadcastReceiver() {
         val timeInMillis = intent.getLongExtra("TIME", 0L)
         val title = intent.getStringExtra("TITLE")!!
         val id = intent.getIntExtra("ID", 1)
+        val todo_timestamp = intent.getLongExtra("timeStamp", 0L)
 
         Toast.makeText(context, "TITILE ||||||||||||||", Toast.LENGTH_SHORT).show()
-        Timber.d("REALME $title | $id")
+        Timber.d("REALME $title | $id | $todo_timestamp")
 
         val returnIntent = Intent(context, MainActivity::class.java).apply {
             putExtra("SOURCE", title)
@@ -47,6 +48,7 @@ class ReminderReceiver: BroadcastReceiver() {
             .setSmallIcon(R.drawable.home)
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setAutoCancel(true)
             .build()
 
         val notificationManager = NotificationManagerCompat.from(context)

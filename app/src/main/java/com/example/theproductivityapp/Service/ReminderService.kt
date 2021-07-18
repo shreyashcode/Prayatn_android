@@ -36,7 +36,7 @@ class ReminderService(
     private fun getPendingIntent(intent: Intent) =
         PendingIntent.getBroadcast(
             context,
-            100,
+            timestamp.toInt(),
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT
         )
@@ -60,5 +60,10 @@ class ReminderService(
         }
     }
 
-    private fun getIntent() = Intent(context, ReminderReceiver::class.java)
+    private fun getIntent(): Intent{
+        val intent = Intent(context, ReminderReceiver::class.java)
+        intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES)
+        intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND)
+        return intent
+    }
 }

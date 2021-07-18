@@ -74,6 +74,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
 //        if(id_ > 0){
 //            prepareUI(id_)
 //        }
+        Timber.d("REALME ${Common.reqTimeStamp}")
         prepareUI(Common.reqTimeStamp)
 
         viewModel.graphTodos.observe(viewLifecycleOwner, {
