@@ -14,56 +14,108 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <TextView
-            android:id="@+id/showAlarm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SHOW ALARM!"
-            android:textColor="@color/primary_dark"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/neumorphCardView"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintStart_toEndOf="@+id/custom_drop_down"
-            app:layout_constraintTop_toBottomOf="@+id/save"
-            app:layout_constraintVertical_bias="0.238" />
+        <!--        <Button-->
+<!--            android:id="@+id/addAlarm"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:backgroundTint="@color/primary_dark"-->
+<!--            android:text="Add reminder.."-->
+<!--            android:visibility="invisible"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/showAlarm"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/showAlarm"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/showAlarm" />-->
 
-        <Button
-            android:id="@+id/addAlarm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            android:layout_marginTop="5dp"
-            android:backgroundTint="@color/primary_dark"
-            android:text="Add reminder.."
-            app:layout_constraintEnd_toEndOf="@+id/showAlarm"
-            app:layout_constraintStart_toStartOf="@+id/showAlarm"
-            app:layout_constraintTop_toBottomOf="@+id/showAlarm" />
-
-        <com.camerash.toggleedittextview.ToggleEditTextView
-            android:id="@+id/title"
+        <soup.neumorphism.NeumorphCardView
+            android:id="@+id/switch_back"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Add title to this ToDo!"
-            android:inputType="textMultiLine|textAutoComplete"
-            android:paddingTop="3dp"
-            android:textSize="26sp"
-            app:layout_constraintEnd_toStartOf="@+id/toggleButton"
+            app:cardBackgroundColor="#979DA3"
+            app:cardCornerRadius="14dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toEndOf="@+id/custom_drop_down"
+            app:layout_constraintTop_toBottomOf="@+id/title_back"
+            app:neumorph_backgroundColor="@color/ui_light2"
+            app:neumorph_shadowColorDark="#C2C5CA"
+            app:neumorph_shadowColorLight="@color/shadow_light2"
+            app:neumorph_shapeType="pressed">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="8dp"
+                android:padding="3dp">
+
+                <TextView
+                    android:id="@+id/showAlarm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reminder?"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/primary_dark"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/reminder_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/showAlarm"
+                    app:layout_constraintTop_toBottomOf="@+id/showAlarm"
+                    app:thumbTint="@color/primary_dark"
+                    app:trackTint="#595F67" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </soup.neumorphism.NeumorphCardView>
+
+
+
+        <soup.neumorphism.NeumorphCardView
+            android:id="@+id/title_back"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#979DA3"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tetv_editTextBottomLineColor="@android:color/transparent"
-            app:tetv_editing="false" />
+            app:layout_constraintTop_toTopOf="@+id/guideline8"
+            app:neumorph_backgroundColor="#063878"
+            app:neumorph_shadowColorDark="#8C98A8"
+            app:neumorph_shadowColorLight="@color/shadow_light2"
+            app:neumorph_shapeType="flat">
+
+            <com.camerash.toggleedittextview.ToggleEditTextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Add title to this ToDo!"
+                android:inputType="textMultiLine|textAutoComplete"
+                android:padding="3dp"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toStartOf="@+id/toggleButton"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tetv_editTextBottomLineColor="@android:color/transparent"
+                app:tetv_editTextViewColor="@color/white"
+                app:tetv_editing="false"
+                app:tetv_textViewColor="@color/white" />
+
+        </soup.neumorphism.NeumorphCardView>
 
 
         <soup.neumorphism.NeumorphCardView
             android:id="@+id/tag_back"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:outlineAmbientShadowColor="@color/ui_light_blue"
             app:cardBackgroundColor="#979DA3"
             app:cardCornerRadius="14dp"
             app:cardElevation="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintTop_toBottomOf="@+id/title_back"
             app:neumorph_backgroundColor="@color/ui_light2"
             app:neumorph_shadowColorDark="@color/shadow_dark2"
             app:neumorph_shadowColorLight="@color/shadow_light2"
@@ -71,7 +123,7 @@
 
             <com.camerash.toggleedittextview.ToggleEditTextView
                 android:id="@+id/tag"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="9dp"
                 android:hint="TAG!"
@@ -111,23 +163,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Edit"
-            android:layout_marginEnd="3dp"
             android:textColor="#000000"
             android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/emoji"
             app:layout_constraintEnd_toEndOf="@+id/toggleButton"
-            app:layout_constraintStart_toEndOf="@+id/title"
+            app:layout_constraintStart_toStartOf="@+id/toggleButton"
             app:layout_constraintTop_toBottomOf="@+id/toggleButton" />
 
         <TextView
             android:id="@+id/priority_text"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:padding="3dp"
             android:text="Priority"
             android:textAlignment="viewStart"
-            android:textSize="25sp"
-            android:padding="3dp"
             android:textColor="#1D64B8"
-            android:textStyle="italic|bold"
+            android:textSize="25sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/custom_drop_down"
             app:layout_constraintEnd_toEndOf="@+id/custom_drop_down"
             app:layout_constraintStart_toStartOf="@+id/custom_drop_down"
@@ -142,7 +194,7 @@
             android:textAlignment="viewStart"
             android:textColor="#1D64B8"
             android:textSize="25sp"
-            android:textStyle="italic|bold"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/custom_drop_down_imp"
             app:layout_constraintEnd_toStartOf="@+id/guideline6"
             app:layout_constraintStart_toStartOf="parent"
@@ -172,13 +224,13 @@
             android:id="@+id/neumorphCardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             app:cardCornerRadius="14dp"
             app:cardElevation="20dp"
-            android:layout_marginTop="30dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/custom_drop_down_imp"
-            app:neumorph_backgroundColor="@color/ui_light2"
+            app:neumorph_backgroundColor="#AFB5BC"
             app:neumorph_shadowColorDark="@color/shadow_dark2"
             app:neumorph_shadowColorLight="@color/shadow_light2"
             app:neumorph_shapeType="flat">
@@ -205,7 +257,7 @@
             android:id="@+id/toggleButton"
             android:layout_width="36dp"
             android:layout_height="35dp"
-            app:layout_constraintBottom_toBottomOf="@+id/title"
+            android:layout_marginEnd="10dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -228,7 +280,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
+            app:layout_constraintGuide_percent="0.57" />
+
+        <com.camerash.toggleedittextview.ToggleEditTextView
+            android:id="@+id/emoji"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="Emoji?"
+            android:layout_margin="6dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="3dp"
+            android:textColor="@color/ui_dark"
+            android:textSize="38sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline8"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.12"/>
+
+<!--        <Switch-->
+<!--            android:id="@+id/toggleButton2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            style=""-->
+<!--            android:text="ToggleButton"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/title_back"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/guideline2"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/title_back"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/guideline8" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

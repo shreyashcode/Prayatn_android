@@ -66,7 +66,13 @@ class TodoAdapter(val itemClickListener: ItemClickListener,
             holder.binding.itemTitle.text = "Extra_added"
             holder.binding.ncard
         } else {
-            holder.binding.itemTitle.text = differ.currentList[position].title
+            val todoObject = differ.currentList[position]
+            if(todoObject.emoji.length >= 2){
+                holder.binding.itemTitle.text = " ${todoObject.emoji[0].toString().plus(todoObject.emoji[1].toString())}   ${differ.currentList[position].title}"
+                Timber.d("CODEFORCES: TITLE: ${todoObject.emoji[0].toString().plus(todoObject.emoji[1].toString())} ${differ.currentList[position].title}")
+            } else {
+                holder.binding.itemTitle.text = "✅   ".plus(todoObject.title)
+            }
             holder.binding.ncard.setShadowColorLight(Color.parseColor("#fdfefe"))
             holder.binding.ncard.setShadowColorDark(Color.parseColor("#ADBACB"))
         }

@@ -12,7 +12,8 @@ data class Todo (
     var status: Boolean,
     var tag: String = "New",
     var displayOrder: Int = 0,
-    var importance: String){
+    var importance: String,
+    var emoji: String = "✅"){
 
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null

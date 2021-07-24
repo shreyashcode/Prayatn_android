@@ -48,6 +48,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
     private lateinit var graphTodo: GraphTodo
     private var isNew = true
     private var isReminderApplied = false
+    private var addReminder = false
 
     override fun onResume() {
         super.onResume()
@@ -68,12 +69,8 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
         priority = priorities[0]
         imp = importance[0]
         binding.dropDownImp.isClickable = false
+
         disableEditingMode()
-//        id_ = Common.reqId
-//        Timber.d("aashi $id_")
-//        if(id_ > 0){
-//            prepareUI(id_)
-//        }
         Timber.d("REALME ${Common.reqTimeStamp}")
         prepareUI(Common.reqTimeStamp)
 
@@ -90,8 +87,12 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
                 month = timeInstance.month
                 date = timeInstance.date
             }
+            Timber.d("CODEFORCES!")
+            for(graphTodo_ in it) {
+                Timber.d("Codeforces: $graphTodo_")
+            }
 
-            for(graphTodo_ in it){
+                for(graphTodo_ in it){
                 if(graphTodo_.month == month && graphTodo_.date == date){
                     graphTodo = graphTodo_
                     break
@@ -103,7 +104,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
 
         Timber.d("NUMBER IS FAST: $id_")
 
-        binding.toggleButton.bind(binding.title, binding.description, binding.tag)
+        binding.toggleButton.bind(binding.title, binding.description, binding.tag, binding.emoji)
 
         binding.toggleButton.setOnClickListener {
             if(binding.title.getEditing()){
@@ -131,10 +132,10 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
         binding.dropDownImp.setAdapter(ArrayAdapter(requireContext(), R.layout.custom_spinner, importance))
         binding.dropDown.setAdapter(ArrayAdapter(requireContext(), R.layout.custom_spinner, priorities))
 
-        binding.addAlarm.setOnClickListener{getTimeInMillis{
-                setTime(it)
-            }
-        }
+//        binding.addAlarm.setOnClickListener{getTimeInMillis{
+//                setTime(it)
+//            }
+//        }
 
         binding.dropDown.setOnItemClickListener { parent, view, position, id ->
             priority = priorities[position]
@@ -142,6 +143,18 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
 
         binding.dropDownImp.setOnItemClickListener { _, view, position, id ->
             imp = importance[position]
+        }
+
+        binding.reminderSwitch.setOnCheckedChangeListener{_, checked->
+            addReminder = checked
+            if(checked == true){
+                getTimeInMillis{
+                    setTime(it)
+                    binding.showAlarm.text = convertDate(it)
+                }
+            } else {
+                binding.showAlarm.text = "Reminder?"
+            }
         }
     }
 
@@ -194,6 +207,8 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
                 val it = list_[0]
                 Timber.d("AASHI: Observer: $it")
                 gTodo = it
+                Timber.d("Character: ${it.emoji}")
+                binding.emoji.textView.text = it.emoji
                 binding.description.textView.text = it.description
                 binding.description.editText.setText(it.description)
                 binding.title.textView.text = it.title
@@ -220,9 +235,10 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
 
     private fun insertTodo(timeInMillis: Long){
         val todo = buildTodo()
-        if(isReminderApplied == true){
+        if(addReminder == true){
             setReminder(timeInMillis, todo.timestamp, todo.title)
         }
+        todo.emoji = binding.emoji.editText.text.toString()
         Toast.makeText(requireContext(), "$ ${convertDate(globalTimeInMillis)}", Toast.LENGTH_SHORT).show()
         todo.displayOrder = Common.todos_size
         Common.todos_size++
@@ -234,6 +250,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
     }
 
     private fun setReminder(timeInMillis: Long, todo_timestamp: Long, title: String){
+        Toast.makeText(requireContext(), "You would be reminded at ${convertDate(timeInMillis)}!", Toast.LENGTH_SHORT).show()
         val reminderService = ReminderService(requireContext(), todo_timestamp, title)
         reminderService.setExactAlarm(timeInMillis)
     }
@@ -251,18 +268,18 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
 
     private fun updateTodo(timeInMillis: Long){
         val todo = buildTodo()
-        if(isReminderApplied == true){
+        if(addReminder == true){
             setReminder(timeInMillis, todo.timestamp, todo.title)
         }
+        todo.emoji = binding.emoji.editText.text.toString()
         todo.id = gTodo.id
         todo.displayOrder = gTodo.displayOrder
-        Timber.d("AASHI: UPDATE: $todo")
         viewModel.update(todo)
     }
 
     private fun editingMode(){
         binding.save.text = "Save"
-        binding.addAlarm.visibility = View.VISIBLE
+//        binding.addAlarm.visibility = View.VISIBLE
         binding.customDropDown.visibility = View.VISIBLE
         binding.customDropDownImp.visibility = View.VISIBLE
         binding.importanceText.visibility = View.INVISIBLE
@@ -271,7 +288,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
 
     private fun disableEditingMode(){
         binding.save.text = "Edit"
-        binding.addAlarm.visibility = View.INVISIBLE
+//        binding.addAlarm.visibility = View.INVISIBLE
         binding.customDropDownImp.visibility = View.INVISIBLE
         binding.customDropDown.visibility = View.INVISIBLE
         binding.importanceText.visibility = View.VISIBLE
@@ -294,6 +311,6 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
     }
 
     private fun convertDate(timeInMillis: Long): String =
-        DateFormat.format("dd/MM/yyyy hh:mm:ss", timeInMillis).toString()
+        DateFormat.format("dd/MM hh:mm", timeInMillis).toString()
 
 }

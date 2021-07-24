@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.theproductivityapp.R
 import com.example.theproductivityapp.Utils.Common
@@ -35,10 +36,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding = FragmentLoginBinding.bind(view)
         Timber.d("Computer Start")
         setUpDatabase()
-        Handler().postDelayed({
+//        Intent.
+        lifecycleScope.launchWhenResumed {
+            delay(2000)
+//            findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
             findNavController().navigate(R.id.action_loginFragment_to_homeTodo)
-            Timber.d("Computer End")
-        }, 2000)
+        }
+//        Handler().postDelayed({
+//           Timber.d("Computer End")
+//        }, 2000)
     }
 
     private fun setUpDatabase() {
@@ -54,7 +60,9 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             month = timeInstance.month
             date = timeInstance.date
         }
+        Timber.d("Codeforces BEGIN: $date | $month")
         Toast.makeText(requireContext(),"FOUND! ${readSharedPref(date, month)}", Toast.LENGTH_SHORT).show()
+        Timber.d("Codeforces END: $date | $month")
         if(readSharedPref(date, month) == false){
             if(date == 1){
                 viewModel.deleteAllGraphEntries()
@@ -112,6 +120,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         val sharedPref: SharedPreferences = requireContext().getSharedPreferences(Utils.LOGIN_CRED, Context.MODE_PRIVATE)
         val date_ = sharedPref.getInt("Date", -1)
         val mon_ = sharedPref.getInt("Month", -1)
+        Timber.d("Codefoces: R $date_ | $mon_")
         return date == date_ && mon == mon_
     }
 }

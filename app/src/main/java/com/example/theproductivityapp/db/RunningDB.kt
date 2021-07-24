@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
         Todo::class,
         GraphTodo::class
     ],
-    version = 6
+    version = 7
 )
 abstract class RunningDB : RoomDatabase() {
 

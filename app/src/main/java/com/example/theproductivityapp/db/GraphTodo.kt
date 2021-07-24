@@ -14,4 +14,9 @@ data class GraphTodo(
     var month: Int,
     @PrimaryKey(autoGenerate = true)
     var entry_no: Int? = null
-)
+
+) {
+    override fun toString(): String {
+        return "$timestamp || $date || $month"
+    }
+}

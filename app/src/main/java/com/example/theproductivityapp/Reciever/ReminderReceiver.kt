@@ -7,6 +7,7 @@ import android.app.TaskStackBuilder
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Build
 import android.text.format.DateFormat
 import android.widget.Toast
@@ -14,6 +15,7 @@ import androidx.core.app.NotificationChannelCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.room.util.ViewInfo
 import com.example.theproductivityapp.R
 import com.example.theproductivityapp.ui.Layouts.MainActivity
 import timber.log.Timber
@@ -38,10 +40,11 @@ class ReminderReceiver: BroadcastReceiver() {
         }
         val pendingIntent = TaskStackBuilder.create(context).run{
             addNextIntentWithParentStack(returnIntent)
-            getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+            Timber.d("Realme ### ${returnIntent.getStringExtra("SOURCE")} | ${returnIntent.getLongExtra("timeStamp", 0L)}")
+            getPendingIntent(todo_timestamp.toInt(), PendingIntent.FLAG_UPDATE_CURRENT)
         }
 
-        createNotification(context)
+//        createNotification(context)
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setContentTitle(title)
             .setContentText(convertDate(timeInMillis))
@@ -49,22 +52,17 @@ class ReminderReceiver: BroadcastReceiver() {
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
+            .setFullScreenIntent(pendingIntent, true)
+            .setChannelId(CHANNEL_ID)
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+            .setVibrate(longArrayOf(0))
             .build()
 
-        val notificationManager = NotificationManagerCompat.from(context)
-        notificationManager.notify(1, notification)
-    }
+//        if (Build.VERSION.SDK_INT >= 21) notification.(new long[0]);
 
-    private fun createNotification(context: Context){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            val channel = NotificationChannel(
-                CHANNEL_ID,
-                CHANNEL_NAME,
-                NotificationManager.IMPORTANCE_DEFAULT
-            )
-            val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            manager.createNotificationChannel(channel)
-        }
+        val notificationManager = NotificationManagerCompat.from(context)
+        Timber.d("Realme is shown?")
+        notificationManager.notify(todo_timestamp.toInt(), notification)
     }
 
     private fun convertDate(timeInMillis: Long): String =

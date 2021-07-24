@@ -1,6 +1,7 @@
 package com.example.theproductivityapp.Repository
 
 import com.example.theproductivityapp.db.GraphTodo
+import com.example.theproductivityapp.db.Reminder
 import com.example.theproductivityapp.db.Todo
 import com.example.theproductivityapp.db.TodoDao
 import javax.inject.Inject
@@ -15,6 +16,12 @@ class MainRepository @Inject constructor(
     fun getTodoByTag(tag: String) = todoDao.getTodoByTag(tag)
 
     fun getTodoByTimeStamp(timeStamp: Long) = todoDao.getTodoByTimeStamp(timeStamp)
+
+    suspend fun insertReminder(reminder: Reminder) = todoDao.insertReminder(reminder)
+
+    suspend fun deleteReminder(reminder: Reminder) = todoDao.deleteReminder(reminder)
+
+    suspend fun updateReminder(reminder: Reminder) = todoDao.updateReminder(reminder)
 
     suspend fun deleteAll() = todoDao.deleteAllGraphEntries()
 

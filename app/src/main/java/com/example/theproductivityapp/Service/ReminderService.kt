@@ -5,10 +5,9 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import com.airbnb.lottie.utils.Utils
 import com.example.theproductivityapp.Reciever.ReminderReceiver
 import com.example.theproductivityapp.Utils.Common
-import java.security.Timestamp
+import timber.log.Timber
 
 class ReminderService(
     private val context: Context,
@@ -24,10 +23,16 @@ class ReminderService(
             timeInMillis,
             getPendingIntent(
                 getIntent().apply {
+                    Timber.d("Realme: SERVICE ----->   $timeInMillis | $title | $timestamp")
                     action = Common.remindAction
                     putExtra("TIME", timeInMillis)
                     putExtra("TITLE", title)
                     putExtra("timeStamp", timestamp)
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                        context.startForegroundService(this);
+//                    } else {
+//                        context.startService(this);
+//                    }
                 }
             )
         )
@@ -36,13 +41,14 @@ class ReminderService(
     private fun getPendingIntent(intent: Intent) =
         PendingIntent.getBroadcast(
             context,
-            timestamp.toInt(),
+            System.currentTimeMillis().toInt(),
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT
         )
 
 
     private fun setAlarm(timeInMillis: Long, pendingIntent: PendingIntent) {
+//        alarmManager.set
         alarmManager?.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 alarmManager.setExactAndAllowWhileIdle(
@@ -60,10 +66,9 @@ class ReminderService(
         }
     }
 
-    private fun getIntent(): Intent{
+    private fun getIntent(): Intent {
         val intent = Intent(context, ReminderReceiver::class.java)
-        intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES)
-        intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND)
+//        intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND)
         return intent
     }
 }

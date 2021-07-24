@@ -1,5 +1,6 @@
 package com.example.theproductivityapp.ui.Layouts
 
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -36,6 +38,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding : ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
     private lateinit var graphTodo: GraphTodo
+    val CHANNEL_ID = "CHANNEL_ID"
+    val CHANNEL_NAME = "CHANNEL_NAME"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +48,8 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavView.menu.getItem(2).isEnabled = false
         binding.bottomBar.background = null
         setContentView(binding.root)
+        createNotification(this)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 //        setUpDatabase()
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.hosting) as NavHostFragment
         val navController = navHostFragment.navController
@@ -139,5 +145,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun insertGraphTodo(graphTodo: GraphTodo){
         viewModel.insertGraph(graphTodo)
+    }
+    private fun createNotification(context: Context){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val channel = NotificationChannel(
+                CHANNEL_ID,
+                CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            manager.createNotificationChannel(channel)
+        }
     }
 }

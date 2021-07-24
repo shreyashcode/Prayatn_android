@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.theproductivityapp.Repository.MainRepository
 import com.example.theproductivityapp.db.GraphTodo
+import com.example.theproductivityapp.db.Reminder
 import com.example.theproductivityapp.db.Todo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -19,7 +20,24 @@ class MainViewModel @Inject constructor(
 
     var todos: LiveData<List<Todo>> = mainRepository.getAllTodos()
     var graphTodos: LiveData<List<GraphTodo>> = mainRepository.getAllGraphTodos()
-//    var todoByTag: LiveData<List<Todo>> = mainRepository.get
+
+    fun insertReminder(reminder: Reminder){
+        viewModelScope.launch {
+            mainRepository.insertReminder(reminder)
+        }
+    }
+
+    fun deleteReminder(reminder: Reminder){
+        viewModelScope.launch {
+            mainRepository.deleteReminder(reminder)
+        }
+    }
+
+    fun updateReminder(reminder: Reminder){
+        viewModelScope.launch {
+            mainRepository.updateReminder(reminder)
+        }
+    }
 
     fun deleteAllGraphEntries() {
         viewModelScope.launch {

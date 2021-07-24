@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.theproductivityapp">
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+<!--    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>-->
+
     <application
         android:name=".di.BaseApplication"
         android:allowBackup="true"
@@ -17,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".Reciever.ReminderReceiver" />
+        <receiver android:name=".Reciever.ReminderReceiver"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

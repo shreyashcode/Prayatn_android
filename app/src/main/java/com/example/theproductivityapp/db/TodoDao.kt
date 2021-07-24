@@ -12,6 +12,15 @@ interface TodoDao {
     @Insert
     suspend fun insertGraph(graphTodo: GraphTodo)
 
+    @Insert
+    suspend fun insertReminder(reminder: Reminder)
+
+    @Delete
+    suspend fun deleteReminder(reminder: Reminder)
+
+    @Update
+    suspend fun updateReminder(reminder: Reminder)
+
     @Update
     suspend fun updateTodo(todo: Todo)
 
