@@ -21,6 +21,7 @@ import com.example.theproductivityapp.Utils.Common
 import com.example.theproductivityapp.Adapter.TagAdapter
 import com.example.theproductivityapp.Adapter.TodoAdapter
 import com.example.theproductivityapp.R
+import com.example.theproductivityapp.Service.ReminderService
 import com.example.theproductivityapp.databinding.FragmentHomeTodoBinding
 import com.example.theproductivityapp.db.GraphTodo
 import com.example.theproductivityapp.db.Todo
@@ -49,6 +50,7 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
     lateinit var paint: Paint
     lateinit var background: Drawable
     lateinit var graphTodo: GraphTodo
+    private lateinit var reminderService: ReminderService
 
     override fun onResume() {
         super.onResume()
@@ -70,6 +72,18 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
             Timber.d("aashi HOME ${Common.reqId}")
             findNavController().navigate(R.id.action_homeTodo_to_addTodoFragment)
         }
+        Timber.d("DELETING: ??????????????????????????????????????????????")
+        reminderService = ReminderService(requireContext())
+        viewModel.reminders.observe(viewLifecycleOwner, {
+            for(i in it){
+                if(i.remindTimeInMillis < System.currentTimeMillis()){
+                    reminderService.cancelReminder(i.remindTimeInMillis)
+                    Timber.d("DELETING : $i")
+                    viewModel.deleteReminder(i)
+                }
+            }
+        })
+        Timber.d("DELETING: $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
 
         viewModel.graphTodos.observe(viewLifecycleOwner, {
             var month: Int = 0
@@ -131,7 +145,6 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
 
             var start = viewHolder.adapterPosition
             var end = target.adapterPosition
-            Timber.d("Shreyash: ${start} ${end}")
             if(start < end){
                 for(i in start until end){
                     val order1 = list[i].displayOrder
@@ -238,8 +251,8 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
                 graphTodo.done_count++
                 viewModel.updateGraph(graphTodo)
             }
-
             viewModel.delete(toDelete)
+
             Snackbar.make(requireView(), "Marked as done!", Snackbar.LENGTH_SHORT).setAction("Undo!", View.OnClickListener {
                 viewModel.insert(toDelete)
                 if(direction == ItemTouchHelper.RIGHT){
@@ -290,7 +303,7 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
         setUpRecyclerView()
     }
 
-    override fun onItemClick(int: Int, sender: String) {
+    override fun onItemClick(int: Int, sender: String, viewId: Int) {
         val tag = list[int].tag
         for(i in list){
             Timber.d("GSOC::::: ${i}")

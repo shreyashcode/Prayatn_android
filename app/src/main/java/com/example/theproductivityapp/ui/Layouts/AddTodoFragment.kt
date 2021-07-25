@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import android.service.autofill.VisibilitySetterAction
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.*
@@ -29,6 +30,7 @@ import java.time.ZoneId
 import java.util.*
 import android.text.format.DateFormat
 import com.example.theproductivityapp.Service.ReminderService
+import com.example.theproductivityapp.db.Reminder
 
 
 @AndroidEntryPoint
@@ -49,6 +51,8 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
     private var isNew = true
     private var isReminderApplied = false
     private var addReminder = false
+    private var showReminderOption = false
+    private var reminderTime: Long = 0L
 
     override fun onResume() {
         super.onResume()
@@ -72,6 +76,12 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
 
         disableEditingMode()
         Timber.d("REALME ${Common.reqTimeStamp}")
+        viewModel.reminderByTimestamp(Common.reqTimeStamp).observe(viewLifecycleOwner, {
+            if(it.isNotEmpty()){
+                binding.reminderSwitch.visibility = View.INVISIBLE
+                binding.showAlarm.text = convertDate(it[0].remindTimeInMillis)
+            }
+        })
         prepareUI(Common.reqTimeStamp)
 
         viewModel.graphTodos.observe(viewLifecycleOwner, {
@@ -92,7 +102,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
                 Timber.d("Codeforces: $graphTodo_")
             }
 
-                for(graphTodo_ in it){
+            for(graphTodo_ in it){
                 if(graphTodo_.month == month && graphTodo_.date == date){
                     graphTodo = graphTodo_
                     break
@@ -209,6 +219,8 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
                 gTodo = it
                 Timber.d("Character: ${it.emoji}")
                 binding.emoji.textView.text = it.emoji
+                // Check?
+                binding.emoji.editText.setText(it.emoji)
                 binding.description.textView.text = it.description
                 binding.description.editText.setText(it.description)
                 binding.title.textView.text = it.title
@@ -237,6 +249,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
         val todo = buildTodo()
         if(addReminder == true){
             setReminder(timeInMillis, todo.timestamp, todo.title)
+            todo.isReminderSet = true
         }
         todo.emoji = binding.emoji.editText.text.toString()
         Toast.makeText(requireContext(), "$ ${convertDate(globalTimeInMillis)}", Toast.LENGTH_SHORT).show()
@@ -250,6 +263,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
     }
 
     private fun setReminder(timeInMillis: Long, todo_timestamp: Long, title: String){
+        viewModel.insertReminder(Reminder(timeInMillis, title, todo_timestamp))
         Toast.makeText(requireContext(), "You would be reminded at ${convertDate(timeInMillis)}!", Toast.LENGTH_SHORT).show()
         val reminderService = ReminderService(requireContext(), todo_timestamp, title)
         reminderService.setExactAlarm(timeInMillis)
@@ -270,6 +284,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
         val todo = buildTodo()
         if(addReminder == true){
             setReminder(timeInMillis, todo.timestamp, todo.title)
+            todo.isReminderSet = true
         }
         todo.emoji = binding.emoji.editText.text.toString()
         todo.id = gTodo.id

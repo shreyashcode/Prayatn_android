@@ -5,8 +5,6 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.content.res.TypedArrayUtils.getString
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -24,7 +22,7 @@ class TodoAdapter(val itemClickListener: ItemClickListener,
     inner class TodoViewHolder(var binding: TodoItemBinding): RecyclerView.ViewHolder(binding.root){
         init {
             binding.ncard.setOnClickListener {
-                itemClickListener.onItemClick(adapterPosition, Utils.TODO)
+                itemClickListener.onItemClick(adapterPosition, Utils.TODO, 0)
             }
         }
     }
@@ -67,10 +65,10 @@ class TodoAdapter(val itemClickListener: ItemClickListener,
             holder.binding.ncard
         } else {
             val todoObject = differ.currentList[position]
-            if(todoObject.emoji.length >= 2){
-                holder.binding.itemTitle.text = " ${todoObject.emoji[0].toString().plus(todoObject.emoji[1].toString())}   ${differ.currentList[position].title}"
-                Timber.d("CODEFORCES: TITLE: ${todoObject.emoji[0].toString().plus(todoObject.emoji[1].toString())} ${differ.currentList[position].title}")
-            } else {
+            Timber.d("LAPTOP: ${todoObject.emoji} || ")
+            if(todoObject.emoji.isNotEmpty()){
+                holder.binding.itemTitle.text = " ${todoObject.emoji}   ${differ.currentList[position].title}"
+             } else {
                 holder.binding.itemTitle.text = "✅   ".plus(todoObject.title)
             }
             holder.binding.ncard.setShadowColorLight(Color.parseColor("#fdfefe"))

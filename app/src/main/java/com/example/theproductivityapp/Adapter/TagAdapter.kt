@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.theproductivityapp.Model.Tags
 import com.example.theproductivityapp.databinding.TagItemBinding
 import com.example.theproductivityapp.db.Todo
 import com.example.theproductivityapp.db.Utils
@@ -17,7 +16,7 @@ class TagAdapter(var itemClickListener: ItemClickListener) : RecyclerView.Adapte
     inner class TagViewHolder(var binding: TagItemBinding): RecyclerView.ViewHolder(binding.root){
         init{
             binding.tagCard.setOnClickListener {
-                itemClickListener.onItemClick(adapterPosition, Utils.TAG)
+                itemClickListener.onItemClick(adapterPosition, Utils.TAG, 0)
             }
         }
     }

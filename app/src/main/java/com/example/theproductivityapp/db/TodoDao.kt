@@ -12,11 +12,17 @@ interface TodoDao {
     @Insert
     suspend fun insertGraph(graphTodo: GraphTodo)
 
+    @Query("SELECT * FROM REMINDER")
+    fun getAllReminders():LiveData<List<Reminder>>
+
     @Insert
     suspend fun insertReminder(reminder: Reminder)
 
     @Delete
     suspend fun deleteReminder(reminder: Reminder)
+
+    @Query("DELETE FROM REMINDER WHERE timeStampOfTodo = :timeStamp")
+    suspend fun deleteReminderByTimeStamp(timeStamp: Long)
 
     @Update
     suspend fun updateReminder(reminder: Reminder)
@@ -29,6 +35,9 @@ interface TodoDao {
 
     @Query("SELECT * FROM TODOS WHERE tag = :tag")
     fun getTodoByTag(tag: String): LiveData<List<Todo>>
+
+    @Query("SELECT * FROM reminder WHERE timeStampOfTodo = :timeStamp")
+    fun getReminderByTimeStamp(timeStamp: Long): LiveData<List<Reminder>>
 
     @Update
     suspend fun updateGraph(graphTodo: GraphTodo)

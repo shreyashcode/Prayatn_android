@@ -6,9 +6,10 @@ import androidx.room.RoomDatabase
 @Database(
     entities = [
         Todo::class,
-        GraphTodo::class
+        GraphTodo::class,
+        Reminder::class
     ],
-    version = 7
+    version = 9
 )
 abstract class RunningDB : RoomDatabase() {
 

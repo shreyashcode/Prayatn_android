@@ -52,7 +52,7 @@ class TagFilterFragment : Fragment(R.layout.fragment_tag_filter), ItemClickListe
         layoutManager = LinearLayoutManager(requireContext())
     }
 
-    override fun onItemClick(int: Int, sender: String) {
+    override fun onItemClick(int: Int, sender: String, viewId: Int) {
         Toast.makeText(requireContext(), "Congrats! ${todos[int].title}", Toast.LENGTH_SHORT).show()
         Common.reqId = todos[int].id!!
         Common.reqTimeStamp = todos[int].timestamp

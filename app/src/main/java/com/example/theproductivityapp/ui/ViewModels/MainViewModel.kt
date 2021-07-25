@@ -20,6 +20,9 @@ class MainViewModel @Inject constructor(
 
     var todos: LiveData<List<Todo>> = mainRepository.getAllTodos()
     var graphTodos: LiveData<List<GraphTodo>> = mainRepository.getAllGraphTodos()
+    var reminders: LiveData<List<Reminder>> = mainRepository.getAllReminders()
+
+    fun reminderByTimestamp(timeStamp: Long): LiveData<List<Reminder>> = mainRepository.getReminder(timeStamp)
 
     fun insertReminder(reminder: Reminder){
         viewModelScope.launch {

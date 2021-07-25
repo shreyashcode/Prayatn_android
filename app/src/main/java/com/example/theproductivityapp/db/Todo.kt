@@ -13,7 +13,8 @@ data class Todo (
     var tag: String = "New",
     var displayOrder: Int = 0,
     var importance: String,
-    var emoji: String = "✅"){
+    var emoji: String = "✅",
+    var isReminderSet: Boolean = false){
 
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null

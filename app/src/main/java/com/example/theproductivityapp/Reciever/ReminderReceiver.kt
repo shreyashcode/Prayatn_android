@@ -17,8 +17,14 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.room.util.ViewInfo
 import com.example.theproductivityapp.R
+import com.example.theproductivityapp.Repository.MainRepository
+import com.example.theproductivityapp.db.TodoDao
 import com.example.theproductivityapp.ui.Layouts.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.*
 import timber.log.Timber
+import javax.inject.Inject
+
 
 class ReminderReceiver: BroadcastReceiver() {
     val CHANNEL_ID = "CHANNEL_ID"
@@ -30,8 +36,14 @@ class ReminderReceiver: BroadcastReceiver() {
         val id = intent.getIntExtra("ID", 1)
         val todo_timestamp = intent.getLongExtra("timeStamp", 0L)
 
-        Toast.makeText(context, "TITILE ||||||||||||||", Toast.LENGTH_SHORT).show()
         Timber.d("REALME $title | $id | $todo_timestamp")
+//        val job = Job()
+//        val coroutineScope = CoroutineScope(job + Dispatchers.Main)
+//        coroutineScope.launch {
+//            todoDao.deleteReminderByTimeStamp(timeInMillis)
+//        }
+
+        Toast.makeText(context, "TITILE ||||||||||||||", Toast.LENGTH_SHORT).show()
 
         val returnIntent = Intent(context, MainActivity::class.java).apply {
             putExtra("SOURCE", title)

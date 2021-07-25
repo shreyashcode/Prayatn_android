@@ -13,9 +13,13 @@ class MainRepository @Inject constructor(
         return todoDao.insertTodo(todo)
     }
 
+    fun getReminder(timeStamp: Long) = todoDao.getReminderByTimeStamp(timeStamp)
+
     fun getTodoByTag(tag: String) = todoDao.getTodoByTag(tag)
 
     fun getTodoByTimeStamp(timeStamp: Long) = todoDao.getTodoByTimeStamp(timeStamp)
+
+    fun getAllReminders() = todoDao.getAllReminders()
 
     suspend fun insertReminder(reminder: Reminder) = todoDao.insertReminder(reminder)
 
