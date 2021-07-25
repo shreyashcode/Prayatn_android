@@ -51,6 +51,7 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
     lateinit var background: Drawable
     lateinit var graphTodo: GraphTodo
     private lateinit var reminderService: ReminderService
+    private var changeRView = true
 
     override fun onResume() {
         super.onResume()
@@ -134,6 +135,9 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
                 binding.progress.visibility = View.GONE
             }
         })
+        binding.setting.setOnClickListener{
+            changeLayoutManager()
+        }
     }
 
     private var callBack = object: ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP.or(ItemTouchHelper.DOWN), ItemTouchHelper.RIGHT.or(ItemTouchHelper.LEFT)){
@@ -289,6 +293,7 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
         val staggeredGridLayoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
         layoutManager = staggeredGridLayoutManager
         itemTouchHelper.attachToRecyclerView(this)
+
     }
 
     private fun setUpTagRecyclerView() = binding.tagRview.apply {
@@ -301,6 +306,17 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
         val list = listOf(Todo("NULL", "NULL", "", System.currentTimeMillis(), true, "Sample", 0, ""))
         tagAdapter.submitList(list)
         setUpRecyclerView()
+    }
+
+    private fun changeLayoutManager(){
+        if(changeRView == true){
+            // sta -> linear
+            changeRView = false
+            binding.rView.layoutManager = LinearLayoutManager(requireContext())
+        } else {
+            changeRView = true
+            binding.rView.layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
+        }
     }
 
     override fun onItemClick(int: Int, sender: String, viewId: Int) {
