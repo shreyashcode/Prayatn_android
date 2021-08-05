@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/TheProductivityApp/app/src/main/res/layout/fragment_add_todo.xml" value="0.18" />
+        <entry key="..\:/TheProductivityApp/app/src/main/res/layout/fragment_graph.xml" value="0.12681159420289856" />
+        <entry key="..\:/TheProductivityApp/app/src/main/res/layout/fragment_login.xml" value="0.18" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

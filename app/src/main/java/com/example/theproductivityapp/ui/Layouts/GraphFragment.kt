@@ -45,13 +45,7 @@ class GraphFragment : Fragment(R.layout.fragment_graph) {
     private fun setUpData(){
         viewModel.graphTodos.observe(viewLifecycleOwner, {
             it?.let {
-                for(i in it){
-                    Timber.d("Computer.cpp UI ${i}")
-                }
                 Collections.sort(it, GraphComparator())
-                for(i in it){
-                    Timber.d("Computer.cpp ${i}")
-                }
                 val data = it.indices.map {i -> BarEntry(it[i].date.toFloat(), it[i].done_count.toFloat())}
                 val dataSet = BarDataSet(data, "Task completed Vs Date").apply {
                     valueTextColor = Color.WHITE
@@ -75,13 +69,9 @@ class GraphFragment : Fragment(R.layout.fragment_graph) {
     private fun setUpGraph(){
         binding.graph.xAxis.apply {
             position = XAxis.XAxisPosition.BOTTOM
-            // remove
-//            spaceMax = 1f
-//            spaceMin = 1f
             setDrawLabels(true)
             textColor = Color.WHITE
             axisLineColor = Color.WHITE
-            // modify
             setDrawGridLines(false)
             textSize = 15f
         }

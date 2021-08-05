@@ -60,9 +60,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             month = timeInstance.month
             date = timeInstance.date
         }
-        Timber.d("Codeforces BEGIN: $date | $month")
-        Toast.makeText(requireContext(),"FOUND! ${readSharedPref(date, month)}", Toast.LENGTH_SHORT).show()
-        Timber.d("Codeforces END: $date | $month")
         if(readSharedPref(date, month) == false){
             if(date == 1){
                 viewModel.deleteAllGraphEntries()

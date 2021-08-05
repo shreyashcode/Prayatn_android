@@ -1,5 +1,7 @@
 package com.example.theproductivityapp.ui.Layouts
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -8,6 +10,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -51,7 +54,7 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
     lateinit var background: Drawable
     lateinit var graphTodo: GraphTodo
     private lateinit var reminderService: ReminderService
-    private var changeRView = true
+//    private var changeRView = true
 
     override fun onResume() {
         super.onResume()
@@ -68,24 +71,18 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
         itemClickListener = this
         setUpTagRecyclerView()
         if(requireActivity().intent.getStringExtra("SOURCE") != null){
-//            Common.loginReq = false
             Common.reqTimeStamp = requireActivity().intent.getLongExtra("timeStamp", 0L)
-            Timber.d("aashi HOME ${Common.reqId}")
             findNavController().navigate(R.id.action_homeTodo_to_addTodoFragment)
         }
-        Timber.d("DELETING: ??????????????????????????????????????????????")
         reminderService = ReminderService(requireContext())
         viewModel.reminders.observe(viewLifecycleOwner, {
             for(i in it){
                 if(i.remindTimeInMillis < System.currentTimeMillis()){
-                    reminderService.cancelReminder(i.remindTimeInMillis)
-                    Timber.d("DELETING : $i")
+                    reminderService.cancelReminder(i.timeStampOfTodo, i.remindTimeInMillis)
                     viewModel.deleteReminder(i)
                 }
             }
         })
-        Timber.d("DELETING: $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-
         viewModel.graphTodos.observe(viewLifecycleOwner, {
             var month: Int = 0
             var date: Int = 0
@@ -165,10 +162,6 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
                     list[i-1].displayOrder = order1
                     Collections.swap(list, i, i-1)
                 }
-            }
-
-            for(i in list){
-                Timber.d("Shreyash: ${i}")
             }
 
             todoAdapter.submitList(list)
@@ -269,35 +262,33 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
         override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
             super.clearView(recyclerView, viewHolder)
             viewHolder.itemView.setBackgroundColor(Color.parseColor("#D5DCE5"))
-//            viewHolder.itemView
-//            viewHolder.itemView.ncard.setBackgroundColor(Color.parseColor("#D5DCE5"))
             for(i in list){
                 viewModel.update(i)
             }
-            Timber.d("Random: Updated!")
         }
 
         override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
             super.onSelectedChanged(viewHolder, actionState)
             if (viewHolder != null) {
-//                viewHolder.itemView.ncard.setBackgroundColor(Color.WHITE)
                 viewHolder.itemView.setBackgroundColor(Color.WHITE)
             }
         }
     }
 
     private fun setUpRecyclerView() = binding.rView.apply {
-        Timber.d("INCLUDE: Todo setup")
         todoAdapter = TodoAdapter(itemClickListener, requireContext())
         adapter = todoAdapter
         val staggeredGridLayoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
-        layoutManager = staggeredGridLayoutManager
+        if(readSharedPref() == true){
+            layoutManager = LinearLayoutManager(requireContext())
+        } else {
+            layoutManager = staggeredGridLayoutManager
+        }
         itemTouchHelper.attachToRecyclerView(this)
 
     }
 
     private fun setUpTagRecyclerView() = binding.tagRview.apply {
-        Timber.d("INCLUDE: Tag setup")
         tagAdapter = TagAdapter(itemClickListener)
         adapter = tagAdapter
         val linearLayoutManager = LinearLayoutManager(requireContext())
@@ -309,14 +300,39 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
     }
 
     private fun changeLayoutManager(){
-        if(changeRView == true){
+        if(readSharedPref() == false){
             // sta -> linear
-            changeRView = false
             binding.rView.layoutManager = LinearLayoutManager(requireContext())
+            writeSharedPref(true)
         } else {
-            changeRView = true
+            writeSharedPref(false)
             binding.rView.layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
         }
+    }
+
+    private fun writeSharedPref(isLinear: Boolean){
+        var val_ = ""
+        val sharedPref: SharedPreferences = requireContext().getSharedPreferences(Utils.recyclerViewStatus, Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        if(isLinear == true){
+            val_ = "PRESENT LINEAR"
+        } else {
+            val_ = "PRESENT STA"
+        }
+        Timber.d("RVIEW---: WRITE $val_")
+        editor.putBoolean(Utils.recyclerViewStatus, isLinear)
+        editor.apply()
+    }
+
+    private fun readSharedPref(): Boolean{
+        var val_ = ""
+        val sharedPref: SharedPreferences = requireContext().getSharedPreferences(Utils.recyclerViewStatus, Context.MODE_PRIVATE)
+        if(sharedPref.getBoolean(Utils.recyclerViewStatus, true) == true){
+            val_ = "LINEAR"
+        } else {
+            val_ = "STA"
+        }
+        return sharedPref.getBoolean(Utils.recyclerViewStatus, true)
     }
 
     override fun onItemClick(int: Int, sender: String, viewId: Int) {

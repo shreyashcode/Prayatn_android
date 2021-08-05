@@ -14,5 +14,6 @@ class Utils {
         val NIMP_UR = "Not ImportantHigh"
         val NIMP_NUR = "Not ImportantLow"
         val QuadrantSharedPrefs = "SharedPreferencesForQuadrants"
+        val recyclerViewStatus = "CONSTANTS_IS_LINEAR"
     }
 }

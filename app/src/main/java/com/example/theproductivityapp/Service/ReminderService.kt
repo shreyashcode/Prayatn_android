@@ -4,50 +4,43 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.icu.text.DateFormat
 import android.os.Build
 import com.example.theproductivityapp.Reciever.ReminderReceiver
 import com.example.theproductivityapp.Utils.Common
+import com.example.theproductivityapp.di.BaseApplication
 import timber.log.Timber
 
 class ReminderService(
     private val context: Context,
-    private val timestamp: Long = 0L,
+    private val TodoTimeStamp: Long = 0L,
     private val title: String = "",
 ) {
     private val alarmManager: AlarmManager? =
         context.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
 
-
-    fun setExactAlarm(timeInMillis: Long) {
+    fun setExactAlarm(remindTime: Long) {
         Timber.d("REMINDER: FOR SETTING")
         setAlarm(
-            timeInMillis,
+            remindTime,
             getPendingIntent(
-                getIntent().apply {
-                    action = Common.remindAction
-                    putExtra("TIME", timeInMillis)
-                    putExtra("TITLE", title)
-                    putExtra("timeStamp", timestamp)
-                },
-                timestamp
+                getIntent(remindTime),
+                TodoTimeStamp
             )
         )
     }
 
-    private fun getPendingIntent(intent: Intent, timestamp_: Long): PendingIntent{
-        Timber.d("REMINDER REQUEST CODE: ${timestamp_.toInt()}")
+    private fun getPendingIntent(intent: Intent, requestCodeTimeStamp: Long): PendingIntent{
+        Timber.d("REMINDER REQUEST CODE: ${requestCodeTimeStamp.toInt()}")
         return PendingIntent.getBroadcast(
-            context,
-            timestamp_.toInt(),
+            BaseApplication.applicationContext(),
+            requestCodeTimeStamp.toInt(),
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT
         )
     }
 
     private fun setAlarm(timeInMillis: Long, pendingIntent: PendingIntent) {
-
-        Timber.d("REMINDER FOR: ${timeInMillis}")
+        Timber.d("REMINDER__ SETTING: ${timeInMillis}")
         alarmManager?.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 alarmManager.setExactAndAllowWhileIdle(
@@ -62,24 +55,33 @@ class ReminderService(
                     pendingIntent
                 )
             }
+            Timber.d("REMINDER__: Alarm set")
         }
+//        Timber.d("REMINDER__: Alarm canceled")
+//        cancelReminder(TodoTimeStamp, timeInMillis)
     }
 
-    fun cancelReminder(requestCodeTimeStamp: Long){
-        Timber.d("REMINDER CANCELLING")
+    fun cancelReminder(requestCodeTimeStamp: Long, timeInMillis: Long){
+        Timber.d("REMINDER__ CANCELLING $timeInMillis")
         if(alarmManager == null){
-            Timber.d("REMINDER NULL")
+            Timber.d("REMINDER_ NULL")
         }
-        alarmManager?.cancel(
+        alarmManager!!.cancel(
             getPendingIntent(
-                getIntent(),
+                getIntent(timeInMillis),
                 requestCodeTimeStamp
             )
         )
     }
 
-    private fun getIntent(): Intent {
-        return Intent(context, ReminderReceiver::class.java)
+    private fun getIntent(timeInMillis: Long): Intent {
+        return Intent(context, ReminderReceiver::class.java).apply {
+            putExtra("NULL", TodoTimeStamp)
+            action = Common.remindAction
+            putExtra("TIME", timeInMillis)
+            putExtra("TITLE", title)
+            putExtra("timeStamp", TodoTimeStamp)
+        }
     }
 
 //    private fun convertDate(timeInMillis: Long): String =

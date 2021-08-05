@@ -35,7 +35,6 @@ class TodoAdapter(val itemClickListener: ItemClickListener,
     val differ = AsyncListDiffer(this, diffCallback)
 
     fun submitList(todos: List<Todo>) {
-        Timber.d("INCLUDE: Inside submit Todo")
         differ.submitList(todos)
     }
 
@@ -46,17 +45,6 @@ class TodoAdapter(val itemClickListener: ItemClickListener,
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         var todo = differ.currentList[position]
-        Timber.d("ICE: OnBind: TodoAdapter Postion: ${position}  ${todo}")
-//        if(position >= differ.currentList.size-2){
-//            Timber.d("Changed***********************")
-//            holder.binding.ncard.setShadowColorDark(Color.parseColor("#1a1a1a"))
-//            holder.binding.ncard.setShadowColorLight(Color.parseColor("#1a1a1a"))
-//            holder.binding.itemPriority.text = ""
-//            holder.binding.itemTitle.text = ""
-//        } else {
-//            holder.binding.ncard.setShadowColorDark(Color.parseColor("#15151a"))
-//            holder.binding.ncard.setShadowColorLight(Color.parseColor("#242426"))
-            Timber.d("INSIDE: ${position} ")
 
         if(todo.priority == ""){
             holder.binding.ncard.setShadowColorLight(ContextCompat.getColor(context, R.color.ui_light2))
@@ -74,7 +62,6 @@ class TodoAdapter(val itemClickListener: ItemClickListener,
             holder.binding.ncard.setShadowColorLight(Color.parseColor("#fdfefe"))
             holder.binding.ncard.setShadowColorDark(Color.parseColor("#ADBACB"))
         }
-//        }
     }
 
     override fun getItemCount() = differ.currentList.size

@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
-import android.service.autofill.VisibilitySetterAction
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.*
@@ -68,6 +67,9 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentAddTodoBinding.bind(view)
+
+        Toast.makeText(requireContext(), "Tap edit to start!", Toast.LENGTH_SHORT).show()
+
         importance = resources.getStringArray(R.array.Importance)
         priorities = resources.getStringArray(R.array.Priority)
         priority = priorities[0]
@@ -75,7 +77,6 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
         binding.dropDownImp.isClickable = false
 
         disableEditingMode()
-        Timber.d("REALME ${Common.reqTimeStamp}")
         viewModel.reminderByTimestamp(Common.reqTimeStamp).observe(viewLifecycleOwner, {
             if(it.isNotEmpty()){
                 binding.reminderSwitch.visibility = View.INVISIBLE
@@ -97,10 +98,6 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
                 month = timeInstance.month
                 date = timeInstance.date
             }
-            Timber.d("CODEFORCES!")
-            for(graphTodo_ in it) {
-                Timber.d("Codeforces: $graphTodo_")
-            }
 
             for(graphTodo_ in it){
                 if(graphTodo_.month == month && graphTodo_.date == date){
@@ -109,10 +106,6 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
                 }
             }
         })
-
-
-
-        Timber.d("NUMBER IS FAST: $id_")
 
         binding.toggleButton.bind(binding.title, binding.description, binding.tag, binding.emoji)
 
@@ -141,11 +134,6 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
 
         binding.dropDownImp.setAdapter(ArrayAdapter(requireContext(), R.layout.custom_spinner, importance))
         binding.dropDown.setAdapter(ArrayAdapter(requireContext(), R.layout.custom_spinner, priorities))
-
-//        binding.addAlarm.setOnClickListener{getTimeInMillis{
-//                setTime(it)
-//            }
-//        }
 
         binding.dropDown.setOnItemClickListener { parent, view, position, id ->
             priority = priorities[position]
@@ -215,9 +203,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
             if(list_.isNotEmpty() == true){
                 isNew = false
                 val it = list_[0]
-                Timber.d("AASHI: Observer: $it")
                 gTodo = it
-                Timber.d("Character: ${it.emoji}")
                 binding.emoji.textView.text = it.emoji
                 // Check?
                 binding.emoji.editText.setText(it.emoji)
@@ -262,11 +248,11 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
         viewModel.updateGraph(graphTodo)
     }
 
-    private fun setReminder(timeInMillis: Long, todo_timestamp: Long, title: String){
-        viewModel.insertReminder(Reminder(timeInMillis, title, todo_timestamp))
-        Toast.makeText(requireContext(), "You would be reminded at ${convertDate(timeInMillis)}!", Toast.LENGTH_SHORT).show()
+    private fun setReminder(remindTime: Long, todo_timestamp: Long, title: String){
+        viewModel.insertReminder(Reminder(remindTime, title, todo_timestamp))
+        Toast.makeText(requireContext(), "You would be reminded at ${convertDate(remindTime)}!", Toast.LENGTH_SHORT).show()
         val reminderService = ReminderService(requireContext(), todo_timestamp, title)
-        reminderService.setExactAlarm(timeInMillis)
+        reminderService.setExactAlarm(remindTime)
     }
 
     private fun buildTodo() = Todo(
@@ -280,10 +266,10 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
             imp
         )
 
-    private fun updateTodo(timeInMillis: Long){
+    private fun updateTodo(remindTime: Long){
         val todo = buildTodo()
         if(addReminder == true){
-            setReminder(timeInMillis, todo.timestamp, todo.title)
+            setReminder(remindTime, todo.timestamp, todo.title)
             todo.isReminderSet = true
         }
         todo.emoji = binding.emoji.editText.text.toString()
@@ -294,7 +280,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
 
     private fun editingMode(){
         binding.save.text = "Save"
-//        binding.addAlarm.visibility = View.VISIBLE
+        binding.reminderSwitch.visibility = View.VISIBLE
         binding.customDropDown.visibility = View.VISIBLE
         binding.customDropDownImp.visibility = View.VISIBLE
         binding.importanceText.visibility = View.INVISIBLE
@@ -303,7 +289,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
 
     private fun disableEditingMode(){
         binding.save.text = "Edit"
-//        binding.addAlarm.visibility = View.INVISIBLE
+        binding.reminderSwitch.visibility = View.INVISIBLE
         binding.customDropDownImp.visibility = View.INVISIBLE
         binding.customDropDown.visibility = View.INVISIBLE
         binding.importanceText.visibility = View.VISIBLE
@@ -315,7 +301,6 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
         val sharedPref: SharedPreferences = requireContext().getSharedPreferences(Utils.QuadrantSharedPrefs, Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
         val getValue: Float = readSharedPref(key)
-        Timber.d("APJ Abdul Kalam Sir | $key | ${getValue+1}")
         editor.putFloat(key, getValue.plus(1f))
         editor.apply()
     }
@@ -327,5 +312,4 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
 
     private fun convertDate(timeInMillis: Long): String =
         DateFormat.format("dd/MM hh:mm", timeInMillis).toString()
-
 }

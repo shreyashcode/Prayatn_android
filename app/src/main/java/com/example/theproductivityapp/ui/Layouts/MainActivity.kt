@@ -50,15 +50,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         createNotification(this)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//        setUpDatabase()
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.hosting) as NavHostFragment
         val navController = navHostFragment.navController
         binding.bottomNavView.setupWithNavController(navController)
-//        if(intent.getStringExtra("SOURCE") != null){
-//            Common.loginReq = false
-//            Common.reqId = intent.getIntExtra("ID", 1)
-//            navController.navigate(R.id.action_loginFragment_to_addTodoFragment)
-//        }
 
         navController.addOnDestinationChangedListener { controller, destination, arg ->
             binding.background.setBackgroundColor(ContextCompat.getColor(this, R.color.ui_light2))
@@ -83,7 +77,6 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 else -> {
-                    Toast.makeText(this, "Coming soon!", Toast.LENGTH_SHORT).show()
                     binding.bottomNavView.visibility = View.VISIBLE
                     binding.bottomBar.visibility = View.VISIBLE
                     binding.fabButton.visibility = View.INVISIBLE

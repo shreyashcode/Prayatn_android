@@ -34,24 +34,18 @@ class TagAdapter(var itemClickListener: ItemClickListener) : RecyclerView.Adapte
     var diff = AsyncListDiffer(this, diffCallback)
 
     fun submitList(list: List<Todo>) {
-        for(i in list){
-            Timber.d("CSE_DDDDDDDDDDDD: ${i.title}, ${i.tag}, ${i.displayOrder}")
-        }
         diff.submitList(list)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TagAdapter.TagViewHolder {
-        Timber.d("INCLUDE : ONCCRESTE")
         return TagViewHolder(TagItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: TagAdapter.TagViewHolder, position: Int) {
-        Timber.d("INCLUDE: ONBIND")
         holder.binding.tagId.text = diff.currentList[position].tag
     }
 
     override fun getItemCount(): Int {
-        Timber.d("INCLUDE: SIZE: ${diff.currentList.size}")
         return diff.currentList.size
     }
 }

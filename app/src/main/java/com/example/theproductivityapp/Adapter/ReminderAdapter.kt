@@ -45,18 +45,15 @@ class ReminderAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReminderAdapter.ReminderViewHolder {
-        Timber.d("INCLUDE : ONCCRESTE")
         return ReminderViewHolder(ReminderItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: ReminderAdapter.ReminderViewHolder, position: Int) {
-        Timber.d("INCLUDE: ONBIND")
         holder.binding.reminderTitle.text = diff.currentList[position].title
         holder.binding.reminderTime.text = convertDate(diff.currentList[position].remindTimeInMillis)
     }
 
     override fun getItemCount(): Int {
-        Timber.d("INCLUDE: SIZE: ${diff.currentList.size}")
         return diff.currentList.size
     }
 

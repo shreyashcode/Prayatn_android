@@ -14,6 +14,7 @@ import com.example.theproductivityapp.databinding.FragmentCountBinding
 import com.example.theproductivityapp.db.Reminder
 import com.example.theproductivityapp.ui.UIHelper.ItemClickListener
 import com.example.theproductivityapp.ui.ViewModels.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -25,18 +26,17 @@ class CountFragment : Fragment(R.layout.fragment_count), ItemClickListener{
     private lateinit var reminderAdapter: ReminderAdapter
     private lateinit var currentReminderList: List<Reminder>
     private lateinit var reminderService: ReminderService
+    private lateinit var snackbarView: View
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCountBinding.bind(view)
         setUpRecyclerView(this)
+        snackbarView = view
         reminderService = ReminderService(requireContext(), 0L, "NA")
 
         viewModel.reminders.observe(viewLifecycleOwner, {
             reminderAdapter.submitList(it)
-            for(i in it){
-                Timber.d("COUNT FRAGMENT: $i")
-            }
             currentReminderList = it
         })
 
@@ -52,11 +52,11 @@ class CountFragment : Fragment(R.layout.fragment_count), ItemClickListener{
 
     override fun onItemClick(int: Int, sender: String, viewId: Int) {
         if(viewId == R.id.deleteReminder){
-            reminderService.cancelReminder(currentReminderList[int].timeStampOfTodo)
-            Timber.d("REMINDER: ${currentReminderList[int].timeStampOfTodo}")
+            reminderService.cancelReminder(currentReminderList[int].timeStampOfTodo,
+                                            currentReminderList[int].remindTimeInMillis)
             viewModel.deleteReminder(currentReminderList[int])
         } else {
-            Toast.makeText(requireContext(), "HEY! ${currentReminderList[int]}!", Toast.LENGTH_SHORT).show()
+            Snackbar.make(snackbarView, "Press delete to remove alarm!", Snackbar.LENGTH_LONG).show()
         }
     }
 
