@@ -57,7 +57,6 @@ class QuadrantFragment : Fragment(R.layout.fragment_quadrant) {
 //                }
 //            }
 //        }
-        Timber.d("APJ Abdul Kalam Sir | ${Utils.IMP_UR} ${Utils.IMP_NUR} ${Utils.NIMP_UR} ${Utils.NIMP_NUR}")
         pieEntries.add(PieEntry(readSharedPref(Utils.IMP_UR), "IMP URGENT"))
         pieEntries.add(PieEntry(readSharedPref(Utils.IMP_NUR), "IMP NON-URGENT"))
         pieEntries.add(PieEntry(readSharedPref(Utils.NIMP_UR), "NON-IMP URGENT"))
@@ -102,7 +101,6 @@ class QuadrantFragment : Fragment(R.layout.fragment_quadrant) {
         val sharedPref: SharedPreferences =
             requireContext().getSharedPreferences(Utils.QuadrantSharedPrefs, Context.MODE_PRIVATE)
         val value = sharedPref.getFloat(key, 0f)
-        Timber.d("APJ Abdul Kalam Sir | $key | ${value}")
         return value
     }
 

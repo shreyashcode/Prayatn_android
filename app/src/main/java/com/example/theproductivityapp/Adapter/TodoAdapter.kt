@@ -53,7 +53,6 @@ class TodoAdapter(val itemClickListener: ItemClickListener,
             holder.binding.ncard
         } else {
             val todoObject = differ.currentList[position]
-            Timber.d("LAPTOP: ${todoObject.emoji} || ")
             if(todoObject.emoji.isNotEmpty()){
                 holder.binding.itemTitle.text = " ${todoObject.emoji}   ${differ.currentList[position].title}"
              } else {

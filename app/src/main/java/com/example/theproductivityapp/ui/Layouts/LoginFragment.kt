@@ -117,7 +117,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         val sharedPref: SharedPreferences = requireContext().getSharedPreferences(Utils.LOGIN_CRED, Context.MODE_PRIVATE)
         val date_ = sharedPref.getInt("Date", -1)
         val mon_ = sharedPref.getInt("Month", -1)
-        Timber.d("Codefoces: R $date_ | $mon_")
         return date == date_ && mon == mon_
     }
 }

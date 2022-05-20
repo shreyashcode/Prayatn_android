@@ -52,7 +52,6 @@ class ReminderReceiver: BroadcastReceiver() {
         }
         val pendingIntent = TaskStackBuilder.create(context).run{
             addNextIntentWithParentStack(returnIntent)
-            Timber.d("Realme ### ${returnIntent.getStringExtra("SOURCE")} | ${returnIntent.getLongExtra("timeStamp", 0L)}")
             getPendingIntent(todo_timestamp.toInt(), PendingIntent.FLAG_UPDATE_CURRENT)
         }
 
@@ -73,7 +72,6 @@ class ReminderReceiver: BroadcastReceiver() {
 //        if (Build.VERSION.SDK_INT >= 21) notification.(new long[0]);
 
         val notificationManager = NotificationManagerCompat.from(context)
-        Timber.d("Realme is shown?")
         notificationManager.notify(todo_timestamp.toInt(), notification)
     }
 

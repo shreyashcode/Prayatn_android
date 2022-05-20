@@ -30,7 +30,6 @@ class ReminderService(
     }
 
     private fun getPendingIntent(intent: Intent, requestCodeTimeStamp: Long): PendingIntent{
-        Timber.d("REMINDER REQUEST CODE: ${requestCodeTimeStamp.toInt()}")
         return PendingIntent.getBroadcast(
             BaseApplication.applicationContext(),
             requestCodeTimeStamp.toInt(),
@@ -40,7 +39,6 @@ class ReminderService(
     }
 
     private fun setAlarm(timeInMillis: Long, pendingIntent: PendingIntent) {
-        Timber.d("REMINDER__ SETTING: ${timeInMillis}")
         alarmManager?.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 alarmManager.setExactAndAllowWhileIdle(
@@ -55,7 +53,6 @@ class ReminderService(
                     pendingIntent
                 )
             }
-            Timber.d("REMINDER__: Alarm set")
         }
 //        Timber.d("REMINDER__: Alarm canceled")
 //        cancelReminder(TodoTimeStamp, timeInMillis)

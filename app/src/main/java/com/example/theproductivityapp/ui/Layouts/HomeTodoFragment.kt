@@ -319,7 +319,6 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
         } else {
             val_ = "PRESENT STA"
         }
-        Timber.d("RVIEW---: WRITE $val_")
         editor.putBoolean(Utils.recyclerViewStatus, isLinear)
         editor.apply()
     }
@@ -337,10 +336,6 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
 
     override fun onItemClick(int: Int, sender: String, viewId: Int) {
         val tag = list[int].tag
-        for(i in list){
-            Timber.d("GSOC::::: ${i}")
-        }
-        Timber.d("GSOC: COMMON: ${list[int]}")
         if(sender == Utils.TAG){
             Common.tag = listToTag[int].tag
             Timber.d("GSOC: $tag")

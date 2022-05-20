@@ -241,7 +241,6 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
         Toast.makeText(requireContext(), "$ ${convertDate(globalTimeInMillis)}", Toast.LENGTH_SHORT).show()
         todo.displayOrder = Common.todos_size
         Common.todos_size++
-        Timber.d("DAO_ENTITY_ ${todo}")
         writeSharedPref(todo.priority, todo.importance)
         viewModel.insert(todo)
         graphTodo.added_count++
