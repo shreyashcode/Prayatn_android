@@ -35,7 +35,7 @@
             android:contentDescription="Matrix_imp_urgency"
             android:padding="6dp"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_count_timer"
+            android:src="@drawable/matrix"
             app:layout_constraintBottom_toTopOf="@+id/guideline9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.434"
