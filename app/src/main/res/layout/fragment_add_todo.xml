@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ui.Layouts.AddTodoFragment"
+    tools:context=".ui.ActivityScreens.AddTodoFragment"
     android:background="@color/ui_light2">
 
     <androidx.constraintlayout.widget.ConstraintLayout

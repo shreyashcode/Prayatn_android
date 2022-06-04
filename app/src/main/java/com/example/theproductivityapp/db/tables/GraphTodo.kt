@@ -1,4 +1,4 @@
-package com.example.theproductivityapp.db
+package com.example.theproductivityapp.db.tables
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

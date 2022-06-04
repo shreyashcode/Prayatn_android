@@ -3,6 +3,7 @@ package com.example.theproductivityapp.di
 import android.content.Context
 import androidx.room.Room
 import com.example.theproductivityapp.db.RunningDB
+import com.example.theproductivityapp.db.StandUpDB
 import com.example.theproductivityapp.db.Utils
 import dagger.Module
 import dagger.Provides
@@ -23,11 +24,24 @@ object AppModule {
     ) = Room.databaseBuilder(
         context,
         RunningDB::class.java,
-        Utils.DB_NAME
+        Utils.DB_TODO
+    ).fallbackToDestructiveMigration().build()
+
+    @Singleton
+    @Provides
+    fun provideStandUpDatabase(
+        @ApplicationContext context: Context
+    ) = Room.databaseBuilder(
+        context,
+        StandUpDB::class.java,
+        Utils.DB_STAND_UP
     ).fallbackToDestructiveMigration().build()
 
     @Singleton
     @Provides
     fun provideTodoDao(database: RunningDB) = database.getDao()
 
+    @Singleton
+    @Provides
+    fun provideStandUpDao(database: StandUpDB) = database.getDao();
 }

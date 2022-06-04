@@ -1,21 +1,17 @@
-package com.example.theproductivityapp.ui.Layouts
+package com.example.theproductivityapp.ui.ActivityScreens
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.theproductivityapp.R
-import com.example.theproductivityapp.Utils.Common
 import com.example.theproductivityapp.databinding.FragmentLoginBinding
-import com.example.theproductivityapp.db.GraphTodo
-import com.example.theproductivityapp.db.Todo
+import com.example.theproductivityapp.db.tables.GraphTodo
 import com.example.theproductivityapp.db.Utils
 import com.example.theproductivityapp.ui.ViewModels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint

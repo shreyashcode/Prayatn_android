@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeTodo"
-        android:name="com.example.theproductivityapp.ui.Layouts.HomeTodoFragment"
+        android:name="com.example.theproductivityapp.ui.ActivityScreens.HomeTodoFragment"
         android:label="fragment_home_todo"
         tools:layout="@layout/fragment_home_todo" >
         <action
@@ -22,21 +22,21 @@
     </fragment>
     <fragment
         android:id="@+id/graphFragment"
-        android:name="com.example.theproductivityapp.ui.Layouts.GraphFragment"
+        android:name="com.example.theproductivityapp.ui.ActivityScreens.GraphFragment"
         android:label="GraphFragment" />
     <fragment
         android:id="@+id/countFragment"
-        android:name="com.example.theproductivityapp.ui.Layouts.CountFragment"
+        android:name="com.example.theproductivityapp.ui.ActivityScreens.CountFragment"
         android:label="fragment_count"
         tools:layout="@layout/fragment_count" />
     <fragment
         android:id="@+id/quadrantFragment"
-        android:name="com.example.theproductivityapp.ui.Layouts.QuadrantFragment"
+        android:name="com.example.theproductivityapp.ui.ActivityScreens.QuadrantFragment"
         android:label="fragment_quadrant"
         tools:layout="@layout/fragment_quadrant" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.theproductivityapp.ui.Layouts.LoginFragment"
+        android:name="com.example.theproductivityapp.ui.ActivityScreens.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/tagFilterFragment"
-        android:name="com.example.theproductivityapp.ui.Layouts.TagFilterFragment"
+        android:name="com.example.theproductivityapp.ui.ActivityScreens.TagFilterFragment"
         android:label="fragment_tag_filter"
         tools:layout="@layout/fragment_tag_filter" >
         <action
@@ -66,7 +66,7 @@
     </fragment>
     <fragment
         android:id="@+id/addTodoFragment"
-        android:name="com.example.theproductivityapp.ui.Layouts.AddTodoFragment"
+        android:name="com.example.theproductivityapp.ui.ActivityScreens.AddTodoFragment"
         android:label="fragment_add_todo"
         tools:layout="@layout/fragment_add_todo" >
         <argument
@@ -74,4 +74,9 @@
             app:argType="integer"
             android:defaultValue="-1" />
     </fragment>
+    <fragment
+        android:id="@+id/dailyStandupFragment"
+        android:name="com.example.theproductivityapp.DailyStandupFragment"
+        android:label="fragment_daily_standup"
+        tools:layout="@layout/fragment_daily_standup" />
 </navigation>

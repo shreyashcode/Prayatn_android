@@ -10,7 +10,8 @@
         android:icon="@drawable/ic_graph_" />
 
     <item android:id="@+id/empty"
-        android:title=""/>
+        android:title="Standup"
+        android:icon="@drawable/ic_chatbot"/>
 
     <item android:id="@+id/countFragment"
         android:title="Count Hours"

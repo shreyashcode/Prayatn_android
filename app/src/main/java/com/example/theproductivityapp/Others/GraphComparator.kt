@@ -1,6 +1,6 @@
 package com.example.theproductivityapp.Others
 
-import com.example.theproductivityapp.db.GraphTodo
+import com.example.theproductivityapp.db.tables.GraphTodo
 
 class GraphComparator : Comparator<GraphTodo>{
     override fun compare(o1: GraphTodo?, o2: GraphTodo?): Int {

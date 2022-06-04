@@ -1,29 +1,17 @@
 package com.example.theproductivityapp.Reciever
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.TaskStackBuilder
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.opengl.Visibility
-import android.os.Build
 import android.text.format.DateFormat
 import android.widget.Toast
-import androidx.core.app.NotificationChannelCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.room.util.ViewInfo
 import com.example.theproductivityapp.R
-import com.example.theproductivityapp.Repository.MainRepository
-import com.example.theproductivityapp.db.TodoDao
-import com.example.theproductivityapp.ui.Layouts.MainActivity
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
+import com.example.theproductivityapp.ui.ActivityScreens.MainActivity
 import timber.log.Timber
-import javax.inject.Inject
 
 
 class ReminderReceiver: BroadcastReceiver() {

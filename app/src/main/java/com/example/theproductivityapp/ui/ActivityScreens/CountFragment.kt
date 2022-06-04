@@ -1,22 +1,20 @@
-package com.example.theproductivityapp.ui.Layouts
+package com.example.theproductivityapp.ui.ActivityScreens
 
 import android.os.Bundle
 import android.text.format.DateFormat
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.theproductivityapp.Adapter.ReminderAdapter
 import com.example.theproductivityapp.R
 import com.example.theproductivityapp.Service.ReminderService
 import com.example.theproductivityapp.databinding.FragmentCountBinding
-import com.example.theproductivityapp.db.Reminder
+import com.example.theproductivityapp.db.tables.Reminder
 import com.example.theproductivityapp.ui.UIHelper.ItemClickListener
 import com.example.theproductivityapp.ui.ViewModels.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class CountFragment : Fragment(R.layout.fragment_count), ItemClickListener{

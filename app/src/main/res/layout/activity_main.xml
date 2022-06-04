@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/background"
-    tools:context=".ui.Layouts.MainActivity"
+    tools:context=".ui.ActivityScreens.MainActivity"
     android:background="@color/ui_light2">
 
     <FrameLayout
@@ -27,11 +27,9 @@
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:fabCradleRoundedCornerRadius="10dp"
-        app:fabCradleMargin="10dp"
-        app:fabAlignmentMode="center"
-        app:fabCradleVerticalOffset="0dp"
+        app:fabAlignmentMode="end"
         app:contentInsetStart="0dp"
+        app:fabCradleVerticalOffset="45dp"
         app:contentInsetEnd="0dp"
         app:backgroundTint="#FFFFFF"
         android:layout_gravity="bottom">
@@ -41,8 +39,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="9dp"
-            app:labelVisibilityMode="unlabeled"
+            app:labelVisibilityMode="selected"
             app:itemIconTint="@drawable/bottom_navigation_color_selector"
+            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
             android:background="@drawable/states"
             app:menu="@menu/bottom_app_menu" />
 
@@ -59,6 +58,7 @@
         android:backgroundTint="#292C30"
         android:background="@color/black_end"
         android:scaleType="centerInside"
-        app:layout_anchor="@id/bottomBar" />
+        app:layout_anchor="@id/bottomBar"
+        android:contentDescription="Add todo" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

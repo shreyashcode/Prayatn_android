@@ -2,6 +2,9 @@ package com.example.theproductivityapp.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.theproductivityapp.db.tables.GraphTodo
+import com.example.theproductivityapp.db.tables.Reminder
+import com.example.theproductivityapp.db.tables.Todo
 
 @Dao
 interface TodoDao {

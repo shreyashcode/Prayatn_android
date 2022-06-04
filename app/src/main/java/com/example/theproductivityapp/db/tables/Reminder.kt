@@ -1,4 +1,4 @@
-package com.example.theproductivityapp.db
+package com.example.theproductivityapp.db.tables
 
 import android.text.format.DateFormat
 import androidx.room.Entity

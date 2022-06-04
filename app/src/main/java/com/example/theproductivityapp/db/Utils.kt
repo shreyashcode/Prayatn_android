@@ -5,7 +5,8 @@ import timber.log.Timber
 class Utils {
 
     companion object {
-        const val DB_NAME = "Todos"
+        const val DB_TODO = "Todos"
+        const val DB_STAND_UP = "Standups"
         const val TODO = "VERTICAL"
         const val TAG = "HORIZONTAL"
         val LOGIN_CRED = "Authorization"

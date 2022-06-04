@@ -1,11 +1,10 @@
-package com.example.theproductivityapp.ui.Layouts
+package com.example.theproductivityapp.ui.ActivityScreens
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.widget.TextView
 import com.example.theproductivityapp.databinding.GraphMarkerBinding
-import com.example.theproductivityapp.db.GraphTodo
-import com.example.theproductivityapp.db.Utils
+import com.example.theproductivityapp.db.tables.GraphTodo
 import com.github.mikephil.charting.components.MarkerView
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.highlight.Highlight

@@ -1,9 +1,10 @@
-package com.example.theproductivityapp.db
+package com.example.theproductivityapp.db.tables
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.theproductivityapp.db.Utils
 
-@Entity(tableName = Utils.DB_NAME)
+@Entity(tableName = Utils.DB_TODO)
 data class Todo (
     var title: String,
     var description: String,
@@ -19,5 +20,5 @@ data class Todo (
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null
 
-    override fun toString() = "ID: $id | TITLE: $title | TAG: $tag"
+    override fun toString() = "TODO= $title"
 }

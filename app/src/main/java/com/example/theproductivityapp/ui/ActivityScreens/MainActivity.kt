@@ -1,4 +1,4 @@
-package com.example.theproductivityapp.ui.Layouts
+package com.example.theproductivityapp.ui.ActivityScreens
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -8,18 +8,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.theproductivityapp.R
 import com.example.theproductivityapp.databinding.ActivityMainBinding
-import com.example.theproductivityapp.db.GraphTodo
+import com.example.theproductivityapp.db.tables.GraphTodo
 import com.example.theproductivityapp.db.TodoDao
 import com.example.theproductivityapp.Utils.Common
 import com.example.theproductivityapp.ui.ViewModels.MainViewModel

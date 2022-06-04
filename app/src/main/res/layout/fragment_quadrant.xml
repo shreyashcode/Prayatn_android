@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/ui_dark2"
-    tools:context=".ui.Layouts.QuadrantFragment">
+    tools:context=".ui.ActivityScreens.QuadrantFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

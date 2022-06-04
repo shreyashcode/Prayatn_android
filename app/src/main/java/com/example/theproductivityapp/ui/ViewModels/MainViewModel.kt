@@ -5,9 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.theproductivityapp.Repository.MainRepository
-import com.example.theproductivityapp.db.GraphTodo
-import com.example.theproductivityapp.db.Reminder
-import com.example.theproductivityapp.db.Todo
+import com.example.theproductivityapp.db.tables.GraphTodo
+import com.example.theproductivityapp.db.tables.Question
+import com.example.theproductivityapp.db.tables.Reminder
+import com.example.theproductivityapp.db.tables.Todo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber

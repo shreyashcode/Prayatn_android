@@ -1,8 +1,6 @@
 package com.example.theproductivityapp.Utils
 
-import com.example.theproductivityapp.db.GraphTodo
-import com.example.theproductivityapp.db.Todo
-import kotlin.properties.Delegates
+import com.example.theproductivityapp.db.tables.Todo
 
 class Common {
 

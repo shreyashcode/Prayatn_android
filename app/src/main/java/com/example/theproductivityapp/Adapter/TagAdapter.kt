@@ -6,10 +6,9 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.theproductivityapp.databinding.TagItemBinding
-import com.example.theproductivityapp.db.Todo
+import com.example.theproductivityapp.db.tables.Todo
 import com.example.theproductivityapp.db.Utils
 import com.example.theproductivityapp.ui.UIHelper.ItemClickListener
-import timber.log.Timber
 
 class TagAdapter(var itemClickListener: ItemClickListener) : RecyclerView.Adapter<TagAdapter.TagViewHolder>(){
 

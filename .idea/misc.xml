@@ -6,8 +6,11 @@
         <entry key="..\:/TheProductivityApp/app/src/main/res/layout/fragment_add_todo.xml" value="0.18" />
         <entry key="..\:/TheProductivityApp/app/src/main/res/layout/fragment_graph.xml" value="0.12681159420289856" />
         <entry key="..\:/TheProductivityApp/app/src/main/res/layout/fragment_login.xml" value="0.18" />
+        <entry key="app/src/main/res/drawable/ic_graph_.xml" value="0.162" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.67" />
         <entry key="app/src/main/res/layout/fragment_add_todo.xml" value="0.13949275362318841" />
         <entry key="app/src/main/res/layout/fragment_quadrant.xml" value="0.16" />
+        <entry key="app/src/main/res/menu/bottom_app_menu.xml" value="0.23541666666666666" />
       </map>
     </option>
   </component>

@@ -1,4 +1,4 @@
-package com.example.theproductivityapp.ui.Layouts
+package com.example.theproductivityapp.ui.ActivityScreens
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
@@ -16,20 +16,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.theproductivityapp.R
 import com.example.theproductivityapp.databinding.FragmentAddTodoBinding
-import com.example.theproductivityapp.db.GraphTodo
-import com.example.theproductivityapp.db.Todo
+import com.example.theproductivityapp.db.tables.GraphTodo
+import com.example.theproductivityapp.db.tables.Todo
 import com.example.theproductivityapp.db.Utils
 import com.example.theproductivityapp.Utils.Common
 import com.example.theproductivityapp.ui.ViewModels.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.*
 import android.text.format.DateFormat
 import com.example.theproductivityapp.Service.ReminderService
-import com.example.theproductivityapp.db.Reminder
+import com.example.theproductivityapp.db.tables.Reminder
 
 
 @AndroidEntryPoint

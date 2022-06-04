@@ -1,4 +1,4 @@
-package com.example.theproductivityapp.ui.Layouts
+package com.example.theproductivityapp.ui.ActivityScreens
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,7 +11,7 @@ import com.example.theproductivityapp.Utils.Common
 import com.example.theproductivityapp.Adapter.TodoAdapter
 import com.example.theproductivityapp.R
 import com.example.theproductivityapp.databinding.FragmentTagFilterBinding
-import com.example.theproductivityapp.db.Todo
+import com.example.theproductivityapp.db.tables.Todo
 import com.example.theproductivityapp.ui.UIHelper.ItemClickListener
 import com.example.theproductivityapp.ui.ViewModels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
