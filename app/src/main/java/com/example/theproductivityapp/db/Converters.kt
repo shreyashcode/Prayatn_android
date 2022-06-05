@@ -1,9 +1,8 @@
 package com.example.theproductivityapp.db
 
 import androidx.room.TypeConverter
-import androidx.room.TypeConverters
 import com.example.theproductivityapp.db.tables.Category
-import com.example.theproductivityapp.db.tables.RowType
+import com.example.theproductivityapp.db.tables.Sender
 
 class Converters {
     @TypeConverter
@@ -13,8 +12,8 @@ class Converters {
     fun toCategory(category: String) = Category.valueOf(category)
 
     @TypeConverter
-    fun fromRowType(rowType: RowType) = rowType.name
+    fun fromRowType(sender: Sender) = sender.name
 
     @TypeConverter
-    fun toRowType(rowType: String) = RowType.valueOf(rowType)
+    fun toRowType(rowType: String) = Sender.valueOf(rowType)
 }

@@ -30,17 +30,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLoginBinding.bind(view)
-        Timber.d("Computer Start")
         setUpDatabase()
-//        Intent.
         lifecycleScope.launchWhenResumed {
             delay(2000)
-//            findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
             findNavController().navigate(R.id.action_loginFragment_to_homeTodo)
         }
-//        Handler().postDelayed({
-//           Timber.d("Computer End")
-//        }, 2000)
     }
 
     private fun setUpDatabase() {
@@ -56,7 +50,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             month = timeInstance.month
             date = timeInstance.date
         }
-        if(readSharedPref(date, month) == false){
+        if(!readSharedPref(date, month)){
             if(date == 1){
                 viewModel.deleteAllGraphEntries()
             }

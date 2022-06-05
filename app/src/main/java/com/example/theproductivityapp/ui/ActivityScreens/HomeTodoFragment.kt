@@ -53,7 +53,6 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
     lateinit var background: Drawable
     lateinit var graphTodo: GraphTodo
     private lateinit var reminderService: ReminderService
-//    private var changeRView = true
 
     override fun onResume() {
         super.onResume()
@@ -278,10 +277,10 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
         todoAdapter = TodoAdapter(itemClickListener, requireContext())
         adapter = todoAdapter
         val staggeredGridLayoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
-        if(readSharedPref() == true){
-            layoutManager = LinearLayoutManager(requireContext())
+        layoutManager = if(readSharedPref()){
+            LinearLayoutManager(requireContext())
         } else {
-            layoutManager = staggeredGridLayoutManager
+            staggeredGridLayoutManager
         }
         itemTouchHelper.attachToRecyclerView(this)
 

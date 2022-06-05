@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homeTodo_to_addTodoFragment"
             app:destination="@id/addTodoFragment" />
+        <action
+            android:id="@+id/action_homeTodo_to_dailyStandupFragment"
+            app:destination="@id/dailyStandupFragment" />
     </fragment>
     <fragment
         android:id="@+id/graphFragment"
@@ -76,7 +79,7 @@
     </fragment>
     <fragment
         android:id="@+id/dailyStandupFragment"
-        android:name="com.example.theproductivityapp.DailyStandupFragment"
+        android:name="com.example.theproductivityapp.ui.ActivityScreens.DailyStandupFragment"
         android:label="fragment_daily_standup"
         tools:layout="@layout/fragment_daily_standup" />
 </navigation>

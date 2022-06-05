@@ -9,7 +9,7 @@
         android:title="Graph"
         android:icon="@drawable/ic_graph_" />
 
-    <item android:id="@+id/empty"
+    <item android:id="@+id/dailyStandupFragment"
         android:title="Standup"
         android:icon="@drawable/ic_chatbot"/>
 

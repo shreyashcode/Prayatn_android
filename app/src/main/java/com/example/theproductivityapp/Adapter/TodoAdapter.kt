@@ -26,12 +26,12 @@ class TodoAdapter(val itemClickListener: ItemClickListener,
         }
     }
 
-    val diffCallback = object : DiffUtil.ItemCallback<Todo>(){
+    private val diffCallback = object : DiffUtil.ItemCallback<Todo>(){
         override fun areItemsTheSame(oldItem: Todo, newItem: Todo) = oldItem.id == newItem.id
         override fun areContentsTheSame(oldItem: Todo, newItem: Todo) = oldItem.hashCode() == newItem.hashCode()
     }
 
-    val differ = AsyncListDiffer(this, diffCallback)
+    private val differ = AsyncListDiffer(this, diffCallback)
 
     fun submitList(todos: List<Todo>) {
         differ.submitList(todos)

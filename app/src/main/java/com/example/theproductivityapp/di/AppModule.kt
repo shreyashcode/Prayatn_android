@@ -8,7 +8,6 @@ import com.example.theproductivityapp.db.Utils
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.internal.managers.ApplicationComponentManager
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
@@ -35,7 +34,7 @@ object AppModule {
         context,
         StandUpDB::class.java,
         Utils.DB_STAND_UP
-    ).fallbackToDestructiveMigration().build()
+    ).createFromAsset("db/Standups.db").build()
 
     @Singleton
     @Provides

@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.theproductivityapp.R
 import com.example.theproductivityapp.databinding.ActivityMainBinding
@@ -22,6 +23,7 @@ import com.example.theproductivityapp.db.TodoDao
 import com.example.theproductivityapp.Utils.Common
 import com.example.theproductivityapp.ui.ViewModels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.*
@@ -43,7 +45,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-        binding.bottomNavView.menu.getItem(2).isEnabled = false
         binding.bottomBar.background = null
         setContentView(binding.root)
         createNotification(this)
@@ -52,35 +53,37 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         binding.bottomNavView.setupWithNavController(navController)
 
-        navController.addOnDestinationChangedListener { controller, destination, arg ->
-            binding.background.setBackgroundColor(ContextCompat.getColor(this, R.color.ui_light2))
-            statusBar(R.color.ui_light2)
-            when(destination.id){
-                R.id.loginFragment, R.id.tagFilterFragment, R.id.addTodoFragment -> {
-                    binding.fabButton.visibility = View.INVISIBLE
-                    binding.bottomBar.visibility = View.INVISIBLE
-                    binding.bottomNavView.visibility = View.INVISIBLE
-                }
+        navHostFragment.findNavController()
+            .addOnDestinationChangedListener { _, destination, _ ->
+                Timber.d("NAVIGATE")
+                binding.background.setBackgroundColor(ContextCompat.getColor(this, R.color.ui_light2))
+                statusBar(R.color.ui_light2)
+                when(destination.id){
+                    R.id.loginFragment, R.id.tagFilterFragment, R.id.addTodoFragment -> {
+                        binding.fabButton.visibility = View.INVISIBLE
+                        binding.bottomBar.visibility = View.INVISIBLE
+                        binding.bottomNavView.visibility = View.INVISIBLE
+                    }
 
-                R.id.homeTodo -> {
-                    binding.fabButton.visibility = View.VISIBLE
-                    binding.bottomNavView.visibility = View.VISIBLE
-                    binding.bottomBar.visibility = View.VISIBLE
-                }
+                    R.id.homeTodo -> {
+                        binding.fabButton.visibility = View.VISIBLE
+                        binding.bottomNavView.visibility = View.VISIBLE
+                        binding.bottomBar.visibility = View.VISIBLE
+                    }
 
-                R.id.graphFragment, R.id.quadrantFragment ->{
-                    statusBar(R.color.ui_dark2)
-                    binding.fabButton.visibility = View.INVISIBLE
-                    binding.background.setBackgroundColor(ContextCompat.getColor(this, R.color.ui_dark2))
-                }
+                    R.id.graphFragment, R.id.quadrantFragment, R.id.dailyStandupFragment ->{
+                        statusBar(R.color.ui_dark2)
+                        binding.fabButton.visibility = View.INVISIBLE
+                        binding.background.setBackgroundColor(ContextCompat.getColor(this, R.color.ui_dark2))
+                    }
 
-                else -> {
-                    binding.bottomNavView.visibility = View.VISIBLE
-                    binding.bottomBar.visibility = View.VISIBLE
-                    binding.fabButton.visibility = View.INVISIBLE
+                    else -> {
+                        binding.bottomNavView.visibility = View.VISIBLE
+                        binding.bottomBar.visibility = View.VISIBLE
+                        binding.fabButton.visibility = View.INVISIBLE
+                    }
                 }
             }
-        }
 
         binding.fabButton.setOnClickListener {
             val action = HomeTodoFragmentDirections.actionHomeTodoToAddTodoFragment()
@@ -120,7 +123,7 @@ class MainActivity : AppCompatActivity() {
                     break
                 }
             }
-            if(found == false){
+            if(!found){
                 insertGraphTodo(GraphTodo(System.currentTimeMillis(), 0, 0, date, month))
             }
 //            if(it.size == 31){
