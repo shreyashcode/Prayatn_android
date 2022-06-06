@@ -16,6 +16,7 @@ class StandUpViewModel @Inject constructor(
     private val repository: StandUpRepository
 ): ViewModel() {
     var questions: LiveData<List<Question>> = repository.getAllQuestion()
+    var chatMessages: LiveData<List<ChatMessage>> = repository.getAllChatMessages()
 
     fun insertQuestion(question: Question){
         viewModelScope.launch {

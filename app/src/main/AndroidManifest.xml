@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TheProductivityApp">
-        <activity android:name=".ui.ActivityScreens.MainActivity">
+        <activity android:name=".ui.ActivityScreens.MainActivity"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

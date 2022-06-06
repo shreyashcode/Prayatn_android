@@ -7,15 +7,17 @@
         <entry key="..\:/TheProductivityApp/app/src/main/res/layout/fragment_graph.xml" value="0.12681159420289856" />
         <entry key="..\:/TheProductivityApp/app/src/main/res/layout/fragment_login.xml" value="0.18" />
         <entry key="app/src/main/res/drawable/ic_graph_.xml" value="0.162" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.67" />
-        <entry key="app/src/main/res/layout/bot_message_item.xml" value="0.25" />
+        <entry key="app/src/main/res/drawable/states.xml" value="0.168" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/bot_message_item.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_add_todo.xml" value="0.13949275362318841" />
-        <entry key="app/src/main/res/layout/fragment_daily_standup.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/fragment_daily_standup.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/fragment_home_todo.xml" value="0.1936725096194955" />
         <entry key="app/src/main/res/layout/fragment_quadrant.xml" value="0.16" />
         <entry key="app/src/main/res/layout/reminder_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/tag_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/todo_item.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/user_message_item.xml" value="0.1936725096194955" />
+        <entry key="app/src/main/res/layout/user_message_item.xml" value="0.33" />
         <entry key="app/src/main/res/menu/bottom_app_menu.xml" value="0.23541666666666666" />
       </map>
     </option>

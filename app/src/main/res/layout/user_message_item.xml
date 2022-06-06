@@ -10,9 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
-        android:layout_marginEnd="10dp"
-        app:cardBackgroundColor="@color/purple_200"
+        android:layout_marginEnd="3dp"
         app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="#86A9D7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,8 +22,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:textStyle="bold"
-            tool:text="@tools:sample/backgrounds/scenic"/>
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tool:text="sdfdsfdsfdsfdasfsdfsdfsadf;lskdfjas;ldkfj;sldkfjsad;lflsakdfj;alkfjl;ksdjf;adsklfjds;"/>
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

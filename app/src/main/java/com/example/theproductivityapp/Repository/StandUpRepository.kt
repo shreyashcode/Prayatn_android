@@ -13,4 +13,5 @@ class StandUpRepository @Inject constructor(
     suspend fun insertChatMessage(chatMessage: ChatMessage) = standUpDao.insertMessage(chatMessage)
 
     fun getAllQuestion() = standUpDao.get()
+    fun getAllChatMessages() = standUpDao.getChatMessages()
 }

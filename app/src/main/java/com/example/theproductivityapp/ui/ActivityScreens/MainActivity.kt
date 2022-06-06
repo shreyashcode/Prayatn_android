@@ -57,12 +57,14 @@ class MainActivity : AppCompatActivity() {
             .addOnDestinationChangedListener { _, destination, _ ->
                 Timber.d("NAVIGATE")
                 binding.background.setBackgroundColor(ContextCompat.getColor(this, R.color.ui_light2))
+                if(destination.id == R.id.dailyStandupFragment)
+                    binding.background.setBackgroundColor(ContextCompat.getColor(this, R.color.ui_dark2))
                 statusBar(R.color.ui_light2)
                 when(destination.id){
-                    R.id.loginFragment, R.id.tagFilterFragment, R.id.addTodoFragment -> {
-                        binding.fabButton.visibility = View.INVISIBLE
-                        binding.bottomBar.visibility = View.INVISIBLE
-                        binding.bottomNavView.visibility = View.INVISIBLE
+                    R.id.loginFragment, R.id.tagFilterFragment, R.id.addTodoFragment, R.id.dailyStandupFragment -> {
+                        binding.fabButton.visibility = View.GONE
+                        binding.bottomBar.visibility = View.GONE
+                        binding.bottomNavView.visibility = View.GONE
                     }
 
                     R.id.homeTodo -> {
