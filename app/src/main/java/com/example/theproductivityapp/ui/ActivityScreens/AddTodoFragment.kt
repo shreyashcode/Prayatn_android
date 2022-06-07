@@ -144,7 +144,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
 
         binding.reminderSwitch.setOnCheckedChangeListener{_, checked->
             addReminder = checked
-            if(checked == true){
+            if(checked){
                 getTimeInMillis{
                     setTime(it)
                     binding.showAlarm.text = convertDate(it)

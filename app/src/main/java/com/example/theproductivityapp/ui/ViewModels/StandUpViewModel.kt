@@ -1,6 +1,7 @@
 package com.example.theproductivityapp.ui.ViewModels
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.theproductivityapp.Repository.MainRepository
@@ -17,6 +18,11 @@ class StandUpViewModel @Inject constructor(
 ): ViewModel() {
     var questions: LiveData<List<Question>> = repository.getAllQuestion()
     var chatMessages: LiveData<List<ChatMessage>> = repository.getAllChatMessages()
+    var pairMediator = MediatorLiveData<Pair<LiveData<List<Question>>, LiveData<List<ChatMessage>>>>()
+    init {
+        pairMediator = MediatorLiveData()
+        pairMediator.value = Pair(questions, chatMessages)
+    }
 
     fun insertQuestion(question: Question){
         viewModelScope.launch {

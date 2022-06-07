@@ -18,5 +18,6 @@ data class Question (
 
 enum class Category{
     MORNING,
-    EVENING
+    EVENING,
+    NONE
 }

@@ -324,10 +324,10 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
     private fun readSharedPref(): Boolean{
         var val_ = ""
         val sharedPref: SharedPreferences = requireContext().getSharedPreferences(Utils.recyclerViewStatus, Context.MODE_PRIVATE)
-        if(sharedPref.getBoolean(Utils.recyclerViewStatus, true) == true){
-            val_ = "LINEAR"
+        val_ = if(sharedPref.getBoolean(Utils.recyclerViewStatus, true)){
+            "LINEAR"
         } else {
-            val_ = "STA"
+            "STA"
         }
         return sharedPref.getBoolean(Utils.recyclerViewStatus, true)
     }
