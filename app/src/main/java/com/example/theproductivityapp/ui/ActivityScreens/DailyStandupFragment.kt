@@ -14,12 +14,19 @@ import com.example.theproductivityapp.Adapter.ChatAdapter
 import com.example.theproductivityapp.R
 import com.example.theproductivityapp.Utils.SharedPrefUtil
 import com.example.theproductivityapp.databinding.FragmentDailyStandupBinding
-import com.example.theproductivityapp.db.tables.*
+import com.example.theproductivityapp.db.tables.Category
+import com.example.theproductivityapp.db.tables.ChatMessage
+import com.example.theproductivityapp.db.tables.Question
+import com.example.theproductivityapp.db.tables.Sender
 import com.example.theproductivityapp.ui.ViewModels.StandUpViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.LocalTime
 import java.util.*
-import kotlin.collections.ArrayList
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
@@ -35,18 +42,32 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
     private val MORNING_ANSWERED = "MORNING_ANSWER"
     private val USER_EVENING_TIME = "EVENING"
     private val EVENING_ANSWERED = "EVENING_ANSWER"
+    private var eveningTime: Long = 0L
+    private var morningTime: Long = 0L
     var questionIndex = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDailyStandupBinding.bind(view)
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        setUpViews()
         onboardUser()
 
         // todo: check time and call for question accordingly, here it is ensured that user is onboarded.
-        val questionCategory = getQuestionCategory()
-        initiateListeners(questionCategory != Category.NONE)
+    }
+
+    private fun areQuestionAnswered(questionCategory: Category): Boolean{
+        val key = when (questionCategory) {
+            Category.MORNING -> {
+                MORNING_ANSWERED
+            }
+            Category.EVENING -> {
+                EVENING_ANSWERED
+            }
+            else -> return true
+        }
+        val today = SimpleDateFormat("DD/mm/yyyy").format(Calendar.getInstance().time)
+        val mostRecentAnsweredString = SharedPrefUtil.readSharedPrefString(requireContext(), key)
+        return mostRecentAnsweredString == today
     }
 
     private fun getQuestionCategory(): Category{
@@ -62,37 +83,59 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
     }
 
     private fun onboardUser(){
-        val isNewUser = SharedPrefUtil.readSharedPrefBoolean(requireContext(), USER_KEY)
-        if(isNewUser){
-            putTimeDetails(USER_MORNING_TIME)
-            putTimeDetails(USER_EVENING_TIME)
-            activateNotificationAlarm()
+        val isRegisteredUser = SharedPrefUtil.readSharedPrefBoolean(requireContext(), USER_KEY)
+        if(!isRegisteredUser){
+            binding.chatRView.visibility = View.INVISIBLE
+            binding.send.visibility = View.INVISIBLE
+            binding.messageEt.visibility = View.INVISIBLE
+            binding.submit.visibility = View.INVISIBLE
+
+            binding.morningtv.visibility = View.VISIBLE
+            binding.morningbutton.visibility = View.VISIBLE
+            binding.eveningtv.visibility = View.VISIBLE
+            binding.eveningbutton.visibility = View.VISIBLE
+
+            binding.morningbutton.setOnClickListener {
+                putTimeDetails(Category.MORNING)
+            }
+            binding.eveningbutton.setOnClickListener {
+                putTimeDetails(Category.EVENING)
+            }
+
+            binding.submit.setOnClickListener {
+                if(eveningTime < morningTime){
+                    Snackbar.make(requireView(), "Invalid", Snackbar.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
+                initiateObservers()
+            }
+        } else {
+            initiateObservers()
         }
     }
 
-    private fun activateNotificationAlarm(){
-        // todo put alarms
+    private fun initiateObservers(){
+        binding.morningtv.visibility = View.INVISIBLE
+        binding.morningbutton.visibility = View.INVISIBLE
+        binding.eveningtv.visibility = View.INVISIBLE
+        binding.eveningbutton.visibility = View.INVISIBLE
+        binding.submit.visibility = View.INVISIBLE
+
+        binding.chatRView.visibility = View.VISIBLE
+        binding.send.visibility = View.VISIBLE
+        binding.messageEt.visibility = View.VISIBLE
+        setUpViews()
+        val questionCategory = getQuestionCategory()
+        initiateListeners(questionCategory != Category.NONE &&  !areQuestionAnswered(questionCategory), questionCategory)
     }
 
-    private fun putTimeDetails(type: String){
-        val mTimePicker: TimePickerDialog
-        val mcurrentTime = Calendar.getInstance()
-        val hour = mcurrentTime.get(Calendar.HOUR_OF_DAY)
-        val minute = mcurrentTime.get(Calendar.MINUTE)
-
-        mTimePicker = TimePickerDialog(requireContext(),
-            { _, hourOfDay, minute ->
-                SharedPrefUtil.writeSharedPref(requireContext(), type,hourOfDay*60+minute)
-            }, hour, minute, false)
-        mTimePicker.show()
-    }
-
-    private fun initiateListeners(viewQuestion: Boolean = true){
+    private fun initiateListeners(viewQuestion: Boolean = true, questionCategory: Category){
+        Timber.d("CATEGORY: $questionCategory")
         if(viewQuestion){
             viewModel.questions.observe(viewLifecycleOwner){
                 questions = it as ArrayList<Question>
                 if(questions != null && chatMessages != null){
-                    initiateBot(questions!!, chatMessages!!)
+                    initiateBot(questions!!, chatMessages!!, questionCategory)
                 }
             }
         }
@@ -101,15 +144,50 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
                 chatMessages = it as ArrayList<ChatMessage>
                 areMessagesInserted = true
                 if(questions != null && chatMessages != null){
-                    initiateBot(questions!!, chatMessages!!)
+                    initiateBot(questions!!, chatMessages!!, questionCategory)
                 } else if(!viewQuestion){
                     initializeRecyclerView()
                 }
             }
         }
-        viewModel.pairMediator.observe(viewLifecycleOwner){
-            val first = it.first
-            val second = it.second
+    }
+
+    private fun activateNotificationAlarm(timeInMillis: Long){
+
+    }
+
+    private fun putTimeDetails(category: Category){
+        val mTimePicker: TimePickerDialog
+        val mcurrentTime = Calendar.getInstance()
+        val hour = mcurrentTime.get(Calendar.HOUR_OF_DAY)
+        val minute = mcurrentTime.get(Calendar.MINUTE)
+        var time: String = ""
+        mTimePicker = TimePickerDialog(requireContext(),
+            { _, hr, min ->
+                if(hr < 10) time += "0"
+                time += hr.toString()
+                time += ":"
+                if(min < 10) time+="0"
+                time += min
+                if(category == Category.MORNING) binding.morningtv.text = time
+                else binding.eveningtv.text = time
+                val now = Calendar.getInstance();
+                now.set(Calendar.HOUR_OF_DAY, hr)
+                now.set(Calendar.MINUTE, min)
+                val timeInMilli = now.timeInMillis
+                activateNotificationAlarm(timeInMilli)
+                if(category == Category.MORNING) morningTime = timeInMilli
+                else eveningTime = timeInMilli
+                SharedPrefUtil.writeSharedPrefInt(requireContext(), key= if(category == Category.MORNING) USER_MORNING_TIME else USER_EVENING_TIME, hr*60+min)
+                putUserKey()
+            }, hour, minute, true)
+        mTimePicker.show()
+    }
+
+    private fun putUserKey(){
+        if(morningTime != 0L && eveningTime != 0L){
+            SharedPrefUtil.writeSharedPrefBoolean(requireContext(), USER_KEY, true)
+            binding.submit.visibility = View.VISIBLE
         }
     }
 
@@ -126,7 +204,7 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
         }
     }
 
-    private fun initiateBot(questions: MutableList<Question>, chatMessages: ArrayList<ChatMessage>){
+    private fun initiateBot(questions: MutableList<Question>, chatMessages: ArrayList<ChatMessage>, questionCategory: Category){
         binding.send.visibility = View.VISIBLE
         binding.messageEt.visibility = View.VISIBLE
         (activity as MainActivity).binding.bottomBar.visibility = View.GONE
@@ -171,6 +249,10 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
                     bottomBar.visibility = View.VISIBLE
                     bottomNavView.visibility = View.VISIBLE
                 }
+                SharedPrefUtil.writeSharedPrefString(requireContext(),
+                    key= if(questionCategory == Category.MORNING) MORNING_ANSWERED else EVENING_ANSWERED,
+                    SimpleDateFormat("DD/mm/yyyy").format(Date())
+                )
                 addMessagesToDB(sessionChatMessage)
             }
         }

@@ -2,17 +2,26 @@ package com.example.theproductivityapp.Utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.theproductivityapp.db.Utils
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.util.*
 
 class SharedPrefUtil {
     companion object{
-        fun writeSharedPref(context: Context, key: String, value: Int){
+        fun writeSharedPrefInt(context: Context, key: String, value: Int){
             val sharedPref: SharedPreferences = context.getSharedPreferences(key, Context.MODE_PRIVATE)
             val editor = sharedPref.edit()
             editor.putInt(key, value)
+            editor.apply()
+        }
+        fun writeSharedPrefString(context: Context, key: String, value: String){
+            val sharedPref: SharedPreferences = context.getSharedPreferences(key, Context.MODE_PRIVATE)
+            val editor = sharedPref.edit()
+            editor.putString(key, value)
+            editor.apply()
+        }
+
+        fun writeSharedPrefBoolean(context: Context, key: String, value: Boolean){
+            val sharedPref: SharedPreferences = context.getSharedPreferences(key, Context.MODE_PRIVATE)
+            val editor = sharedPref.edit()
+            editor.putBoolean(key, value)
             editor.apply()
         }
 
@@ -24,6 +33,11 @@ class SharedPrefUtil {
         fun readSharedPrefBoolean(context: Context, key: String): Boolean{
             val sharedPref: SharedPreferences = context.getSharedPreferences(key, Context.MODE_PRIVATE)
             return sharedPref.getBoolean(key, false)
+        }
+        fun readSharedPrefString(context: Context, key: String): String {
+            val sharedPref: SharedPreferences =
+                context.getSharedPreferences(key, Context.MODE_PRIVATE)
+            return sharedPref.getString(key, "NA") ?: "NA"
         }
     }
 }
