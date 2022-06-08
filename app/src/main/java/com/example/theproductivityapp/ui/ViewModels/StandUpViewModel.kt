@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.theproductivityapp.Repository.MainRepository
 import com.example.theproductivityapp.Repository.StandUpRepository
+import com.example.theproductivityapp.db.tables.Category
 import com.example.theproductivityapp.db.tables.ChatMessage
 import com.example.theproductivityapp.db.tables.Question
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,9 +20,15 @@ class StandUpViewModel @Inject constructor(
     var questions: LiveData<List<Question>> = repository.getAllQuestion()
     var chatMessages: LiveData<List<ChatMessage>> = repository.getAllChatMessages()
     var pairMediator = MediatorLiveData<Pair<LiveData<List<Question>>, LiveData<List<ChatMessage>>>>()
+    private lateinit var questionByCategory: LiveData<List<Question>>
     init {
         pairMediator = MediatorLiveData()
         pairMediator.value = Pair(questions, chatMessages)
+    }
+
+    fun getQuestionsByCategory(category: Category): LiveData<List<Question>>{
+        questionByCategory = repository.getQuestionByCategory(category)
+        return questionByCategory
     }
 
     fun insertQuestion(question: Question){

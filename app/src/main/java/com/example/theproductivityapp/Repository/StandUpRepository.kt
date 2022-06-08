@@ -2,6 +2,7 @@ package com.example.theproductivityapp.Repository
 
 import androidx.lifecycle.LiveData
 import com.example.theproductivityapp.db.StandUpDao
+import com.example.theproductivityapp.db.tables.Category
 import com.example.theproductivityapp.db.tables.ChatMessage
 import com.example.theproductivityapp.db.tables.Question
 import javax.inject.Inject
@@ -14,4 +15,6 @@ class StandUpRepository @Inject constructor(
 
     fun getAllQuestion() = standUpDao.get()
     fun getAllChatMessages() = standUpDao.getChatMessages()
+
+    fun getQuestionByCategory(category: Category) = standUpDao.getQuestionByCategory(category)
 }

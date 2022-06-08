@@ -7,6 +7,7 @@ import android.text.InputType
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +24,7 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.util.*
@@ -49,9 +51,11 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDailyStandupBinding.bind(view)
-        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        onboardUser()
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+        viewModel.getQuestionsByCategory(Category.MORNING).observe(viewLifecycleOwner){
 
+        }
+        onboardUser()
         // todo: check time and call for question accordingly, here it is ensured that user is onboarded.
     }
 
@@ -65,8 +69,11 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
             }
             else -> return true
         }
-        val today = SimpleDateFormat("DD/mm/yyyy").format(Calendar.getInstance().time)
+        val today = SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().time)
+        Timber.d("Shreyash= calendar: ${Calendar.getInstance().time}")
         val mostRecentAnsweredString = SharedPrefUtil.readSharedPrefString(requireContext(), key)
+        Timber.d("Shreyash= $today <> $mostRecentAnsweredString")
+        if(mostRecentAnsweredString == "NA") return false
         return mostRecentAnsweredString == today
     }
 
@@ -76,8 +83,10 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
         val calendar = Calendar.getInstance();
         val currentTime = calendar.get(Calendar.HOUR_OF_DAY)*60 + calendar.get(Calendar.MINUTE)
         return if(currentTime in morningTime until eveningTime  ){
+            Timber.d("Shreyash= MORNING")
             Category.MORNING
         } else if(currentTime > eveningTime) {
+            Timber.d("Shreyash= EVENING")
             Category.EVENING
         } else Category.NONE
     }
@@ -126,18 +135,23 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
         binding.messageEt.visibility = View.VISIBLE
         setUpViews()
         val questionCategory = getQuestionCategory()
-        initiateListeners(questionCategory != Category.NONE &&  !areQuestionAnswered(questionCategory), questionCategory)
+        val notAnswered = !areQuestionAnswered(questionCategory)
+        Toast.makeText(requireContext(), "Answered= ${!notAnswered}", Toast.LENGTH_SHORT).show()
+        initiateListeners(questionCategory != Category.NONE &&  notAnswered, questionCategory)
     }
 
     private fun initiateListeners(viewQuestion: Boolean = true, questionCategory: Category){
         Timber.d("CATEGORY: $questionCategory")
+        Snackbar.make(requireView(), "quesByCategory, ${questionCategory.toString()}", Snackbar.LENGTH_SHORT).show()
         if(viewQuestion){
-            viewModel.questions.observe(viewLifecycleOwner){
+            viewModel.getQuestionsByCategory(questionCategory).observe(viewLifecycleOwner){
                 questions = it as ArrayList<Question>
                 if(questions != null && chatMessages != null){
                     initiateBot(questions!!, chatMessages!!, questionCategory)
                 }
             }
+        } else {
+            Snackbar.make(requireView(), "Already responded!", Snackbar.LENGTH_LONG).show()
         }
         viewModel.chatMessages.observe(viewLifecycleOwner){ it ->
             if(!areMessagesInserted){
@@ -251,7 +265,7 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
                 }
                 SharedPrefUtil.writeSharedPrefString(requireContext(),
                     key= if(questionCategory == Category.MORNING) MORNING_ANSWERED else EVENING_ANSWERED,
-                    SimpleDateFormat("DD/mm/yyyy").format(Date())
+                    SimpleDateFormat("dd/MM/yyyy").format(Date())
                 )
                 addMessagesToDB(sessionChatMessage)
             }
