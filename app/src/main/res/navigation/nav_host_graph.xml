@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_homeTodo_to_dailyStandupFragment"
             app:destination="@id/dailyStandupFragment" />
+        <action
+            android:id="@+id/action_homeTodo_to_dailyStandupFragment2"
+            app:destination="@id/dailyStandupFragment" />
     </fragment>
     <fragment
         android:id="@+id/graphFragment"

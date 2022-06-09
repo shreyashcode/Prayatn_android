@@ -17,36 +17,28 @@ import timber.log.Timber
 class ReminderReceiver: BroadcastReceiver() {
     val CHANNEL_ID = "CHANNEL_ID"
     val CHANNEL_NAME = "CHANNEL_NAME"
+    private lateinit var title: String
+    private lateinit var description: String
+    private lateinit var pendingIntent: PendingIntent
+    private lateinit var returnIntent: Intent
 
+    // TODO: do some case work here, to send the standup intent.
     override fun onReceive(context: Context, intent: Intent) {
-        val timeInMillis = intent.getLongExtra("TIME", 0L)
-        val title = intent.getStringExtra("TITLE")!!
-        val id = intent.getIntExtra("ID", 1)
-        val todo_timestamp = intent.getLongExtra("timeStamp", 0L)
-
-        Timber.d("REALME $title | $id | $todo_timestamp")
-//        val job = Job()
-//        val coroutineScope = CoroutineScope(job + Dispatchers.Main)
-//        coroutineScope.launch {
-//            todoDao.deleteReminderByTimeStamp(timeInMillis)
-//        }
-
-        Toast.makeText(context, "TITILE ||||||||||||||", Toast.LENGTH_SHORT).show()
-
-        val returnIntent = Intent(context, MainActivity::class.java).apply {
-            putExtra("SOURCE", title)
-            putExtra("ID", id)
-            putExtra("timeStamp", intent.getLongExtra("timeStamp", 0L))
+        val type = intent.getStringExtra("TYPE")
+        Timber.d("Shreyash= Title= ${intent.getStringExtra("TITLE")}")
+        Timber.d("Shreyash= TYPE= $type")
+        if(type == "STANDUP"){
+            standupReminder(context, intent)
+        } else {
+            todoReminder(context, intent)
         }
-        val pendingIntent = TaskStackBuilder.create(context).run{
+        pendingIntent = TaskStackBuilder.create(context).run{
             addNextIntentWithParentStack(returnIntent)
-            getPendingIntent(todo_timestamp.toInt(), PendingIntent.FLAG_UPDATE_CURRENT)
+            getPendingIntent(System.currentTimeMillis().toInt(), PendingIntent.FLAG_UPDATE_CURRENT)
         }
-
-//        createNotification(context)
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setContentTitle(title)
-            .setContentText(convertDate(timeInMillis))
+            .setContentText(description)
             .setSmallIcon(R.drawable.home)
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -56,11 +48,28 @@ class ReminderReceiver: BroadcastReceiver() {
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .setVibrate(longArrayOf(0))
             .build()
-
-//        if (Build.VERSION.SDK_INT >= 21) notification.(new long[0]);
-
         val notificationManager = NotificationManagerCompat.from(context)
-        notificationManager.notify(todo_timestamp.toInt(), notification)
+        notificationManager.notify(System.currentTimeMillis().toInt(), notification)
+    }
+
+    private fun standupReminder(context: Context, intent: Intent){
+        title = "SELF-STANDUP time, ready? \uD83D\uDD0D"
+        description = "This is description..."
+        returnIntent = Intent(context, MainActivity::class.java).apply {
+            putExtra("TYPE", "Standup")
+        }
+    }
+
+    private fun todoReminder(context: Context, intent: Intent){
+        description = convertDate(intent.getLongExtra("TIME", 0L))
+        title = intent.getStringExtra("TITLE")!!
+        val id = intent.getIntExtra("ID", 1)
+        returnIntent = Intent(context, MainActivity::class.java).apply {
+            putExtra("TYPE", "Todo")
+            putExtra("SOURCE", title)
+            putExtra("ID", id)
+            putExtra("timeStamp", intent.getLongExtra("timeStamp", 0L))
+        }
     }
 
     private fun convertDate(timeInMillis: Long): String =

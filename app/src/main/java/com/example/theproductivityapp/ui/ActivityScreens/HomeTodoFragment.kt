@@ -68,9 +68,14 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
         binding = FragmentHomeTodoBinding.bind(view)
         itemClickListener = this
         setUpTagRecyclerView()
-        if(requireActivity().intent.getStringExtra("SOURCE") != null){
-            Common.reqTimeStamp = requireActivity().intent.getLongExtra("timeStamp", 0L)
-            findNavController().navigate(R.id.action_homeTodo_to_addTodoFragment)
+        if(requireActivity().intent.getStringExtra("TYPE") != null){
+            val source = requireActivity().intent.getStringExtra("TYPE")
+            if(source == "Standup"){
+                findNavController().navigate(R.id.action_homeTodo_to_dailyStandupFragment)
+            } else {
+                Common.reqTimeStamp = requireActivity().intent.getLongExtra("timeStamp", 0L)
+                findNavController().navigate(R.id.action_homeTodo_to_addTodoFragment)
+            }
         }
         reminderService = ReminderService(requireContext())
         viewModel.reminders.observe(viewLifecycleOwner, {

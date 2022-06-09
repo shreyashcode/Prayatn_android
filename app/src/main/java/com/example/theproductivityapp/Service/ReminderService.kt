@@ -7,8 +7,11 @@ import android.content.Intent
 import android.os.Build
 import com.example.theproductivityapp.Reciever.ReminderReceiver
 import com.example.theproductivityapp.Utils.Common
+import com.example.theproductivityapp.db.tables.Category
 import com.example.theproductivityapp.di.BaseApplication
 import timber.log.Timber
+import java.util.*
+import kotlin.coroutines.cancellation.CancellationException
 
 class ReminderService(
     private val context: Context,
@@ -17,9 +20,10 @@ class ReminderService(
 ) {
     private val alarmManager: AlarmManager? =
         context.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
+    private val MORNING_REQUESTCODE = 100
+    private val EVENING_REQUESTCODE = 101
 
     fun setExactAlarm(remindTime: Long) {
-        Timber.d("REMINDER: FOR SETTING")
         setAlarm(
             remindTime,
             getPendingIntent(
@@ -29,12 +33,43 @@ class ReminderService(
         )
     }
 
+    fun setRepeatingAlarm(hr: Int, min: Int, category: Category){
+        Timber.d("Shreyash= alarm $hr $min")
+        val calendar = Calendar.getInstance().apply {
+            timeInMillis = System.currentTimeMillis()
+            set(Calendar.HOUR_OF_DAY, hr)
+            set(Calendar.MINUTE, min)
+            set(Calendar.SECOND, 0)
+        }
+        val requestCode = if(category == Category.MORNING) MORNING_REQUESTCODE else EVENING_REQUESTCODE
+        Timber.d("Shreyash= REQ $requestCode")
+        alarmManager?.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            24*60*60*1000,
+            getPendingIntent(
+                getIntent(category.toString()),
+                requestCode
+            )
+        )
+    }
+
+    // todo same
     private fun getPendingIntent(intent: Intent, requestCodeTimeStamp: Long): PendingIntent{
         return PendingIntent.getBroadcast(
             BaseApplication.applicationContext(),
             requestCodeTimeStamp.toInt(),
             intent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_CANCEL_CURRENT
+        )
+    }
+
+    private fun getPendingIntent(intent: Intent, requestCode: Int): PendingIntent{
+        return PendingIntent.getBroadcast(
+            BaseApplication.applicationContext(),
+            requestCode,
+            intent,
+            PendingIntent.FLAG_CANCEL_CURRENT
         )
     }
 
@@ -78,9 +113,12 @@ class ReminderService(
             putExtra("TIME", timeInMillis)
             putExtra("TITLE", title)
             putExtra("timeStamp", TodoTimeStamp)
+            putExtra("TYPE", "ToDo")
         }
     }
-
-//    private fun convertDate(timeInMillis: Long): String =
-//        DateFormat.format("dd/MM hh:mm", timeInMillis).toString()
+    private fun getIntent(category: String): Intent  = Intent(context, ReminderReceiver::class.java).apply {
+        putExtra("TYPE", "STANDUP")
+        putExtra("TITLE", category)
+        action = category
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.theproductivityapp.ui.ActivityScreens
 
 import android.app.Activity
+import android.app.AlarmManager
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.text.InputType
@@ -13,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.theproductivityapp.Adapter.ChatAdapter
 import com.example.theproductivityapp.R
+import com.example.theproductivityapp.Service.ReminderService
 import com.example.theproductivityapp.Utils.SharedPrefUtil
 import com.example.theproductivityapp.databinding.FragmentDailyStandupBinding
 import com.example.theproductivityapp.db.tables.Category
@@ -52,9 +54,6 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDailyStandupBinding.bind(view)
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
-        viewModel.getQuestionsByCategory(Category.MORNING).observe(viewLifecycleOwner){
-
-        }
         onboardUser()
         // todo: check time and call for question accordingly, here it is ensured that user is onboarded.
     }
@@ -85,7 +84,7 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
         return if(currentTime in morningTime until eveningTime  ){
             Timber.d("Shreyash= MORNING")
             Category.MORNING
-        } else if(currentTime > eveningTime) {
+        } else if(currentTime >= eveningTime) {
             Timber.d("Shreyash= EVENING")
             Category.EVENING
         } else Category.NONE
@@ -116,6 +115,15 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
                     Snackbar.make(requireView(), "Invalid", Snackbar.LENGTH_LONG).show()
                     return@setOnClickListener
                 }
+                val mTime = SharedPrefUtil.readSharedPrefInt(requireContext(), USER_MORNING_TIME)
+                val eTime = SharedPrefUtil.readSharedPrefInt(requireContext(), USER_EVENING_TIME)
+                val morningHr = mTime/60
+                val morningMin = mTime% 60
+                val eveningHr = eTime/60
+                val eveningMin = eTime % 60
+                val reminderService = ReminderService(requireContext())
+                reminderService.setRepeatingAlarm(morningHr, morningMin, Category.MORNING)
+                reminderService.setRepeatingAlarm(eveningHr, eveningMin, Category.EVENING)
                 initiateObservers()
             }
         } else {
@@ -136,7 +144,7 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
         setUpViews()
         val questionCategory = getQuestionCategory()
         val notAnswered = !areQuestionAnswered(questionCategory)
-        Toast.makeText(requireContext(), "Answered= ${!notAnswered}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "NONE?= ${questionCategory == Category.NONE} Answered= ${!notAnswered}", Toast.LENGTH_SHORT).show()
         initiateListeners(questionCategory != Category.NONE &&  notAnswered, questionCategory)
     }
 
@@ -224,6 +232,7 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
         (activity as MainActivity).binding.bottomBar.visibility = View.GONE
         chatAdapter.items = chatMessages
         chatAdapter.notifyDataSetChanged()
+        binding.chatRView.scrollToPosition(chatMessages.size-1)
 
         chatMessages.add(ChatMessage(Sender.BOT, questions[questionIndex++].questionDescription, System.currentTimeMillis()))
         sessionChatMessage.add(chatMessages.last())
