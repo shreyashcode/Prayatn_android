@@ -1,5 +1,6 @@
 package com.example.theproductivityapp.Adapter
 
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -36,6 +37,7 @@ class ChatAdapter: RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
         class UserMessageViewHolder(private val userMessageItemBinding: UserMessageItemBinding): ChatViewHolder(userMessageItemBinding){
             override fun bind(chatMessage: ChatMessage){
                 userMessageItemBinding.message.text = chatMessage.description
+                userMessageItemBinding.date.text = convertDate(chatMessage.timeStamp)
             }
         }
         class BotMessageViewHolder(private val botMessageItemBinding: BotMessageItemBinding): ChatViewHolder(botMessageItemBinding){
@@ -44,5 +46,9 @@ class ChatAdapter: RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
             }
         }
         abstract fun bind(chatMessage: ChatMessage)
+        companion object{
+            private fun convertDate(timeInMillis: Long): String =
+                DateFormat.format("dd/MM hh:mm", timeInMillis).toString()
+        }
     }
 }

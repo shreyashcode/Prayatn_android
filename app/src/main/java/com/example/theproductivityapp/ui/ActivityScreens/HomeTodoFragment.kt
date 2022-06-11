@@ -11,6 +11,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -62,7 +63,6 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         view_ = view
         itemTouchHelper = ItemTouchHelper(callBack)
         binding = FragmentHomeTodoBinding.bind(view)

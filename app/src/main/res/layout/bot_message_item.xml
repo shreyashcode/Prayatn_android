@@ -7,12 +7,12 @@
     xmlns:tool="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
         android:layout_marginEnd="70dp"
         app:cardCornerRadius="10dp"
-        app:cardBackgroundColor="#FFFFFF"
+        app:cardBackgroundColor="#EEEEEE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,9 +21,9 @@
             android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="12dp"
+            android:padding="8dp"
             android:textColor="#1E1E1E"
-            android:textSize="18sp"
+            android:textSize="16sp"
             tool:text="sdfdsfdsfdsfdasfsdfsdfsadf;lskdfjas;ldkfj;sldkfjsad;lflsakdfj;alkfjl;ksdjf;adsklfjds;"/>
     </androidx.cardview.widget.CardView>
 

@@ -3,6 +3,7 @@ package com.example.theproductivityapp.ui.ActivityScreens
 import android.app.Activity
 import android.app.AlarmManager
 import android.app.TimePickerDialog
+import android.os.Build
 import android.os.Bundle
 import android.text.InputType
 import android.view.View
@@ -10,6 +11,7 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -18,6 +20,7 @@ import com.example.theproductivityapp.Adapter.ChatAdapter
 import com.example.theproductivityapp.R
 import com.example.theproductivityapp.Service.ReminderService
 import com.example.theproductivityapp.Utils.SharedPrefUtil
+import com.example.theproductivityapp.databinding.ActivityMainBinding
 import com.example.theproductivityapp.databinding.FragmentDailyStandupBinding
 import com.example.theproductivityapp.db.tables.Category
 import com.example.theproductivityapp.db.tables.ChatMessage
@@ -55,6 +58,7 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDailyStandupBinding.bind(view)
+        statusBar(R.color.primary_dark)
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         onboardUser()
         binding.back.setOnClickListener {
@@ -98,15 +102,17 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
     private fun onboardUser(){
         val isRegisteredUser = SharedPrefUtil.readSharedPrefBoolean(requireContext(), USER_KEY)
         if(!isRegisteredUser){
-            binding.chatRView.visibility = View.INVISIBLE
-            binding.send.visibility = View.INVISIBLE
             binding.messageEt.visibility = View.INVISIBLE
+            binding.send.visibility = View.INVISIBLE
+            binding.chatRView.visibility = View.INVISIBLE
             binding.submit.visibility = View.INVISIBLE
 
             binding.morningtv.visibility = View.VISIBLE
             binding.morningbutton.visibility = View.VISIBLE
             binding.eveningtv.visibility = View.VISIBLE
             binding.eveningbutton.visibility = View.VISIBLE
+            binding.messageBot.visibility = View.VISIBLE
+            binding.bot.visibility = View.VISIBLE
 
             binding.morningbutton.setOnClickListener {
                 putTimeDetails(Category.MORNING)
@@ -136,16 +142,27 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
         }
     }
 
+    private fun statusBar(color_id: Int){
+        if (Build.VERSION.SDK_INT >= 21) {
+            val window = requireActivity().window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            window.statusBarColor = this.resources.getColor(color_id)
+        }
+    }
+
     private fun initiateObservers(){
         binding.morningtv.visibility = View.INVISIBLE
         binding.morningbutton.visibility = View.INVISIBLE
+        binding.messageBot.visibility = View.INVISIBLE
+        binding.bot.visibility = View.INVISIBLE
         binding.eveningtv.visibility = View.INVISIBLE
         binding.eveningbutton.visibility = View.INVISIBLE
         binding.submit.visibility = View.INVISIBLE
 
-        binding.chatRView.visibility = View.VISIBLE
         binding.send.visibility = View.VISIBLE
         binding.messageEt.visibility = View.VISIBLE
+        binding.chatRView.visibility = View.VISIBLE
         setUpViews()
         val questionCategory = getQuestionCategory()
         val notAnswered = !areQuestionAnswered(questionCategory)
@@ -232,7 +249,14 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
     }
 
     private fun onBackPressed(){
-        findNavController().navigate(R.id.action_dailyStandupFragment_to_homeTodo)
+        val params = CoordinatorLayout.LayoutParams(
+            CoordinatorLayout.LayoutParams.MATCH_PARENT,
+            CoordinatorLayout.LayoutParams.MATCH_PARENT
+        )
+        // todo reset on fragment back pressed
+        params.setMargins(0, 0, 0, 48)
+        (requireActivity() as MainActivity).binding.framelayout.layoutParams = params
+        findNavController().popBackStack()
     }
 
     private fun initiateBot(questions: MutableList<Question>, chatMessages: ArrayList<ChatMessage>, questionCategory: Category){

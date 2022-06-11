@@ -1,27 +1,32 @@
 package com.example.theproductivityapp.ui.ActivityScreens
 
+import android.R.attr.left
+import android.R.attr.right
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import android.widget.FrameLayout
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.marginBottom
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.theproductivityapp.R
-import com.example.theproductivityapp.databinding.ActivityMainBinding
-import com.example.theproductivityapp.db.tables.GraphTodo
-import com.example.theproductivityapp.db.TodoDao
 import com.example.theproductivityapp.Utils.Common
+import com.example.theproductivityapp.databinding.ActivityMainBinding
+import com.example.theproductivityapp.db.TodoDao
+import com.example.theproductivityapp.db.tables.GraphTodo
 import com.example.theproductivityapp.ui.ViewModels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -29,6 +34,7 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.*
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -61,8 +67,27 @@ class MainActivity : AppCompatActivity() {
                 if(destination.id == R.id.dailyStandupFragment)
                     binding.background.setBackgroundColor(ContextCompat.getColor(this, R.color.ui_dark2))
                 statusBar(R.color.ui_light2)
+
                 when(destination.id){
-                    R.id.loginFragment, R.id.tagFilterFragment, R.id.addTodoFragment, R.id.dailyStandupFragment -> {
+                    R.id.dailyStandupFragment ->{
+                        val params = CoordinatorLayout.LayoutParams(
+                            CoordinatorLayout.LayoutParams.MATCH_PARENT,
+                            CoordinatorLayout.LayoutParams.MATCH_PARENT
+                        )
+                        // todo reset on fragment back pressed
+                        params.setMargins(0, 0, 0, 0)
+                        binding.framelayout.layoutParams = params
+                        binding.fabButton.visibility = View.GONE
+                        binding.bottomBar.visibility = View.GONE
+                        binding.bottomNavView.visibility = View.GONE
+                    }
+                    R.id.loginFragment, R.id.tagFilterFragment, R.id.addTodoFragment -> {
+                        val params = CoordinatorLayout.LayoutParams(
+                            CoordinatorLayout.LayoutParams.MATCH_PARENT,
+                            CoordinatorLayout.LayoutParams.MATCH_PARENT
+                        )
+                        // todo reset on fragment back pressed
+                        params.setMargins(0, 0, 0, 50)
                         Timber.d("Shreyash= FIRST")
                         binding.fabButton.visibility = View.GONE
                         binding.bottomBar.visibility = View.GONE
@@ -71,15 +96,33 @@ class MainActivity : AppCompatActivity() {
 
                     R.id.homeTodo -> {
                         Timber.d("Shreyash= 2")
-
+                        val params = CoordinatorLayout.LayoutParams(
+                            CoordinatorLayout.LayoutParams.MATCH_PARENT,
+                            CoordinatorLayout.LayoutParams.MATCH_PARENT
+                        )
+                        // todo reset on fragment back pressed
+                        params.setMargins(0, 0, 0, 50)
+                        Timber.d("Shreyash= FIRST")
+                        binding.fabButton.visibility = View.GONE
+                        binding.bottomBar.visibility = View.GONE
+                        binding.bottomNavView.visibility = View.GONE
                         binding.fabButton.visibility = View.VISIBLE
                         binding.bottomNavView.visibility = View.VISIBLE
                         binding.bottomBar.visibility = View.VISIBLE
                     }
 
-                    R.id.graphFragment, R.id.quadrantFragment, R.id.dailyStandupFragment ->{
+                    R.id.graphFragment, R.id.quadrantFragment ->{
                         Timber.d("Shreyash= 3")
-
+                        val params = CoordinatorLayout.LayoutParams(
+                            CoordinatorLayout.LayoutParams.MATCH_PARENT,
+                            CoordinatorLayout.LayoutParams.MATCH_PARENT
+                        )
+                        // todo reset on fragment back pressed
+                        params.setMargins(0, 0, 0, 50)
+                        Timber.d("Shreyash= FIRST")
+                        binding.fabButton.visibility = View.GONE
+                        binding.bottomBar.visibility = View.GONE
+                        binding.bottomNavView.visibility = View.GONE
                         statusBar(R.color.ui_dark2)
                         binding.fabButton.visibility = View.INVISIBLE
                         binding.background.setBackgroundColor(ContextCompat.getColor(this, R.color.ui_dark2))
@@ -87,7 +130,16 @@ class MainActivity : AppCompatActivity() {
 
                     else -> {
                         Timber.d("Shreyash= 4")
-
+                        val params = CoordinatorLayout.LayoutParams(
+                            CoordinatorLayout.LayoutParams.MATCH_PARENT,
+                            CoordinatorLayout.LayoutParams.MATCH_PARENT
+                        )
+                        // todo reset on fragment back pressed
+                        params.setMargins(0, 0, 0, 50)
+                        Timber.d("Shreyash= FIRST")
+                        binding.fabButton.visibility = View.GONE
+                        binding.bottomBar.visibility = View.GONE
+                        binding.bottomNavView.visibility = View.GONE
                         binding.bottomNavView.visibility = View.VISIBLE
                         binding.bottomBar.visibility = View.VISIBLE
                         binding.fabButton.visibility = View.INVISIBLE
