@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/drawable/ic_group_6.xml" value="0.178" />
         <entry key="app/src/main/res/drawable/ic_send.xml" value="0.178" />
         <entry key="app/src/main/res/drawable/states.xml" value="0.168" />
+        <entry key="app/src/main/res/font/sen.xml" value="0.21846943138093203" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="app/src/main/res/layout/bot_message_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_add_todo.xml" value="0.13949275362318841" />
