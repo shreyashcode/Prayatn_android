@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -55,31 +56,38 @@ class MainActivity : AppCompatActivity() {
 
         navHostFragment.findNavController()
             .addOnDestinationChangedListener { _, destination, _ ->
-                Timber.d("NAVIGATE")
+
                 binding.background.setBackgroundColor(ContextCompat.getColor(this, R.color.ui_light2))
                 if(destination.id == R.id.dailyStandupFragment)
                     binding.background.setBackgroundColor(ContextCompat.getColor(this, R.color.ui_dark2))
                 statusBar(R.color.ui_light2)
                 when(destination.id){
                     R.id.loginFragment, R.id.tagFilterFragment, R.id.addTodoFragment, R.id.dailyStandupFragment -> {
+                        Timber.d("Shreyash= FIRST")
                         binding.fabButton.visibility = View.GONE
                         binding.bottomBar.visibility = View.GONE
                         binding.bottomNavView.visibility = View.GONE
                     }
 
                     R.id.homeTodo -> {
+                        Timber.d("Shreyash= 2")
+
                         binding.fabButton.visibility = View.VISIBLE
                         binding.bottomNavView.visibility = View.VISIBLE
                         binding.bottomBar.visibility = View.VISIBLE
                     }
 
                     R.id.graphFragment, R.id.quadrantFragment, R.id.dailyStandupFragment ->{
+                        Timber.d("Shreyash= 3")
+
                         statusBar(R.color.ui_dark2)
                         binding.fabButton.visibility = View.INVISIBLE
                         binding.background.setBackgroundColor(ContextCompat.getColor(this, R.color.ui_dark2))
                     }
 
                     else -> {
+                        Timber.d("Shreyash= 4")
+
                         binding.bottomNavView.visibility = View.VISIBLE
                         binding.bottomBar.visibility = View.VISIBLE
                         binding.fabButton.visibility = View.INVISIBLE

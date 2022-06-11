@@ -68,12 +68,15 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
         binding = FragmentHomeTodoBinding.bind(view)
         itemClickListener = this
         setUpTagRecyclerView()
-        if(requireActivity().intent.getStringExtra("TYPE") != null){
+        if(requireActivity().intent.getStringExtra("TYPE") != null && !requireActivity().intent.getBooleanExtra("NavigateStatus", true)){
+            Timber.d("Shreyash= TYPE")
             val source = requireActivity().intent.getStringExtra("TYPE")
             if(source == "Standup"){
+                requireActivity().intent.putExtra("NavigateStatus", true)
                 findNavController().navigate(R.id.action_homeTodo_to_dailyStandupFragment)
             } else {
                 Common.reqTimeStamp = requireActivity().intent.getLongExtra("timeStamp", 0L)
+                requireActivity().intent.putExtra("NavigateStatus", true)
                 findNavController().navigate(R.id.action_homeTodo_to_addTodoFragment)
             }
         }
@@ -245,15 +248,16 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
             val toDelete = list[viewHolder.adapterPosition]
-
+            var message = "Deleted"
             if(direction == ItemTouchHelper.RIGHT){
                 //Add to 2nd DATABASE
                 graphTodo.done_count++
                 viewModel.updateGraph(graphTodo)
+                message = "Marked as done"
             }
             viewModel.delete(toDelete)
 
-            Snackbar.make(requireView(), "Marked as done!", Snackbar.LENGTH_SHORT).setAction("Undo!", View.OnClickListener {
+            Snackbar.make(binding.myCoordinatorLayout, message, Snackbar.LENGTH_SHORT).setAction("Undo", View.OnClickListener {
                 viewModel.insert(toDelete)
                 if(direction == ItemTouchHelper.RIGHT){
                     graphTodo.done_count--

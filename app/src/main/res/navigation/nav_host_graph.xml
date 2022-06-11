@@ -84,5 +84,10 @@
         android:id="@+id/dailyStandupFragment"
         android:name="com.example.theproductivityapp.ui.ActivityScreens.DailyStandupFragment"
         android:label="fragment_daily_standup"
-        tools:layout="@layout/fragment_daily_standup" />
+        tools:layout="@layout/fragment_daily_standup" >
+        <action
+            android:id="@+id/action_dailyStandupFragment_to_homeTodo"
+            app:popUpToInclusive="true"
+            app:destination="@id/homeTodo" />
+    </fragment>
 </navigation>

@@ -9,8 +9,10 @@ import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.theproductivityapp.Adapter.ChatAdapter
 import com.example.theproductivityapp.R
@@ -55,6 +57,9 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
         binding = FragmentDailyStandupBinding.bind(view)
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         onboardUser()
+        binding.back.setOnClickListener {
+            onBackPressed()
+        }
         // todo: check time and call for question accordingly, here it is ensured that user is onboarded.
     }
 
@@ -224,6 +229,10 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
             adapter = chatAdapter;
             layoutManager = LinearLayoutManager(requireContext())
         }
+    }
+
+    private fun onBackPressed(){
+        findNavController().navigate(R.id.action_dailyStandupFragment_to_homeTodo)
     }
 
     private fun initiateBot(questions: MutableList<Question>, chatMessages: ArrayList<ChatMessage>, questionCategory: Category){

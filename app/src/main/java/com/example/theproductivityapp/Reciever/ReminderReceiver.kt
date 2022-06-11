@@ -32,6 +32,7 @@ class ReminderReceiver: BroadcastReceiver() {
         } else {
             todoReminder(context, intent)
         }
+        returnIntent.putExtra("NavigateStatus", false)
         pendingIntent = TaskStackBuilder.create(context).run{
             addNextIntentWithParentStack(returnIntent)
             getPendingIntent(System.currentTimeMillis().toInt(), PendingIntent.FLAG_UPDATE_CURRENT)
