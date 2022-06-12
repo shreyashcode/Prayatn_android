@@ -3,7 +3,11 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/</item>
         <item>@font/archivo_black</item>
+        <item>@font/bebas_neue</item>
+        <item>@font/bungee</item>
         <item>@font/open_sans</item>
+        <item>@font/passion_one</item>
+        <item>@font/passion_one_bold</item>
         <item>@font/secular_one</item>
         <item>@font/sen</item>
     </array>

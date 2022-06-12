@@ -13,13 +13,19 @@
         <entry key="app/src/main/res/drawable/ic_group_6.xml" value="0.178" />
         <entry key="app/src/main/res/drawable/ic_send.xml" value="0.178" />
         <entry key="app/src/main/res/drawable/states.xml" value="0.168" />
+        <entry key="app/src/main/res/font/bebas_neue.xml" value="0.21846943138093203" />
+        <entry key="app/src/main/res/font/bungee.xml" value="0.21846943138093203" />
         <entry key="app/src/main/res/font/sen.xml" value="0.21846943138093203" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="app/src/main/res/layout/bot_message_item.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_add_todo.xml" value="0.13949275362318841" />
+        <entry key="app/src/main/res/layout/fragment_count.xml" value="0.1936725096194955" />
         <entry key="app/src/main/res/layout/fragment_daily_standup.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_graph.xml" value="0.1936725096194955" />
         <entry key="app/src/main/res/layout/fragment_home_todo.xml" value="0.1936725096194955" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1936725096194955" />
         <entry key="app/src/main/res/layout/fragment_quadrant.xml" value="0.16" />
+        <entry key="app/src/main/res/layout/fragment_tag_filter.xml" value="0.1936725096194955" />
         <entry key="app/src/main/res/layout/reminder_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/tag_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/todo_item.xml" value="0.1" />

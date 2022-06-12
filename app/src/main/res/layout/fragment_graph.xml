@@ -48,17 +48,13 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="STATISTICS"
-            android:layout_marginBottom="30dp"
-            android:fontFamily="@font/archivo_black"
-            android:padding="6dp"
+            android:fontFamily="@font/passion_one_bold"
+            android:text="Statistics"
             android:textColor="@color/ui_light2"
-            android:textSize="30sp"
+            android:textSize="60sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/horizontal"
+            app:layout_constraintStart_toStartOf="@+id/vertical" />
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/graph"
@@ -93,6 +89,20 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.8"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.1"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
