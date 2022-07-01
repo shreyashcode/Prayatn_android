@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="3dp"
-        app:cardBackgroundColor="#C6D0DC"
+        app:cardBackgroundColor="#E4FFD6"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,7 @@
                 android:fontFamily="sans-serif-thin"
                 android:textSize="12sp"
                 android:text="DD/MM/YYYY"
-                android:textColor="#FFF6F6" />
+                android:textColor="#787878" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.cardview.widget.CardView>

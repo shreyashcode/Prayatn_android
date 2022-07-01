@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f1f1f1"
+    android:background="@color/primary_dark"
     android:orientation="vertical">
 
     <ImageView
@@ -137,7 +137,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/eveningbutton"
         android:layout_width="0dp"
-        app:cardBackgroundColor="@color/primary_dark"
+        app:cardBackgroundColor="@color/ui_light2"
         android:layout_height="wrap_content"
         android:visibility="invisible"
         android:layout_marginTop="10dp"
@@ -154,7 +154,7 @@
             android:layout_margin="5dp"
             android:padding="4dp"
             android:fontFamily="@font/sen"
-            android:textColor="@color/ui_light2"
+            android:textColor="#000000"
             android:text="Pick evening timing"
             android:textSize="16sp" />
 
