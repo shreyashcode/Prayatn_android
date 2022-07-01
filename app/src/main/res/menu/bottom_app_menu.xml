@@ -14,7 +14,7 @@
         android:icon="@drawable/ic_chatbot"/>
 
     <item android:id="@+id/countFragment"
-        android:title="Count Hours"
+        android:title="Reminders"
         android:icon="@drawable/ic_count_timer"/>
 
     <item android:id="@+id/quadrantFragment"

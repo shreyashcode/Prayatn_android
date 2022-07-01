@@ -29,7 +29,6 @@ import com.example.theproductivityapp.db.TodoDao
 import com.example.theproductivityapp.db.tables.GraphTodo
 import com.example.theproductivityapp.ui.ViewModels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.*
@@ -65,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
                 binding.background.setBackgroundColor(ContextCompat.getColor(this, R.color.ui_light2))
                 if(destination.id == R.id.dailyStandupFragment)
-                    binding.background.setBackgroundColor(ContextCompat.getColor(this, R.color.ui_dark2))
+                    binding.background.setBackgroundColor(ContextCompat.getColor(this, R.color.primary_dark))
                 statusBar(R.color.ui_light2)
 
                 when(destination.id){
@@ -88,58 +87,44 @@ class MainActivity : AppCompatActivity() {
                         )
                         // todo reset on fragment back pressed
                         params.setMargins(0, 0, 0, 50)
-                        Timber.d("Shreyash= FIRST")
                         binding.fabButton.visibility = View.GONE
                         binding.bottomBar.visibility = View.GONE
                         binding.bottomNavView.visibility = View.GONE
                     }
 
                     R.id.homeTodo -> {
-                        Timber.d("Shreyash= 2")
                         val params = CoordinatorLayout.LayoutParams(
                             CoordinatorLayout.LayoutParams.MATCH_PARENT,
                             CoordinatorLayout.LayoutParams.MATCH_PARENT
                         )
                         // todo reset on fragment back pressed
                         params.setMargins(0, 0, 0, 50)
-                        Timber.d("Shreyash= FIRST")
-                        binding.fabButton.visibility = View.GONE
-                        binding.bottomBar.visibility = View.GONE
-                        binding.bottomNavView.visibility = View.GONE
                         binding.fabButton.visibility = View.VISIBLE
                         binding.bottomNavView.visibility = View.VISIBLE
                         binding.bottomBar.visibility = View.VISIBLE
                     }
 
                     R.id.graphFragment, R.id.quadrantFragment ->{
-                        Timber.d("Shreyash= 3")
                         val params = CoordinatorLayout.LayoutParams(
                             CoordinatorLayout.LayoutParams.MATCH_PARENT,
                             CoordinatorLayout.LayoutParams.MATCH_PARENT
                         )
                         // todo reset on fragment back pressed
                         params.setMargins(0, 0, 0, 50)
-                        Timber.d("Shreyash= FIRST")
-                        binding.fabButton.visibility = View.GONE
-                        binding.bottomBar.visibility = View.GONE
-                        binding.bottomNavView.visibility = View.GONE
                         statusBar(R.color.ui_dark2)
+                        binding.bottomNavView.visibility = View.VISIBLE
+                        binding.bottomBar.visibility = View.VISIBLE
                         binding.fabButton.visibility = View.INVISIBLE
                         binding.background.setBackgroundColor(ContextCompat.getColor(this, R.color.ui_dark2))
                     }
 
                     else -> {
-                        Timber.d("Shreyash= 4")
                         val params = CoordinatorLayout.LayoutParams(
                             CoordinatorLayout.LayoutParams.MATCH_PARENT,
                             CoordinatorLayout.LayoutParams.MATCH_PARENT
                         )
                         // todo reset on fragment back pressed
                         params.setMargins(0, 0, 0, 50)
-                        Timber.d("Shreyash= FIRST")
-                        binding.fabButton.visibility = View.GONE
-                        binding.bottomBar.visibility = View.GONE
-                        binding.bottomNavView.visibility = View.GONE
                         binding.bottomNavView.visibility = View.VISIBLE
                         binding.bottomBar.visibility = View.VISIBLE
                         binding.fabButton.visibility = View.INVISIBLE
@@ -174,7 +159,7 @@ class MainActivity : AppCompatActivity() {
                 month = timeInstance.monthValue
                 date = timeInstance.dayOfMonth
             } else {
-                var timeInstance = Date(System.currentTimeMillis())
+                val timeInstance = Date(System.currentTimeMillis())
                 month = timeInstance.month
                 date = timeInstance.date
             }
@@ -188,12 +173,10 @@ class MainActivity : AppCompatActivity() {
             if(!found){
                 insertGraphTodo(GraphTodo(System.currentTimeMillis(), 0, 0, date, month))
             }
-//            if(it.size == 31){
-//                last 20 days record!
-//                viewModel.deleteGraph(it[0])
-//            }
+            if(it.size == 31){
+                viewModel.deleteGraph(it[0])
+            }
 //            if(it.isEmpty() || it[it.size-1].date != date.date){
-//                Timber.d("VedicCricket: Date: Insertion!")
 //                viewModel.insertGraph(GraphTodo(System.currentTimeMillis(), 0, 0, date.date))
 //            }
         })

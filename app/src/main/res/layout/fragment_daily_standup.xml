@@ -4,18 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ui_light2"
+    android:background="#f1f1f1"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/bot"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:padding="65dp"
         android:src="@drawable/ic_group_6"
         app:layout_constraintBottom_toTopOf="@+id/guideline100"
         app:layout_constraintEnd_toStartOf="@+id/guideline15"
         app:layout_constraintStart_toStartOf="@+id/guideline14"
-        app:layout_constraintTop_toTopOf="@+id/guideline16" />
+        app:layout_constraintTop_toTopOf="@+id/topbar" />
 
     <TextView
         android:id="@+id/message_bot"
@@ -24,7 +25,7 @@
         android:layout_margin="5dp"
         android:fontFamily="@font/sen"
         android:text="Hey! I'm PrayatnBot. I help you getting more productive."
-        android:textColor="#272727"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/morningbutton"
         app:layout_constraintEnd_toStartOf="@+id/end"
@@ -37,6 +38,7 @@
         android:layout_height="0dp"
         android:background="@color/primary_dark"
         app:layout_constraintBottom_toTopOf="@id/topbar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
@@ -44,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="15dp"
+            android:padding="12dp"
             android:src="@drawable/ic_back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,24 +56,28 @@
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:padding="2dp"
             android:src="@drawable/ic_group_6"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/back"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:text="Prayatn-bot"
             android:textColor="@color/ui_light"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.049"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.529" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -90,7 +96,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/morningbutton"
-        app:cardBackgroundColor="@color/primary_dark"
+        app:cardBackgroundColor="@color/ui_light2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:visibility="invisible"
@@ -108,7 +114,7 @@
             android:layout_gravity="center"
             android:layout_margin="5dp"
             android:padding="4dp"
-            android:textColor="@color/ui_light2"
+            android:textColor="@color/primary_dark"
             android:fontFamily="@font/sen"
             android:text="Pick morning timing"
             android:textSize="16sp" />
@@ -302,7 +308,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.08" />
+        app:layout_constraintGuide_percent="0.06" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier2"

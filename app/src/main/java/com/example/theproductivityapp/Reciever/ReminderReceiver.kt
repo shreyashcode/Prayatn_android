@@ -25,8 +25,6 @@ class ReminderReceiver: BroadcastReceiver() {
     // TODO: do some case work here, to send the standup intent.
     override fun onReceive(context: Context, intent: Intent) {
         val type = intent.getStringExtra("TYPE")
-        Timber.d("Shreyash= Title= ${intent.getStringExtra("TITLE")}")
-        Timber.d("Shreyash= TYPE= $type")
         if(type == "STANDUP"){
             standupReminder(context, intent)
         } else {

@@ -34,7 +34,6 @@ class ReminderService(
     }
 
     fun setRepeatingAlarm(hr: Int, min: Int, category: Category){
-        Timber.d("Shreyash= alarm $hr $min")
         val calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
             set(Calendar.HOUR_OF_DAY, hr)
@@ -42,7 +41,6 @@ class ReminderService(
             set(Calendar.SECOND, 0)
         }
         val requestCode = if(category == Category.MORNING) MORNING_REQUESTCODE else EVENING_REQUESTCODE
-        Timber.d("Shreyash= REQ $requestCode")
         alarmManager?.setRepeating(
             AlarmManager.RTC_WAKEUP,
             calendar.timeInMillis,
@@ -94,10 +92,6 @@ class ReminderService(
     }
 
     fun cancelReminder(requestCodeTimeStamp: Long, timeInMillis: Long){
-        Timber.d("REMINDER__ CANCELLING $timeInMillis")
-        if(alarmManager == null){
-            Timber.d("REMINDER_ NULL")
-        }
         alarmManager!!.cancel(
             getPendingIntent(
                 getIntent(timeInMillis),

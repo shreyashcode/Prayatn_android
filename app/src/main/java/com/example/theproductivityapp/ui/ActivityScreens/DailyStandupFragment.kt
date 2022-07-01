@@ -29,7 +29,6 @@ import com.example.theproductivityapp.db.tables.Sender
 import com.example.theproductivityapp.ui.ViewModels.StandUpViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -78,9 +77,7 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
             else -> return true
         }
         val today = SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().time)
-        Timber.d("Shreyash= calendar: ${Calendar.getInstance().time}")
         val mostRecentAnsweredString = SharedPrefUtil.readSharedPrefString(requireContext(), key)
-        Timber.d("Shreyash= $today <> $mostRecentAnsweredString")
         if(mostRecentAnsweredString == "NA") return false
         return mostRecentAnsweredString == today
     }
@@ -91,10 +88,8 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
         val calendar = Calendar.getInstance();
         val currentTime = calendar.get(Calendar.HOUR_OF_DAY)*60 + calendar.get(Calendar.MINUTE)
         return if(currentTime in morningTime until eveningTime  ){
-            Timber.d("Shreyash= MORNING")
             Category.MORNING
         } else if(currentTime >= eveningTime) {
-            Timber.d("Shreyash= EVENING")
             Category.EVENING
         } else Category.NONE
     }
@@ -166,13 +161,12 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
         setUpViews()
         val questionCategory = getQuestionCategory()
         val notAnswered = !areQuestionAnswered(questionCategory)
-        Toast.makeText(requireContext(), "NONE?= ${questionCategory == Category.NONE} Answered= ${!notAnswered}", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(requireContext(), "NONE?= ${questionCategory == Category.NONE} Answered= ${!notAnswered}", Toast.LENGTH_SHORT).show()
         initiateListeners(questionCategory != Category.NONE &&  notAnswered, questionCategory)
     }
 
     private fun initiateListeners(viewQuestion: Boolean = true, questionCategory: Category){
-        Timber.d("CATEGORY: $questionCategory")
-        Snackbar.make(requireView(), "quesByCategory, ${questionCategory.toString()}", Snackbar.LENGTH_SHORT).show()
+//        Snackbar.make(requireView(), "quesByCategory, ${questionCategory.toString()}", Snackbar.LENGTH_SHORT).show()
         if(viewQuestion){
             viewModel.getQuestionsByCategory(questionCategory).observe(viewLifecycleOwner){
                 questions = it as ArrayList<Question>
@@ -181,7 +175,7 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
                 }
             }
         } else {
-            Snackbar.make(requireView(), "Already responded!", Snackbar.LENGTH_LONG).show()
+//            Snackbar.make(requireView(), "Already responded!", Snackbar.LENGTH_LONG).show()
         }
         viewModel.chatMessages.observe(viewLifecycleOwner){ it ->
             if(!areMessagesInserted){

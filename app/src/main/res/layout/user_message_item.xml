@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
     android:backgroundTint="@android:color/transparent"
+    android:layout_gravity="end"
     android:padding="4dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="3dp"
-        app:cardBackgroundColor="#86A9D7"
+        app:cardBackgroundColor="#C6D0DC"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:textColor="@color/white"
+                android:textColor="#201F1F"
                 android:textSize="16sp"
                 tool:text=";lskdfjas;lflsakdfj;alkfjl;ksdjf;adsklfjds;" />
 
@@ -40,8 +42,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:padding="4dp"
+                android:fontFamily="sans-serif-thin"
+                android:textSize="12sp"
                 android:text="DD/MM/YYYY"
-                android:textColor="#2F2F2F" />
+                android:textColor="#FFF6F6" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.cardview.widget.CardView>

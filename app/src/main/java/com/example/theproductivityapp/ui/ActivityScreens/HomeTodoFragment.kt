@@ -69,7 +69,6 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
         itemClickListener = this
         setUpTagRecyclerView()
         if(requireActivity().intent.getStringExtra("TYPE") != null && !requireActivity().intent.getBooleanExtra("NavigateStatus", true)){
-            Timber.d("Shreyash= TYPE")
             val source = requireActivity().intent.getStringExtra("TYPE")
             if(source == "Standup"){
                 requireActivity().intent.putExtra("NavigateStatus", true)
@@ -118,7 +117,6 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
             }
             val listToTag_ = mutableListOf<Todo>()
             val set = mutableSetOf<String>()
-//            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
             for(i in it){
                 if(set.contains(i.tag) == false){
                     listToTag_.add(i)
@@ -131,9 +129,6 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
             Common.todos_size = order+1
             tagAdapter.submitList(listToTag)
             todoAdapter.submitList(it)
-
-//            tagAdapter.notifyDataSetChanged()
-
             if(binding.progress.visibility == View.VISIBLE){
                 binding.progress.visibility = View.GONE
             }
@@ -150,8 +145,8 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
             target: RecyclerView.ViewHolder
         ): Boolean {
 
-            var start = viewHolder.adapterPosition
-            var end = target.adapterPosition
+            val start = viewHolder.adapterPosition
+            val end = target.adapterPosition
             if(start < end){
                 for(i in start until end){
                     val order1 = list[i].displayOrder
@@ -307,7 +302,7 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
     }
 
     private fun changeLayoutManager(){
-        if(readSharedPref() == false){
+        if(!readSharedPref()){
             // sta -> linear
             binding.rView.layoutManager = LinearLayoutManager(requireContext())
             writeSharedPref(true)
@@ -318,14 +313,8 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
     }
 
     private fun writeSharedPref(isLinear: Boolean){
-        var val_ = ""
         val sharedPref: SharedPreferences = requireContext().getSharedPreferences(Utils.recyclerViewStatus, Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
-        if(isLinear == true){
-            val_ = "PRESENT LINEAR"
-        } else {
-            val_ = "PRESENT STA"
-        }
         editor.putBoolean(Utils.recyclerViewStatus, isLinear)
         editor.apply()
     }
@@ -345,7 +334,6 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
         val tag = list[int].tag
         if(sender == Utils.TAG){
             Common.tag = listToTag[int].tag
-            Timber.d("GSOC: $tag")
             findNavController().navigate(R.id.action_homeTodo_to_tagFilterFragment)
         } else {
             Common.reqId = list[int].id!!
