@@ -81,15 +81,15 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
             }
         }
         reminderService = ReminderService(requireContext())
-        viewModel.reminders.observe(viewLifecycleOwner, {
-            for(i in it){
-                if(i.remindTimeInMillis < System.currentTimeMillis()){
+        viewModel.reminders.observe(viewLifecycleOwner) {it->
+            for (i in it) {
+                if (i.remindTimeInMillis < System.currentTimeMillis()) {
                     reminderService.cancelReminder(i.timeStampOfTodo, i.remindTimeInMillis)
                     viewModel.deleteReminder(i)
                 }
             }
-        })
-        viewModel.graphTodos.observe(viewLifecycleOwner, {
+        }
+        viewModel.graphTodos.observe(viewLifecycleOwner, {it->
             var month: Int = 0
             var date: Int = 0
             if(Build.VERSION.SDK_INT >= 26){

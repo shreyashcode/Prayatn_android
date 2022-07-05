@@ -41,9 +41,9 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline3"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tetv_editTextBottomLineColor="@android:color/transparent"
-                app:tetv_editTextViewColor="@color/white"
+                app:tetv_editTextViewColor="#040404"
                 app:tetv_editing="false"
-                app:tetv_textViewColor="@color/white" />
+                app:tetv_textViewColor="#040404" />
 
         </soup.neumorphism.NeumorphCardView>
 
@@ -82,7 +82,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:tetv_editTextBottomLineColor="#050505"
                     app:tetv_editing="false"
-                    app:tetv_textViewColor="#040404" />
+                    />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/linearLayoutCompat3"

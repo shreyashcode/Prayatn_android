@@ -40,7 +40,6 @@ class TagFilterFragment : Fragment(R.layout.fragment_tag_filter), ItemClickListe
         })
 
         binding.remove.setOnClickListener {
-//            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
             findNavController().popBackStack()
         }
     }

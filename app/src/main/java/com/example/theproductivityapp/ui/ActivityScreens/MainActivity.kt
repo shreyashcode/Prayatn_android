@@ -73,7 +73,6 @@ class MainActivity : AppCompatActivity() {
                             CoordinatorLayout.LayoutParams.MATCH_PARENT,
                             CoordinatorLayout.LayoutParams.MATCH_PARENT
                         )
-                        // todo reset on fragment back pressed
                         params.setMargins(0, 0, 0, 0)
                         binding.framelayout.layoutParams = params
                         binding.fabButton.visibility = View.GONE
@@ -85,7 +84,6 @@ class MainActivity : AppCompatActivity() {
                             CoordinatorLayout.LayoutParams.MATCH_PARENT,
                             CoordinatorLayout.LayoutParams.MATCH_PARENT
                         )
-                        // todo reset on fragment back pressed
                         params.setMargins(0, 0, 0, 50)
                         binding.fabButton.visibility = View.GONE
                         binding.bottomBar.visibility = View.GONE
@@ -97,7 +95,6 @@ class MainActivity : AppCompatActivity() {
                             CoordinatorLayout.LayoutParams.MATCH_PARENT,
                             CoordinatorLayout.LayoutParams.MATCH_PARENT
                         )
-                        // todo reset on fragment back pressed
                         params.setMargins(0, 0, 0, 50)
                         binding.fabButton.visibility = View.VISIBLE
                         binding.bottomNavView.visibility = View.VISIBLE
@@ -109,7 +106,6 @@ class MainActivity : AppCompatActivity() {
                             CoordinatorLayout.LayoutParams.MATCH_PARENT,
                             CoordinatorLayout.LayoutParams.MATCH_PARENT
                         )
-                        // todo reset on fragment back pressed
                         params.setMargins(0, 0, 0, 50)
                         statusBar(R.color.ui_dark2)
                         binding.bottomNavView.visibility = View.VISIBLE
@@ -123,7 +119,6 @@ class MainActivity : AppCompatActivity() {
                             CoordinatorLayout.LayoutParams.MATCH_PARENT,
                             CoordinatorLayout.LayoutParams.MATCH_PARENT
                         )
-                        // todo reset on fragment back pressed
                         params.setMargins(0, 0, 0, 50)
                         binding.bottomNavView.visibility = View.VISIBLE
                         binding.bottomBar.visibility = View.VISIBLE
@@ -133,7 +128,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         binding.fabButton.setOnClickListener {
-            val action = HomeTodoFragmentDirections.actionHomeTodoToAddTodoFragment()
+            HomeTodoFragmentDirections.actionHomeTodoToAddTodoFragment()
             navController.navigate(R.id.action_homeTodo_to_addTodoFragment)
             Common.reqTimeStamp = 0L
             Common.reqId = -1

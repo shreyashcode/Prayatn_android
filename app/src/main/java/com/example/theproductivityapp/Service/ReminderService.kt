@@ -66,7 +66,6 @@ class ReminderService(
         )
     }
 
-    // todo same
     private fun getPendingIntent(intent: Intent, requestCodeTimeStamp: Long): PendingIntent{
         return PendingIntent.getBroadcast(
             BaseApplication.applicationContext(),

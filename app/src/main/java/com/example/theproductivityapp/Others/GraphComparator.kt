@@ -7,11 +7,10 @@ class GraphComparator : Comparator<GraphTodo>{
         if(o1 == null || o2 == null){
             return 0
         }
-        if(o1.month == o2.month){
-            return o1.date-o2.date
+        return if(o1.month == o2.month){
+            o1.date-o2.date
         } else {
-            return o1.month-o2.month
+            o1.month-o2.month
         }
     }
-
 }

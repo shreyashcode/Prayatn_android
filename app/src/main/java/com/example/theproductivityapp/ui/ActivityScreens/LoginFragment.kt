@@ -59,40 +59,26 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
 
 
-//        viewModel.graphTodos.observe(viewLifecycleOwner, {
-//            var month: Int = 0
-//            var date: Int = 0
-//            if (Build.VERSION.SDK_INT >= 26) {
-//                var timeInstance: LocalDateTime? = null
-//                timeInstance = LocalDateTime.now(ZoneId.of("Asia/Kolkata"))
-//                month = timeInstance.monthValue
-//                date = timeInstance.dayOfMonth
-//            } else {
-//                var timeInstance = Date(System.currentTimeMillis())
-//                month = timeInstance.month
-//                date = timeInstance.date
-//            }
-//
-//            if(it.isNotEmpty()){
-//                Timber.d("Login__ $date | ${it.size} | ${it[it.size-1].month} | $month")
-//            } else {
-//                Timber.d("Login__ $date | ${it.size} | $month")
-//            }
-//            if(date == 1 && (it.isNotEmpty() && it[it.size-1].month != month)){
-//                viewModel.deleteAllGraphEntries()
-//            }
-//            var found = false
-//            for (graphTodo in it) {
-//                Timber.d("ComputerScience: $graphTodo")
-//                if (graphTodo.month == month && graphTodo.date == date) {
-//                    found = true
-//                    break
-//                }
-//            }
-//            if (found == false) {
-//                viewModel.insertGraph(GraphTodo(System.currentTimeMillis(), 0, 0, date, month))
-//            }
-//        })
+        viewModel.graphTodos.observe(viewLifecycleOwner) {
+            var month: Int = 0
+            var date: Int = 0
+            val calendar = Calendar.getInstance();
+            month = calendar.get(Calendar.MONTH)
+            date = calendar.get(Calendar.DAY_OF_MONTH)
+            if (date == 1 && (it.isNotEmpty() && it[it.size - 1].month != month)) {
+                viewModel.deleteAllGraphEntries()
+            }
+            var found = false
+            for (graphTodo in it) {
+                if (graphTodo.month == month && graphTodo.date == date) {
+                    found = true
+                    break
+                }
+            }
+            if (!found) {
+                viewModel.insertGraph(GraphTodo(System.currentTimeMillis(), 0, 0, date, month+1))
+            }
+        }
     }
 
     private fun writeSharedPref(date: Int, month: Int){

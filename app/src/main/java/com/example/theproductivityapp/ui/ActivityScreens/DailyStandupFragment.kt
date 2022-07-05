@@ -100,6 +100,8 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
         val isRegisteredUser = SharedPrefUtil.readSharedPrefBoolean(requireContext(), USER_KEY)
         if(!isRegisteredUser){
             binding.messageEt.visibility = View.INVISIBLE
+            binding.messageEt1.visibility = View.INVISIBLE
+            binding.constraint.visibility = View.INVISIBLE
             binding.send.visibility = View.INVISIBLE
             binding.chatRView.visibility = View.INVISIBLE
             binding.submit.visibility = View.INVISIBLE
@@ -159,16 +161,16 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
 
         binding.send.visibility = View.VISIBLE
         binding.messageEt.visibility = View.VISIBLE
+        binding.messageEt1.visibility = View.VISIBLE
         binding.chatRView.visibility = View.VISIBLE
+        binding.constraint.visibility = View.VISIBLE
         setUpViews()
         val questionCategory = getQuestionCategory()
         val notAnswered = !areQuestionAnswered(questionCategory)
-//        Toast.makeText(requireContext(), "NONE?= ${questionCategory == Category.NONE} Answered= ${!notAnswered}", Toast.LENGTH_SHORT).show()
         initiateListeners(questionCategory != Category.NONE &&  notAnswered, questionCategory)
     }
 
     private fun initiateListeners(viewQuestion: Boolean = true, questionCategory: Category){
-//        Snackbar.make(requireView(), "quesByCategory, ${questionCategory.toString()}", Snackbar.LENGTH_SHORT).show()
         if(viewQuestion){
             viewModel.getQuestionsByCategory(questionCategory).observe(viewLifecycleOwner){
                 questions = it as ArrayList<Question>
@@ -176,8 +178,6 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
                     initiateBot(questions!!, chatMessages!!, questionCategory)
                 }
             }
-        } else {
-//            Snackbar.make(requireView(), "Already responded!", Snackbar.LENGTH_LONG).show()
         }
         viewModel.chatMessages.observe(viewLifecycleOwner){ it ->
             if(!areMessagesInserted){
@@ -192,9 +192,6 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
         }
     }
 
-    private fun activateNotificationAlarm(timeInMillis: Long){
-
-    }
 
     private fun putTimeDetails(category: Category){
         val mTimePicker: TimePickerDialog
@@ -215,7 +212,6 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
                 now.set(Calendar.HOUR_OF_DAY, hr)
                 now.set(Calendar.MINUTE, min)
                 val timeInMilli = now.timeInMillis
-                activateNotificationAlarm(timeInMilli)
                 if(category == Category.MORNING) morningTime = timeInMilli
                 else eveningTime = timeInMilli
                 SharedPrefUtil.writeSharedPrefInt(requireContext(), key= if(category == Category.MORNING) USER_MORNING_TIME else USER_EVENING_TIME, hr*60+min)
@@ -249,7 +245,6 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
             CoordinatorLayout.LayoutParams.MATCH_PARENT,
             CoordinatorLayout.LayoutParams.MATCH_PARENT
         )
-        // todo reset on fragment back pressed
         params.setMargins(0, 0, 0, 48)
         (requireActivity() as MainActivity).binding.framelayout.layoutParams = params
         findNavController().popBackStack()
@@ -258,6 +253,8 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
     private fun initiateBot(questions: MutableList<Question>, chatMessages: ArrayList<ChatMessage>, questionCategory: Category){
         binding.send.visibility = View.VISIBLE
         binding.messageEt.visibility = View.VISIBLE
+        binding.messageEt1.visibility = View.VISIBLE
+        binding.constraint.visibility = View.VISIBLE
         (activity as MainActivity).binding.bottomBar.visibility = View.GONE
         chatAdapter.items = chatMessages
         chatAdapter.notifyDataSetChanged()
@@ -297,6 +294,8 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
                 binding.messageEt1.editText!!.inputType = InputType.TYPE_NULL
                 binding.send.visibility = View.GONE
                 binding.messageEt.visibility = View.GONE
+                binding.messageEt1.visibility = View.GONE
+                binding.constraint.visibility = View.GONE
                 (requireActivity() as MainActivity).binding.apply {
                     bottomBar.visibility = View.VISIBLE
                     bottomNavView.visibility = View.VISIBLE

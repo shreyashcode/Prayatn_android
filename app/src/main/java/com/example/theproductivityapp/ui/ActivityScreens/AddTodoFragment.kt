@@ -150,7 +150,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
                     binding.showAlarm.text = convertDate(it)
                 }
             } else {
-                binding.showAlarm.text = "Reminder?"
+                binding.showAlarm.text = "Reminder"
             }
         }
     }
@@ -181,7 +181,6 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
                             this.set(Calendar.MINUTE, minute)
                             timeInMillis = this.timeInMillis
                             callback(this.timeInMillis)
-//                            binding.showAlarm.text = convertDate(timeInMillis)
                         },
                         this.get(Calendar.HOUR_OF_DAY),
                         this.get(Calendar.MINUTE),
@@ -193,7 +192,6 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
                 this.get(Calendar.DAY_OF_MONTH)
             ).show()
         }
-        Toast.makeText(requireContext(), "CLOCK: ${convertDate(timeInMillis)}", Toast.LENGTH_SHORT).show()
         return timeInMillis
     }
 
@@ -204,7 +202,6 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
                 val it = list_[0]
                 gTodo = it
                 binding.emoji.textView.text = it.emoji
-                // Check?
                 binding.emoji.editText.setText(it.emoji)
                 binding.description.textView.text = it.description
                 binding.description.editText.setText(it.description)
@@ -223,7 +220,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
     private fun validate(view: View): Boolean{
         val title = binding.title.editText.text
         return if(title.isEmpty()){
-            Snackbar.make(view, "Enter valid title!", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(view, "Enter valid title.", Snackbar.LENGTH_SHORT).show()
             false
         } else {
             true
@@ -237,7 +234,6 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
             todo.isReminderSet = true
         }
         todo.emoji = binding.emoji.editText.text.toString()
-        Toast.makeText(requireContext(), "$ ${convertDate(globalTimeInMillis)}", Toast.LENGTH_SHORT).show()
         todo.displayOrder = Common.todos_size
         Common.todos_size++
         writeSharedPref(todo.priority, todo.importance)
@@ -248,7 +244,6 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
 
     private fun setReminder(remindTime: Long, todo_timestamp: Long, title: String){
         viewModel.insertReminder(Reminder(remindTime, title, todo_timestamp))
-        Toast.makeText(requireContext(), "You would be reminded at ${convertDate(remindTime)}!", Toast.LENGTH_SHORT).show()
         val reminderService = ReminderService(requireContext(), todo_timestamp, title)
         reminderService.setExactAlarm(remindTime)
     }
@@ -266,7 +261,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
 
     private fun updateTodo(remindTime: Long){
         val todo = buildTodo()
-        if(addReminder == true){
+        if(addReminder){
             setReminder(remindTime, todo.timestamp, todo.title)
             todo.isReminderSet = true
         }
@@ -295,7 +290,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo) {
     }
 
     private fun writeSharedPref(priority: String, imp: String){
-        var key: String = imp+priority;
+        val key: String = imp+priority;
         val sharedPref: SharedPreferences = requireContext().getSharedPreferences(Utils.QuadrantSharedPrefs, Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
         val getValue: Float = readSharedPref(key)

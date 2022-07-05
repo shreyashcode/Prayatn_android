@@ -45,23 +45,13 @@ class TodoAdapter(val itemClickListener: ItemClickListener,
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         var todo = differ.currentList[position]
 
-        if(todo.priority == ""){
-//            holder.binding.ncard.setShadowColorLight(ContextCompat.getColor(context, R.color.ui_light2))
-//            holder.binding.ncard.setShadowColorDark(ContextCompat.getColor(context, R.color.ui_light2))
-//            holder.binding.itemTitle.text = "Extra_added"
-//            holder.binding.ncard
-        } else {
             val todoObject = differ.currentList[position]
             if(todoObject.emoji.isNotEmpty()){
                 holder.binding.itemTitle.text = " ${todoObject.emoji}   ${differ.currentList[position].title}"
              } else {
                 holder.binding.itemTitle.text = "✅   ".plus(todoObject.title)
             }
-//            holder.binding.ncard.setShadowColorLight(Color.parseColor("#fdfefe"))
-//            holder.binding.ncard.setShadowColorDark(Color.parseColor("#ADBACB"))
         }
-    }
 
     override fun getItemCount() = differ.currentList.size
-
 }

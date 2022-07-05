@@ -17,6 +17,7 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import java.util.*
 
 @AndroidEntryPoint
@@ -41,10 +42,15 @@ class GraphFragment : Fragment(R.layout.fragment_graph) {
     }
 
     private fun setUpData(){
-        viewModel.graphTodos.observe(viewLifecycleOwner, {
+        viewModel.graphTodos.observe(viewLifecycleOwner) {
             it?.let {
                 Collections.sort(it, GraphComparator())
-                val data = it.indices.map {i -> BarEntry(it[i].date.toFloat(), it[i].done_count.toFloat())}
+                val data = it.indices.map { i ->
+                    BarEntry(
+                        it[i].date.toFloat(),
+                        it[i].done_count.toFloat()
+                    )
+                }
                 val dataSet = BarDataSet(data, "Task completed Vs Date").apply {
                     valueTextColor = Color.WHITE
                     color = ContextCompat.getColor(requireContext(), R.color.ui_light2)
@@ -56,10 +62,16 @@ class GraphFragment : Fragment(R.layout.fragment_graph) {
                 binding.graph.data.setValueTextSize(10f)
                 binding.graph.description.isEnabled = false
                 binding.graph.isDoubleTapToZoomEnabled = false
-                binding.graph.marker = GraphMarkerView(it, requireContext(), R.layout.graph_marker, binding.stats, binding.date)
+                binding.graph.marker = GraphMarkerView(
+                    it,
+                    requireContext(),
+                    R.layout.graph_marker,
+                    binding.stats,
+                    binding.date
+                )
                 binding.graph.invalidate()
             }
-        })
+        }
     }
 
 

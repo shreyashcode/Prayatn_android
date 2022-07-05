@@ -22,7 +22,6 @@ class ReminderReceiver: BroadcastReceiver() {
     private lateinit var pendingIntent: PendingIntent
     private lateinit var returnIntent: Intent
 
-    // TODO: do some case work here, to send the standup intent.
     override fun onReceive(context: Context, intent: Intent) {
         val type = intent.getStringExtra("TYPE")
         if(type == "STANDUP"){

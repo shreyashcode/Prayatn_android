@@ -25,7 +25,9 @@ object AppModule {
         RunningDB::class.java,
         Utils.DB_TODO
     ).build()
-//    ).fallbackToDestructiveMigration().build()
+//    ).fallbackToDestructiveMigration().build()\
+
+    // #Checkpoint
 
     @Singleton
     @Provides

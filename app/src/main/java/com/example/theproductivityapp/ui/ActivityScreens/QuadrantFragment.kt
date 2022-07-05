@@ -32,30 +32,9 @@ class QuadrantFragment : Fragment(R.layout.fragment_quadrant) {
         pieEntries = ArrayList<PieEntry>()
 
         setUpPieEntries()
-//        setUpPie()
     }
 
     private fun setUpPieEntries() {
-//        var map: MutableMap<String, Float> = HashMap<String, Float>()
-//        map[IMP_UR] = 0f
-//        map[IMP_NUR] = 0f
-//        map[NIMP_UR] = 0f
-//        map[NIMP_NUR] = 0f
-//        for (todo in it) {
-//            if (todo.importance == Common.imp) {
-//                if (todo.priority == Common.urgent) {
-//                    map[IMP_UR] = map[IMP_UR]!!.plus(1f)
-//                } else {
-//                    map[IMP_NUR] = map[IMP_NUR]!!.plus(1f)
-//                }
-//            } else {
-//                if (todo.priority == Common.urgent) {
-//                    map[NIMP_UR] = map[NIMP_UR]!!.plus(1f)
-//                } else {
-//                    map[NIMP_NUR] = map[NIMP_NUR]!!.plus(1f)
-//                }
-//            }
-//        }
         pieEntries.add(PieEntry(readSharedPref(Utils.IMP_UR), "IMP URGENT"))
         pieEntries.add(PieEntry(readSharedPref(Utils.IMP_NUR), "IMP NON-URGENT"))
         pieEntries.add(PieEntry(readSharedPref(Utils.NIMP_UR), "NON-IMP URGENT"))
@@ -85,7 +64,6 @@ class QuadrantFragment : Fragment(R.layout.fragment_quadrant) {
         binding.piechart.apply {
             holeRadius = 30f
             legend.isEnabled = false
-//            isDrawEntryLabelsEnabled = false
             transparentCircleRadius = 33f
             isDrawHoleEnabled = true
             setHoleColor(Color.TRANSPARENT)
