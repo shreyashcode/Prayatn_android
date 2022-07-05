@@ -24,7 +24,8 @@ object AppModule {
         context,
         RunningDB::class.java,
         Utils.DB_TODO
-    ).fallbackToDestructiveMigration().build()
+    ).build()
+//    ).fallbackToDestructiveMigration().build()
 
     @Singleton
     @Provides

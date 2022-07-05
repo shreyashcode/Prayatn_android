@@ -10,10 +10,12 @@
         android:id="@+id/ncard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
         app:neumorph_backgroundColor="@color/ui_light2"
         app:neumorph_shadowColorLight="@color/shadow_light2"
         app:neumorph_shadowColorDark="@color/shadow_dark2"
+
         android:layout_marginTop="-10dp"
         android:layout_marginBottom="-10dp"
         app:neumorph_lightSource="leftTop"

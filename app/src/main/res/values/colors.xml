@@ -41,4 +41,11 @@
     <color name="black_start">#000000</color>
     <color name="black_end">#434343</color>
 
+<!--    Colors for new UI -->
+    <color name="primary_dark_v1">#2E3B49</color>
+    <color name="primary_light_v1">#FCFCFC</color>
+    <color name="light_shadow_v1">#DFE3E7</color>
+    <color name="blue_accent">#0077FF</color>
+
+
 </resources>

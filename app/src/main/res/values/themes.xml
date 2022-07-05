@@ -3,7 +3,7 @@
     <style name="Theme.TheProductivityApp" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#B9C0CC</item>
-        <item name="fontFamily">@font/sen</item>
+        <item name="fontFamily">@font/inter</item>
         <item name="colorPrimaryVariant">@color/ui_light2</item>
         <item name="colorOnPrimary">#8C8888</item>
         <item name="android:navigationBarColor">@color/primary_dark</item>
