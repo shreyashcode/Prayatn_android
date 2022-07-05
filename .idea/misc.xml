@@ -3,21 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/bottom_navigation_color_selector.xml" value="0.294" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/card_back_marker.xml" value="0.152" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/gradient_v2.xml" value="0.239" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_chatbot.xml" value="0.264" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_group_6.xml" value="0.2555" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/message_item.xml" value="0.239" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/states.xml" value="0.2555" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/bot_message_item.xml" value="0.25" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/custom_spinner.xml" value="0.2558876811594203" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/fragment_add_todo.xml" value="0.264" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/fragment_count.xml" value="0.29010416666666666" />
-        <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/fragment_daily_standup.xml" value="0.264" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/fragment_daily_standup.xml" value="0.36422613531047265" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/fragment_graph.xml" value="0.29010416666666666" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/fragment_home_todo.xml" value="0.30105263157894735" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/fragment_login.xml" value="0.25" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/fragment_quadrant.xml" value="0.264" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/fragment_tag_filter.xml" value="0.2554347826086957" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/graph_marker.xml" value="0.25" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/message.xml" value="0.2554347826086957" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/message_item.xml" value="0.24895833333333334" />
-        <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/todo_item.xml" value="0.25" />
-        <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/user_message_item.xml" value="0.264" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/tag_item.xml" value="0.72" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/todo_item.xml" value="0.6" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/user_message_item.xml" value="0.4" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/menu/bottom_app_menu.xml" value="0.25" />
         <entry key="..\:/TheProductivityApp/app/src/main/res/layout/fragment_add_todo.xml" value="0.18" />
         <entry key="..\:/TheProductivityApp/app/src/main/res/layout/fragment_graph.xml" value="0.12681159420289856" />

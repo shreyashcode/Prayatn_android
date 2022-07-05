@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/ui_light2">
+    android:background="@color/primary_light_v1">
 
     <soup.neumorphism.NeumorphCardView
         android:id="@+id/tagCard"
@@ -14,9 +14,9 @@
         app:neumorph_shapeType="flat"
         app:neumorph_lightSource="rightTop"
         app:neumorph_shapeAppearance="@style/tagStyle"
-        app:neumorph_backgroundColor="#8D8F93"
-        app:neumorph_shadowColorLight="@color/shadow_light2"
-        app:neumorph_shadowColorDark="@color/shadow_dark2"
+        app:neumorph_backgroundColor="@color/bottomNavBar"
+        app:neumorph_shadowColorLight="@color/shadowColorLight"
+        app:neumorph_shadowColorDark="#D3D2EC"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
                 android:fontFamily="@font/open_sans"
                 android:padding="7dp"
                 android:text="Tag Appears Here"
-                android:textColor="@color/white"
+                android:textColor="#FFFFFF"
                 android:textStyle="bold"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"

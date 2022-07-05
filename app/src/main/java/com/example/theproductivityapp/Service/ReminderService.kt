@@ -52,6 +52,20 @@ class ReminderService(
         )
     }
 
+    fun cancelRepeatingAlarm(){
+        alarmManager!!.cancel(getPendingIntent(
+                getIntent(Category.MORNING.toString()),
+                MORNING_REQUESTCODE
+            )
+        )
+        alarmManager.cancel(
+            getPendingIntent(
+                getIntent(Category.EVENING.toString()),
+                EVENING_REQUESTCODE
+            )
+        )
+    }
+
     // todo same
     private fun getPendingIntent(intent: Intent, requestCodeTimeStamp: Long): PendingIntent{
         return PendingIntent.getBroadcast(
@@ -87,8 +101,6 @@ class ReminderService(
                 )
             }
         }
-//        Timber.d("REMINDER__: Alarm canceled")
-//        cancelReminder(TodoTimeStamp, timeInMillis)
     }
 
     fun cancelReminder(requestCodeTimeStamp: Long, timeInMillis: Long){

@@ -63,7 +63,9 @@ class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {
         binding.back.setOnClickListener {
             onBackPressed()
         }
-        // todo: check time and call for question accordingly, here it is ensured that user is onboarded.
+        binding.remove.setOnClickListener{
+            ReminderService(requireContext()).cancelRepeatingAlarm()
+        }
     }
 
     private fun areQuestionAnswered(questionCategory: Category): Boolean{

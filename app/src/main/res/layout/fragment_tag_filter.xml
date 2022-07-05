@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ui_light2"
+    android:background="@color/primary_light_v1"
     tools:context=".ui.ActivityScreens.TagFilterFragment">
 
     <Button

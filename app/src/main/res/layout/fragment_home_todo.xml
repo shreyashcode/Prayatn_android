@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ui_light2"
+    android:background="@color/primary_light_v1"
     tools:context=".ui.ActivityScreens.HomeTodoFragment">
 
     <ProgressBar
@@ -33,11 +33,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:fontFamily="@font/open_sans"
+            android:fontFamily="@font/inter"
             android:padding="3dp"
-            android:text="Filter:"
+            android:text="Filters "
             android:textColor="#000000"
             android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

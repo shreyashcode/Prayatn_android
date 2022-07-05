@@ -53,7 +53,7 @@ class ReminderReceiver: BroadcastReceiver() {
 
     private fun standupReminder(context: Context, intent: Intent){
         title = "SELF-STANDUP time, ready? \uD83D\uDD0D"
-        description = "This is description..."
+        description = "A half truth is a whole lie. Be true to yourself!"
         returnIntent = Intent(context, MainActivity::class.java).apply {
             putExtra("TYPE", "Standup")
         }

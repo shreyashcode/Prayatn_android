@@ -46,10 +46,10 @@ class TodoAdapter(val itemClickListener: ItemClickListener,
         var todo = differ.currentList[position]
 
         if(todo.priority == ""){
-            holder.binding.ncard.setShadowColorLight(ContextCompat.getColor(context, R.color.ui_light2))
-            holder.binding.ncard.setShadowColorDark(ContextCompat.getColor(context, R.color.ui_light2))
-            holder.binding.itemTitle.text = "Extra_added"
-            holder.binding.ncard
+//            holder.binding.ncard.setShadowColorLight(ContextCompat.getColor(context, R.color.ui_light2))
+//            holder.binding.ncard.setShadowColorDark(ContextCompat.getColor(context, R.color.ui_light2))
+//            holder.binding.itemTitle.text = "Extra_added"
+//            holder.binding.ncard
         } else {
             val todoObject = differ.currentList[position]
             if(todoObject.emoji.isNotEmpty()){
@@ -57,8 +57,8 @@ class TodoAdapter(val itemClickListener: ItemClickListener,
              } else {
                 holder.binding.itemTitle.text = "✅   ".plus(todoObject.title)
             }
-            holder.binding.ncard.setShadowColorLight(Color.parseColor("#fdfefe"))
-            holder.binding.ncard.setShadowColorDark(Color.parseColor("#ADBACB"))
+//            holder.binding.ncard.setShadowColorLight(Color.parseColor("#fdfefe"))
+//            holder.binding.ncard.setShadowColorDark(Color.parseColor("#ADBACB"))
         }
     }
 

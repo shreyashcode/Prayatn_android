@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -165,8 +166,8 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
                 }
             }
 
-            todoAdapter.submitList(list)
             binding.rView.adapter?.notifyItemMoved(viewHolder.adapterPosition, target.adapterPosition)
+            todoAdapter.submitList(list)
             return true
         }
 
@@ -263,7 +264,11 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
 
         override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
             super.clearView(recyclerView, viewHolder)
-            viewHolder.itemView.setBackgroundColor(Color.parseColor("#D5DCE5"))
+            val color = ContextCompat.getColor(
+                requireContext(),
+                R.color.primary_light_v1
+            )
+            viewHolder.itemView.setBackgroundColor(color)
             for(i in list){
                 viewModel.update(i)
             }
@@ -272,7 +277,7 @@ class HomeTodoFragment : Fragment(R.layout.fragment_home_todo), ItemClickListene
         override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
             super.onSelectedChanged(viewHolder, actionState)
             if (viewHolder != null) {
-                viewHolder.itemView.setBackgroundColor(Color.WHITE)
+                viewHolder.itemView.setBackgroundColor(Color.TRANSPARENT)
             }
         }
     }

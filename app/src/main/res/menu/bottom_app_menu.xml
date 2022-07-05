@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_home_todo"/>
 
     <item  android:id="@+id/graphFragment"
-        android:title="Graph"
+        android:title="Stats"
         android:icon="@drawable/ic_graph_" />
 
     <item android:id="@+id/dailyStandupFragment"
@@ -18,7 +18,7 @@
         android:icon="@drawable/ic_count_timer"/>
 
     <item android:id="@+id/quadrantFragment"
-        android:title="Quadrant"
+        android:title="Time management"
         android:icon="@drawable/ic_pie" />
 
 </menu>

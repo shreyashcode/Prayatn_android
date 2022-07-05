@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:id="@+id/background"
     tools:context=".ui.ActivityScreens.MainActivity"
-    android:background="@color/ui_light2">
+    android:background="@color/primary_light_v1">
 
     <FrameLayout
         android:id="@+id/framelayout"

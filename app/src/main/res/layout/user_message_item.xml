@@ -14,12 +14,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="3dp"
-        app:cardBackgroundColor="#E4FFD6"
+        app:cardBackgroundColor="#EFFEDD"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintStart_toStartOf="@id/guideline12"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -32,9 +31,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
+                android:maxWidth="300dp"
                 android:textColor="#201F1F"
                 android:textSize="16sp"
-                tool:text=";lskdfjas;lflsakdfj;alkfjl;ksdjf;adsklfjds;" />
+                tool:text=";lskdfjas;lflsakdfj;alk dfsd f sdffjl;ksdjf;adsklfjds;" />
 
             <TextView
                 android:id="@+id/date"
@@ -49,12 +49,5 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.cardview.widget.CardView>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.15"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

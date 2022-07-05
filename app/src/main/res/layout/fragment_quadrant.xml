@@ -5,26 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ui_dark2"
+    android:background="@color/backgroundDark"
     tools:context=".ui.ActivityScreens.QuadrantFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:padding="6dp"
-            android:text="Time Tracking"
-            android:fontFamily="@font/passion_one_bold"
-            android:textColor="@color/ui_light2"
-            android:textSize="60sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/vertical"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -37,7 +23,7 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline9"
             app:layout_constraintEnd_toStartOf="@+id/v_end"
             app:layout_constraintStart_toStartOf="@+id/vertical"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+            app:layout_constraintTop_toTopOf="@+id/horizontal" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
@@ -101,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.1"/>
+            app:layout_constraintGuide_percent="0.02"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

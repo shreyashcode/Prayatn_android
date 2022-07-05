@@ -140,7 +140,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun statusBar(color_id: Int){
+    private fun statusBar(color_id: Int = ContextCompat.getColor(
+        this,
+        R.color.bottomNavBar
+    )){
         if (Build.VERSION.SDK_INT >= 21) {
             val window = this.window
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)

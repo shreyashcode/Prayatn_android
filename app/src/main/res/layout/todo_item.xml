@@ -4,18 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/ui_light2">
+    android:background="@color/primary_light_v1">
 
     <soup.neumorphism.NeumorphCardView
         android:id="@+id/ncard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
-        app:neumorph_backgroundColor="@color/ui_light2"
-        app:neumorph_shadowColorLight="@color/shadow_light2"
-        app:neumorph_shadowColorDark="@color/shadow_dark2"
-
+        app:neumorph_backgroundColor="@color/primary_card_background_light"
+        app:neumorph_shadowColorLight="@color/shadowColorLight"
+        app:neumorph_shadowColorDark="@color/shadowColorDark"
         android:layout_marginTop="-10dp"
         android:layout_marginBottom="-10dp"
         app:neumorph_lightSource="leftTop"

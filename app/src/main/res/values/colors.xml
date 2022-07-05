@@ -14,7 +14,7 @@
     <color name="shadow_ui_light">#242426</color>
     <color name="shadow_ui_dark">#15151a</color>
 <!--    Dark 2-->
-    <color name="ui_dark2">#2C2C2C</color>
+    <color name="ui_dark2">@color/backgroundDark</color>
     <color name="shadow_ui_light2">#636365</color>
     <color name="shadow_ui_dark2">#1E1E23</color>
 
@@ -23,8 +23,12 @@
     <color name="shadow_light">#fdfefe</color>
     <color name="shadow_dark">#d1d9e6</color>
 
+    <color name="ui_light1">#EAEEF3</color>
+    <color name="shadow_light1">#F5FBFB</color>
+    <color name="shadow_dark1">#EFF6FF</color>
+
 <!--    Light 2-->
-    <color name="ui_light2">#D5DCE5</color>
+    <color name="ui_light2">#EFEFFA</color>
     <color name="shadow_light2">#fdfefe</color>
     <color name="shadow_dark2">#ADBACB</color>
 
@@ -34,7 +38,7 @@
     <color name="shadow_dark3">#4E5256</color>
 
 <!--    Final Primary_dark-->
-    <color name="primary_dark">#373B40</color>
+    <color name="primary_dark">#292C30</color>
     <color name="primary_light">@color/ui_light2</color>
 
 <!--    Color for gradient-->
@@ -43,9 +47,14 @@
 
 <!--    Colors for new UI -->
     <color name="primary_dark_v1">#2E3B49</color>
-    <color name="primary_light_v1">#FCFCFC</color>
-    <color name="light_shadow_v1">#DFE3E7</color>
-    <color name="blue_accent">#0077FF</color>
+    <color name="primary_light_v1">#F0F0F8</color>
+    <color name="primary_card_background_light">#EFEFFA</color>
+    <color name="shadowColorLight">#FFFFFF</color>
+    <color name="shadowColorDark">#D5D4E4</color>
+    <color name="blue_accent">#7DB0EC</color>
+
+    <color name="bottomNavBar">#292C30</color>
+    <color name="backgroundDark">#242729</color>
 
 
 </resources>

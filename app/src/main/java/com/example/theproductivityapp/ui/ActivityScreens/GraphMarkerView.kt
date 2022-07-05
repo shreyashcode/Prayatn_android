@@ -40,7 +40,7 @@ class GraphMarkerView (
         val months = arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec")
 
         val graphTodo = graphTodos[index]
-        val input_ = "Added ${graphTodo.added_count}, Done ${graphTodo.done_count}"
+        val input_ = "Added ${graphTodo.added_count}\nDone ${graphTodo.done_count}"
         stats.text = input_
         date_.text = "${graphTodo.date} ${months[graphTodo.month - 1]}"
 
