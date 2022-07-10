@@ -3,13 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1025" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/bot_dp_shape.xml" value="0.1025" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/bottom_navigation_color_selector.xml" value="0.294" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/card_back_marker.xml" value="0.152" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/down_icon.xml" value="0.1025" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/gradient_back.xml" value="0.1025" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/gradient_v2.xml" value="0.239" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_account.xml" value="0.1025" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_add.xml" value="0.1025" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_back.xml" value="0.1025" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1025" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_chatbot.xml" value="0.264" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_count.xml" value="0.1025" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_count_timer.xml" value="0.1025" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_graph.xml" value="0.1025" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_graph_.xml" value="0.1025" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_group_6.xml" value="0.2555" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_home_todo.xml" value="0.1025" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1025" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_pie.xml" value="0.1025" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_trash.xml" value="0.1025" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/message_item.xml" value="0.239" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/states.xml" value="0.2555" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/tick.xml" value="0.1025" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/bot_message_item.xml" value="0.25" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/custom_spinner.xml" value="0.2558876811594203" />
