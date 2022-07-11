@@ -17,12 +17,15 @@
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_chatbot.xml" value="0.264" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_count.xml" value="0.1025" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_count_timer.xml" value="0.1025" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_delete.xml" value="0.121" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_graph.xml" value="0.1025" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_graph_.xml" value="0.1025" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_group_6.xml" value="0.2555" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_home_todo.xml" value="0.1025" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1025" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_pie.xml" value="0.1025" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_send.xml" value="0.121" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_setting.xml" value="0.121" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/ic_trash.xml" value="0.1025" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/message_item.xml" value="0.239" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/drawable/states.xml" value="0.2555" />
@@ -41,6 +44,7 @@
         <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/graph_marker.xml" value="0.25" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/message.xml" value="0.2554347826086957" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/message_item.xml" value="0.24895833333333334" />
+        <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/reminder_item.xml" value="0.25" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/tag_item.xml" value="0.72" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/todo_item.xml" value="0.6" />
         <entry key="..\:/Projects/Prayatn/app/src/main/res/layout/user_message_item.xml" value="0.4" />
