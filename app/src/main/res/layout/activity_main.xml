@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/background"
-    tools:context=".ui.ActivityScreens.MainActivity"
+    tools:context=".ui.activityAndFragments.MainActivity"
     android:background="@color/primary_light_v1">
 
     <FrameLayout

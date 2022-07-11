@@ -1,17 +1,14 @@
-package com.example.theproductivityapp.ui.ViewModels
+package com.example.theproductivityapp.ui.viewModels
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.theproductivityapp.Repository.MainRepository
+import com.example.theproductivityapp.repository.MainRepository
 import com.example.theproductivityapp.db.tables.GraphTodo
-import com.example.theproductivityapp.db.tables.Question
 import com.example.theproductivityapp.db.tables.Reminder
 import com.example.theproductivityapp.db.tables.Todo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel

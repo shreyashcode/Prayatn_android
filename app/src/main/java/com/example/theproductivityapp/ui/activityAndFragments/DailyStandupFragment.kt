@@ -1,7 +1,6 @@
-package com.example.theproductivityapp.ui.ActivityScreens
+package com.example.theproductivityapp.ui.activityAndFragments
 
 import android.app.Activity
-import android.app.AlarmManager
 import android.app.TimePickerDialog
 import android.os.Build
 import android.os.Bundle
@@ -9,8 +8,6 @@ import android.text.InputType
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -18,23 +15,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.theproductivityapp.Adapter.ChatAdapter
 import com.example.theproductivityapp.R
-import com.example.theproductivityapp.Service.ReminderService
-import com.example.theproductivityapp.Utils.SharedPrefUtil
-import com.example.theproductivityapp.databinding.ActivityMainBinding
+import com.example.theproductivityapp.service.ReminderService
+import com.example.theproductivityapp.utils.SharedPrefUtil
 import com.example.theproductivityapp.databinding.FragmentDailyStandupBinding
 import com.example.theproductivityapp.db.tables.Category
 import com.example.theproductivityapp.db.tables.ChatMessage
 import com.example.theproductivityapp.db.tables.Question
 import com.example.theproductivityapp.db.tables.Sender
-import com.example.theproductivityapp.ui.ViewModels.StandUpViewModel
+import com.example.theproductivityapp.ui.viewModels.StandUpViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.LocalTime
 import java.util.*
-import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class DailyStandupFragment : Fragment(R.layout.fragment_daily_standup) {

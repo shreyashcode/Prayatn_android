@@ -1,21 +1,18 @@
 package com.example.theproductivityapp.Adapter
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.theproductivityapp.R
 import com.example.theproductivityapp.databinding.TodoItemBinding
 import com.example.theproductivityapp.db.tables.Todo
 import com.example.theproductivityapp.db.Utils
-import com.example.theproductivityapp.ui.UIHelper.ItemClickListener
+import com.example.theproductivityapp.utils.ItemClickListener
 
 class TodoAdapter(val itemClickListener: ItemClickListener,
-    var context: Context
+                  var context: Context
     ): RecyclerView.Adapter<TodoAdapter.TodoViewHolder>(){
 
     inner class TodoViewHolder(var binding: TodoItemBinding): RecyclerView.ViewHolder(binding.root){

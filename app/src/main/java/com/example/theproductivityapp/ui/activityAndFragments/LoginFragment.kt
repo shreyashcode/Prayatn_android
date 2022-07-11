@@ -1,4 +1,4 @@
-package com.example.theproductivityapp.ui.ActivityScreens
+package com.example.theproductivityapp.ui.activityAndFragments
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -13,10 +13,9 @@ import com.example.theproductivityapp.R
 import com.example.theproductivityapp.databinding.FragmentLoginBinding
 import com.example.theproductivityapp.db.tables.GraphTodo
 import com.example.theproductivityapp.db.Utils
-import com.example.theproductivityapp.ui.ViewModels.MainViewModel
+import com.example.theproductivityapp.ui.viewModels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
-import timber.log.Timber
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.*

@@ -1,4 +1,4 @@
-package com.example.theproductivityapp.Others
+package com.example.theproductivityapp.others
 
 import com.example.theproductivityapp.db.tables.GraphTodo
 

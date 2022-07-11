@@ -10,10 +10,10 @@ import com.example.theproductivityapp.R
 import com.example.theproductivityapp.databinding.ReminderItemBinding
 import com.example.theproductivityapp.db.tables.Reminder
 import com.example.theproductivityapp.db.Utils
-import com.example.theproductivityapp.ui.UIHelper.ItemClickListener
+import com.example.theproductivityapp.utils.ItemClickListener
 
 class ReminderAdapter(
-    var itemClickListener:ItemClickListener
+    var itemClickListener: ItemClickListener
 ) : RecyclerView.Adapter<ReminderAdapter.ReminderViewHolder>() {
 
     inner class ReminderViewHolder(var binding: ReminderItemBinding): RecyclerView.ViewHolder(binding.root){

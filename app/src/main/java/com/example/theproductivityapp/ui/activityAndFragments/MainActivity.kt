@@ -1,7 +1,5 @@
-package com.example.theproductivityapp.ui.ActivityScreens
+package com.example.theproductivityapp.ui.activityAndFragments
 
-import android.R.attr.left
-import android.R.attr.right
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -9,25 +7,22 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.widget.FrameLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginBottom
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.theproductivityapp.R
-import com.example.theproductivityapp.Utils.Common
+import com.example.theproductivityapp.utils.Common
 import com.example.theproductivityapp.databinding.ActivityMainBinding
 import com.example.theproductivityapp.db.TodoDao
 import com.example.theproductivityapp.db.tables.GraphTodo
-import com.example.theproductivityapp.ui.ViewModels.MainViewModel
+import com.example.theproductivityapp.ui.viewModels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDateTime
 import java.time.ZoneId

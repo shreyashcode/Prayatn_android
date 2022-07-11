@@ -1,11 +1,10 @@
-package com.example.theproductivityapp.ui.ViewModels
+package com.example.theproductivityapp.ui.viewModels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.theproductivityapp.Repository.MainRepository
-import com.example.theproductivityapp.Repository.StandUpRepository
+import com.example.theproductivityapp.repository.StandUpRepository
 import com.example.theproductivityapp.db.tables.Category
 import com.example.theproductivityapp.db.tables.ChatMessage
 import com.example.theproductivityapp.db.tables.Question

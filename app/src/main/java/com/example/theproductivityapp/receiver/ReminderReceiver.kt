@@ -1,4 +1,4 @@
-package com.example.theproductivityapp.Reciever
+package com.example.theproductivityapp.receiver
 
 import android.app.PendingIntent
 import android.app.TaskStackBuilder
@@ -6,12 +6,10 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.text.format.DateFormat
-import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.theproductivityapp.R
-import com.example.theproductivityapp.ui.ActivityScreens.MainActivity
-import timber.log.Timber
+import com.example.theproductivityapp.ui.activityAndFragments.MainActivity
 
 
 class ReminderReceiver: BroadcastReceiver() {

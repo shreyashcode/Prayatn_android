@@ -1,4 +1,4 @@
-package com.example.theproductivityapp.Utils
+package com.example.theproductivityapp.utils
 
 import com.example.theproductivityapp.db.tables.Todo
 

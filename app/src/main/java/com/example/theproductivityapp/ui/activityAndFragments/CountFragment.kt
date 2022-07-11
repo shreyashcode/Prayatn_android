@@ -1,4 +1,4 @@
-package com.example.theproductivityapp.ui.ActivityScreens
+package com.example.theproductivityapp.ui.activityAndFragments
 
 import android.os.Bundle
 import android.text.format.DateFormat
@@ -8,16 +8,16 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.theproductivityapp.Adapter.ReminderAdapter
 import com.example.theproductivityapp.R
-import com.example.theproductivityapp.Service.ReminderService
+import com.example.theproductivityapp.service.ReminderService
 import com.example.theproductivityapp.databinding.FragmentCountBinding
 import com.example.theproductivityapp.db.tables.Reminder
-import com.example.theproductivityapp.ui.UIHelper.ItemClickListener
-import com.example.theproductivityapp.ui.ViewModels.MainViewModel
+import com.example.theproductivityapp.utils.ItemClickListener
+import com.example.theproductivityapp.ui.viewModels.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CountFragment : Fragment(R.layout.fragment_count), ItemClickListener{
+class CountFragment : Fragment(R.layout.fragment_count), ItemClickListener {
 
     private val viewModel:MainViewModel by viewModels()
     private lateinit var binding: FragmentCountBinding

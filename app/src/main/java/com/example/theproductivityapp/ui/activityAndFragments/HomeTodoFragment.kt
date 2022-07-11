@@ -1,4 +1,4 @@
-package com.example.theproductivityapp.ui.ActivityScreens
+package com.example.theproductivityapp.ui.activityAndFragments
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -11,7 +11,6 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,20 +20,19 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.theproductivityapp.Utils.Common
+import com.example.theproductivityapp.utils.Common
 import com.example.theproductivityapp.Adapter.TagAdapter
 import com.example.theproductivityapp.Adapter.TodoAdapter
 import com.example.theproductivityapp.R
-import com.example.theproductivityapp.Service.ReminderService
+import com.example.theproductivityapp.service.ReminderService
 import com.example.theproductivityapp.databinding.FragmentHomeTodoBinding
 import com.example.theproductivityapp.db.tables.GraphTodo
 import com.example.theproductivityapp.db.tables.Todo
 import com.example.theproductivityapp.db.Utils
-import com.example.theproductivityapp.ui.UIHelper.ItemClickListener
-import com.example.theproductivityapp.ui.ViewModels.MainViewModel
+import com.example.theproductivityapp.utils.ItemClickListener
+import com.example.theproductivityapp.ui.viewModels.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.*

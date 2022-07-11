@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_light_v1"
-    tools:context=".ui.ActivityScreens.HomeTodoFragment">
+    tools:context=".ui.activityAndFragments.HomeTodoFragment">
 
     <ProgressBar
         android:id="@+id/progress"

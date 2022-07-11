@@ -1,21 +1,19 @@
-package com.example.theproductivityapp.ui.ActivityScreens
+package com.example.theproductivityapp.ui.activityAndFragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.theproductivityapp.Utils.Common
+import com.example.theproductivityapp.utils.Common
 import com.example.theproductivityapp.Adapter.TodoAdapter
 import com.example.theproductivityapp.R
 import com.example.theproductivityapp.databinding.FragmentTagFilterBinding
 import com.example.theproductivityapp.db.tables.Todo
-import com.example.theproductivityapp.ui.UIHelper.ItemClickListener
-import com.example.theproductivityapp.ui.ViewModels.MainViewModel
+import com.example.theproductivityapp.utils.ItemClickListener
+import com.example.theproductivityapp.ui.viewModels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class TagFilterFragment : Fragment(R.layout.fragment_tag_filter), ItemClickListener {

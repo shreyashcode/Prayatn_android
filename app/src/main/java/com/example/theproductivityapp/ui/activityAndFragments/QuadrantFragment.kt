@@ -1,4 +1,4 @@
-package com.example.theproductivityapp.ui.ActivityScreens
+package com.example.theproductivityapp.ui.activityAndFragments
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import com.example.theproductivityapp.R
 import com.example.theproductivityapp.databinding.FragmentQuadrantBinding
 import com.example.theproductivityapp.db.Utils
-import com.example.theproductivityapp.ui.ViewModels.MainViewModel
+import com.example.theproductivityapp.ui.viewModels.MainViewModel
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet

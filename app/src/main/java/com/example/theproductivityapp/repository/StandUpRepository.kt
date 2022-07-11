@@ -1,6 +1,5 @@
-package com.example.theproductivityapp.Repository
+package com.example.theproductivityapp.repository
 
-import androidx.lifecycle.LiveData
 import com.example.theproductivityapp.db.StandUpDao
 import com.example.theproductivityapp.db.tables.Category
 import com.example.theproductivityapp.db.tables.ChatMessage

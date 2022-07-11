@@ -1,11 +1,9 @@
-package com.example.theproductivityapp.Repository
+package com.example.theproductivityapp.repository
 
-import com.example.theproductivityapp.db.StandUpDao
 import com.example.theproductivityapp.db.tables.GraphTodo
 import com.example.theproductivityapp.db.tables.Reminder
 import com.example.theproductivityapp.db.tables.Todo
 import com.example.theproductivityapp.db.TodoDao
-import com.example.theproductivityapp.db.tables.Question
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(

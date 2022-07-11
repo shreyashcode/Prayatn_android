@@ -1,17 +1,15 @@
-package com.example.theproductivityapp.Service
+package com.example.theproductivityapp.service
 
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import com.example.theproductivityapp.Reciever.ReminderReceiver
-import com.example.theproductivityapp.Utils.Common
+import com.example.theproductivityapp.receiver.ReminderReceiver
+import com.example.theproductivityapp.utils.Common
 import com.example.theproductivityapp.db.tables.Category
 import com.example.theproductivityapp.di.BaseApplication
-import timber.log.Timber
 import java.util.*
-import kotlin.coroutines.cancellation.CancellationException
 
 class ReminderService(
     private val context: Context,

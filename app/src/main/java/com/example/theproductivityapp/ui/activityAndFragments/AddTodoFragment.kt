@@ -1,4 +1,4 @@
-package com.example.theproductivityapp.ui.ActivityScreens
+package com.example.theproductivityapp.ui.activityAndFragments
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
@@ -19,15 +19,15 @@ import com.example.theproductivityapp.databinding.FragmentAddTodoBinding
 import com.example.theproductivityapp.db.tables.GraphTodo
 import com.example.theproductivityapp.db.tables.Todo
 import com.example.theproductivityapp.db.Utils
-import com.example.theproductivityapp.Utils.Common
-import com.example.theproductivityapp.ui.ViewModels.MainViewModel
+import com.example.theproductivityapp.utils.Common
+import com.example.theproductivityapp.ui.viewModels.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.*
 import android.text.format.DateFormat
-import com.example.theproductivityapp.Service.ReminderService
+import com.example.theproductivityapp.service.ReminderService
 import com.example.theproductivityapp.db.tables.Reminder
 
 

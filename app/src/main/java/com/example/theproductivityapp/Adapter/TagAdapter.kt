@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.theproductivityapp.databinding.TagItemBinding
 import com.example.theproductivityapp.db.tables.Todo
 import com.example.theproductivityapp.db.Utils
-import com.example.theproductivityapp.ui.UIHelper.ItemClickListener
+import com.example.theproductivityapp.utils.ItemClickListener
 
 class TagAdapter(var itemClickListener: ItemClickListener) : RecyclerView.Adapter<TagAdapter.TagViewHolder>(){
 

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_light_v1"
-    tools:context=".ui.ActivityScreens.TagFilterFragment">
+    tools:context=".ui.activityAndFragments.TagFilterFragment">
 
     <Button
         android:id="@+id/remove"
