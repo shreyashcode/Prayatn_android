@@ -20,4 +20,4 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class com.example.theproductivityapp.model.*
+-keep class com.prayatnApp.theproductivityapp.model.*

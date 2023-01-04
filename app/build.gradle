@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-//    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id "androidx.navigation.safeargs"
     id 'dagger.hilt.android.plugin'
@@ -12,7 +11,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.example.theproductivityapp"
+        applicationId "com.prayatnApp.theproductivityapp"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
